@@ -1,4 +1,4 @@
-package im.zego.customrender.orientation;
+package com.cosmos.appbase.orientation;
 
 public class BeautySdkOrientationSwitchListener extends OrientationSwitchListener {
     private float lastAngle = 0;

@@ -1,4 +1,4 @@
-package im.zego.customrender.orientation;
+package com.cosmos.appbase.orientation;
 
 import android.content.Context;
 import android.hardware.Sensor;
