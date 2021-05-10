@@ -1,0 +1,15 @@
+include ':app'
+gradle.ext.usemmbeauty = true
+gradle.ext.uselocalbeauty = false
+if (gradle.usemmbeauty) {
+    include "mmbeautybase"
+    project(':mmbeautybase').projectDir = new File(settingsDir,'../mmbeautybase/')
+} else {
+    include ':faceunity'
+}
+if(gradle.uselocalbeauty){
+    gradle.ext.userLocalDoki = false
+    gradle.ext.userLocalEffect = false
+    include "mmbeautysdk"
+    project(':mmbeautysdk').projectDir = new File(settingsDir,'../../../../mmsdk/beauty-sdk/beauty')
+}

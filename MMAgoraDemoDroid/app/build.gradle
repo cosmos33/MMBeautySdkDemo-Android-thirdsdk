@@ -1,0 +1,57 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion 28
+
+    defaultConfig {
+//        applicationId "io.agora.rtcwithfu"
+        applicationId "" //TODO mmbeauty 配置cosmos后台配置的applicationid
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 11
+        versionName "5.4"
+
+        ndk {
+            abiFilters "armeabi-v7a", "arm64-v8a"
+        }
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    signingConfigs {
+        config { // TODO mmbeauty 配置cosmos后台配置的keystore
+            keyAlias ''
+            keyPassword ''
+            storeFile file('')
+            storePassword ''
+            v2SigningEnabled true   // android 5.0-8.0，必须用V2，否则会有安全问题
+            v1SigningEnabled true
+        }
+    }
+
+    buildTypes {
+        debug{
+            signingConfig signingConfigs.config
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar', '*.aar'], dir: 'libs')
+
+    implementation 'io.agora.rtc:full-sdk:3.0.1'
+    implementation 'com.wuyr:pathlayoutmanager:1.0.3'
+//    implementation 'org.adw.library:discrete-seekbar:1.0.1'
+//    implementation project(':faceunity')
+    implementation project(":mmbeautybase")
+}

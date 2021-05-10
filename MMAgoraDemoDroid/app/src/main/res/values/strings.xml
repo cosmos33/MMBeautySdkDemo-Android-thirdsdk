@@ -1,0 +1,30 @@
+<resources>
+    <string name="app_name" translatable="false">Agora with FU</string>
+    <string name="agora_app_id" translatable="false">aab8b8f5a8cd4469a63042fcfafe7063</string>
+    <string name="legal_characters" translatable="false">abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789!#$%&amp;()+,-:;&lt;=.>?@[]^_`{|}~</string>
+
+    <!-- Main Activity -->
+    <string name="room_name_edit_hint">Fill Your Room Name</string>
+    <string name="enter_room_btn">Enter Room</string>
+    <string name="empty_room_name_toast">Please input a room name</string>
+    <string name="msg_permission_granted">All necessary permissions granted</string>
+    <string name="msg_permission_rejected">All necessary permissions need to be granted</string>
+
+
+    <!-- FU Effects -->
+    <string name="home_function_name_beauty">Beautification</string>
+    <string name="home_function_name_makeup">Makeup</string>
+    <string name="home_function_name_sticker">Sticker</string>
+    <string name="home_function_name_beauty_body">Body</string>
+    <string name="fu_base_is_tracking_text">No Face Tracking</string>
+
+    <string name="sorry_no_permission">Sorry, Your license is not supported for these functions.</string>
+    <string name="sorry_not_available">Sorry, not available yet(under construction)</string>
+    <string name="camera_dialog_title">warning</string>
+    <string name="camera_dialog_message">Camera permissions are disabled or the camera is occupied by another app!</string>
+    <string name="camera_dialog_open">Retry</string>
+    <string name="camera_dialog_back">quit</string>
+
+    <string name="confirm">Yes</string>
+    <string name="cancel">No</string>
+</resources>

@@ -1,0 +1,25 @@
+<resources>
+    <!-- Main Activity -->
+    <string name="room_name_edit_hint">输入房间名</string>
+    <string name="enter_room_btn">加入房间</string>
+    <string name="empty_room_name_toast">请输入房间名</string>
+    <string name="msg_permission_granted">已通过所有必要的权限</string>
+    <string name="msg_permission_rejected">您需要通过所有的必要权限</string>
+
+    <!-- FU Effects -->
+    <string name="home_function_name_beauty">美颜</string>
+    <string name="home_function_name_makeup">美妆</string>
+    <string name="home_function_name_sticker">贴纸</string>
+    <string name="home_function_name_beauty_body">美体</string>
+    <string name="fu_base_is_tracking_text">未检测到人脸</string>
+
+    <string name="sorry_no_permission">抱歉，你所使用的证书权限或SDK不包括该功能。</string>
+    <string name="sorry_not_available">Sorry, not available yet(under construction)</string>
+    <string name="camera_dialog_title">警告</string>
+    <string name="camera_dialog_message">相机权限被禁用或者相机被别的应用占用！</string>
+    <string name="camera_dialog_open">重试</string>
+    <string name="camera_dialog_back">退出</string>
+
+    <string name="confirm">是</string>
+    <string name="cancel">否</string>
+</resources>

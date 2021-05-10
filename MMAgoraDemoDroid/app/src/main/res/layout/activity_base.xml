@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+    <TextureView
+        android:id="@+id/local_video_view"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <TextView
+        android:visibility="invisible"
+        android:id="@+id/iv_face_detect"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:text="@string/fu_base_is_tracking_text"
+        android:textColor="@color/colorWhite"
+        android:textSize="17sp" />
+
+    <FrameLayout
+        android:id="@+id/remote_video_view"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginTop="@dimen/max_space"
+        android:layout_marginEnd="@dimen/max_space" />
+
+    <ImageView
+        android:id="@+id/btn_switch_camera"
+        android:layout_width="38dp"
+        android:layout_height="38dp"
+        android:layout_marginTop="@dimen/max_space"
+        android:layout_marginStart="@dimen/max_space"
+        android:src="@mipmap/camera_normal"
+        android:scaleType="fitXY"
+        android:onClick="onClick" />
+
+</RelativeLayout>

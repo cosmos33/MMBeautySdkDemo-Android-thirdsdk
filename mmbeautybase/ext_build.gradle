@@ -1,0 +1,23 @@
+ext {
+    mdlogVersion = '2.0.0'
+    compileSdkVersion = 28
+    minSdkVersion = 21
+    targetSdkVersion = 28
+    buildToolsVersion = "29.0.3"
+    supportSdkVersion = "26.0.1"
+    VERSION_NAME= "1.4.0_04021420"
+    ARTIFACT_ID = 15
+    ARTIFACT_ID_SUPREME_PROPS = 15
+    liteavSdk="com.tencent.liteavsdk:LiteAVSDK_Smart:latest.release"
+    ARTIFACT_ID_LEVEL= "15"
+    beautyutils = "1.0.1_11241607"
+    appcompat = "1.2.0"
+
+    xesceneVersion = "4.4.4-20200827.1913"
+    abiFilters = "arm64-v8a"//"arm64-v8a" // "armeabi"  "armeabi-v7a"
+    userLocalEffect = false
+    userLocalEffect = false
+    cvcenterSmallVersion = "2.1.2.20210401.1654"
+}
+
+
