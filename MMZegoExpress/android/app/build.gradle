@@ -1,0 +1,72 @@
+apply plugin: 'com.android.application'
+
+android {
+    ndkVersion '21.3.6528147'
+    compileSdkVersion 28
+
+    defaultConfig {
+        applicationId "" //TODO mmbeauty 配置cosmos后台配置的applicationid
+        minSdkVersion 21
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        ndk {
+            //设置支持的SO库架构
+            abiFilters 'arm64-v8a', 'armeabi-v7a', 'x86'
+        }
+
+    }
+
+    signingConfigs {
+        config { // TODO mmbeauty 配置cosmos后台配置的keystore
+            keyAlias ''
+            keyPassword ''
+            storeFile file('')
+            storePassword ''
+            v2SigningEnabled true   // android 5.0-8.0，必须用V2，否则会有安全问题
+            v1SigningEnabled true
+        }
+    }
+
+
+    lintOptions {
+        checkReleaseBuilds false
+        abortOnError false
+    }
+
+    buildTypes {
+        debug {
+            minifyEnabled false
+            signingConfig signingConfigs.config
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    sourceSets {
+        main.assets.srcDirs += ['src/main/assets', 'src/main/effects/bundle', 'src/main/makeup/material']
+        main.res.srcDirs += ['src/main/res', 'src/main/effects/res', 'src/main/makeup/res']
+        main.jniLibs.srcDir(["libs", "3rdlibs"])
+    }
+
+
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.1.0'
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.annotation:annotation:1.1.0'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    implementation files('libs/ZegoExpressEngine.jar')
+//    implementation files('3rdlibs/nama.jar')
+    implementation project(':mmbeautybase')
+}
