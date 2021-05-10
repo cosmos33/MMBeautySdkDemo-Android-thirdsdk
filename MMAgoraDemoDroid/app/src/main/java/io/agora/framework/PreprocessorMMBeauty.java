@@ -66,9 +66,6 @@ public class PreprocessorMMBeauty implements IPreprocessor {
 //        if (mFURenderer != null) {
 //            mFURenderer.onSurfaceDestroyed();
 //        }
-    }
-
-    public void destory(){
         if (render != null) {
             render.textureDestoryed();
         }

@@ -147,7 +147,6 @@ public class FUChatActivity extends RtcBasedActivity implements RtcEngineEventHa
     public void finish() {
         mFinished = true;
 //        CountDownLatch countDownLatch = new CountDownLatch(1);
-        preprocessorFaceUnity.destory();
 //        try {
 //            countDownLatch.await();
 //        } catch (InterruptedException e) {
