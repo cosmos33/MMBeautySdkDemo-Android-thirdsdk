@@ -1,4 +1,4 @@
-本工程为MM美颜SDK接入第三方直播、视频sdk demo
+## 本工程为MM美颜SDK接入第三方直播、视频sdk demo
 
 ### MMAgoraDemoDroid 为接入声网1v1聊天sdk demo
 ### MMZegoExpress 为接入zego自定义视频前处理 demo
