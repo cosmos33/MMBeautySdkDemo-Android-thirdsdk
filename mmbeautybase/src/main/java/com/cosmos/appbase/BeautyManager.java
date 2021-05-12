@@ -53,11 +53,21 @@ abstract public class BeautyManager implements IMMRenderModuleManager.CVModelSta
         initSDK();
     }
 
-    abstract public int renderWithOESTexture(int texture, int texWidth, int texHeight, boolean mFrontCamera, int cameraRotation);
+    public int renderWithOESTexture(int texture, int texWidth, int texHeight, boolean mFrontCamera, int cameraRotation) {
+        return texture;
+    }
 
-    abstract public int renderWithTexture(int texture, int texWidth, int texHeight, boolean mFrontCamera);
+    public int renderWithTexture(int texture, int texWidth, int texHeight, boolean mFrontCamera) {
+        return texHeight;
+    }
 
-//    abstract public int renderWithBytesAndOesTexture(byte[] bytes, int texture, int texWidth, int texHeight, boolean mFrontCamera, int rotation);
+    public int renderWithBytesTexture(byte[] datas, int texture, int dataWidth, int dataHeight, int texWidth, int texHeight, boolean mFrontCamera) {
+        return texture;
+    }
+
+    public int renderWithBytesAndOesTexture(byte[] bytes, int texture, int texWidth, int texHeight, boolean mFrontCamera, int rotation) {
+        return texture;
+    }
 
     public void textureDestoryed() {
         if (transOesTextureFilter != null) {

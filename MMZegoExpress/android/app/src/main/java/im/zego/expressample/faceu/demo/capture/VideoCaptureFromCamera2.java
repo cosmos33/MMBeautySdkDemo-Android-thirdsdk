@@ -21,7 +21,7 @@
 //import java.util.concurrent.TimeUnit;
 //import java.util.concurrent.atomic.AtomicBoolean;
 //
-//import im.zego.expressample.faceu.demo.faceunity.ZegoBeautyManager;
+//import com.cosmos.thirdlive.ZegoBeautyManager;
 //import im.zego.expressample.faceu.demo.util.ZegoUtil;
 //import im.zego.expressample.faceu.demo.ve_gl.EglBase;
 //import im.zego.expressample.faceu.demo.ve_gl.EglBase14;

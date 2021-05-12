@@ -1,4 +1,4 @@
-package im.zego.expressample.faceu.demo.faceunity;
+package com.cosmos.thirdlive;
 
 import android.content.Context;
 

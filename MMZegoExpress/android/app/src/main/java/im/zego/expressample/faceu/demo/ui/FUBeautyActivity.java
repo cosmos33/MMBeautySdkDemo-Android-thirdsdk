@@ -18,7 +18,7 @@ import java.util.Date;
 
 
 import im.zego.expressample.faceu.demo.GetAppIDConfig;
-import im.zego.expressample.faceu.demo.faceunity.ZegoBeautyManager;
+import com.cosmos.thirdlive.ZegoBeautyManager;
 import im.zego.expressample.faceu.demo.process.VideoFilterByProcess2;
 import im.zego.expressample.faceu.demo.util.ZegoUtil;
 import im.zego.expressample.faceu.demo.view.BeautyControlView;
@@ -28,7 +28,6 @@ import im.zego.expresssample.faceu.demo.databinding.ActivityFuBaseBinding;
 import im.zego.zegoexpress.ZegoExpressEngine;
 import im.zego.zegoexpress.callback.IZegoCustomVideoCaptureHandler;
 import im.zego.zegoexpress.callback.IZegoCustomVideoProcessHandler;
-import im.zego.zegoexpress.callback.IZegoDestroyCompletionCallback;
 import im.zego.zegoexpress.callback.IZegoEventHandler;
 import im.zego.zegoexpress.constants.ZegoPublishChannel;
 import im.zego.zegoexpress.constants.ZegoPublisherState;

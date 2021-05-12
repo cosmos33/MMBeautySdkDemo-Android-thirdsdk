@@ -1,7 +1,7 @@
 package im.zego.expressample.faceu.demo.process;
 import android.util.Log;
 
-import im.zego.expressample.faceu.demo.faceunity.ZegoBeautyManager;
+import com.cosmos.thirdlive.ZegoBeautyManager;
 import im.zego.expressample.faceu.demo.util.ZegoUtil;
 import im.zego.zegoexpress.ZegoExpressEngine;
 import im.zego.zegoexpress.callback.IZegoCustomVideoProcessHandler;
