@@ -7,6 +7,7 @@
 
 ### MMAgoraDemoDroid 为接入声网1v1聊天sdk demo
 ### MMZegoExpress 为接入zego自定义视频前处理 demo
+> MMZegoExpress除需要配置以上三个部分之外，还需要在GetAppIDConfig中配置在即构后台申请的appID以及appSign
 ### MMQiniu 为接入七牛sdk demo
 ### MMTencent 为接入腾讯直播sdk demo
 > MMTencent除需要配置以上三个部分之外，还需要在TxApplication中配置在腾讯直播后台申请的licenceUrl以及licenseKey
