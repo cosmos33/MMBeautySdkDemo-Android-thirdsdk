@@ -5,11 +5,11 @@
 > - cosmosAppid.          //需要修改为cosmos后台注册的appid
 
 
-### MMAgoraDemoDroid 为接入声网1v1聊天sdk demo
-### MMZegoExpress 为接入zego自定义视频前处理 demo
+### 1.MMAgoraDemoDroid 为接入声网1v1聊天sdk demo
+### 2.MMZegoExpress 为接入zego自定义视频前处理 demo
 > MMZegoExpress除需要配置以上三个部分之外，还需要在GetAppIDConfig中配置在即构后台申请的appID以及appSign
-### MMQiniu 为接入七牛sdk demo
-### MMTencent 为接入腾讯直播sdk demo
+### 3.MMQiniu 为接入七牛sdk demo
+### 4.MMTencent 为接入腾讯直播sdk demo
 > MMTencent除需要配置以上三个部分之外，还需要在TxApplication中配置在腾讯直播后台申请的licenceUrl以及licenseKey
 
 
