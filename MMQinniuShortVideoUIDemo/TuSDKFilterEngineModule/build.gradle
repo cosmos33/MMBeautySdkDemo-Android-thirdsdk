@@ -1,0 +1,13 @@
+apply from: "../../mmbeautybase/lib.gradle"
+dependencies {
+
+    compileOnly 'androidx.appcompat:appcompat:1.0.0'
+
+    compileOnly 'androidx.recyclerview:recyclerview:1.0.0'
+
+    api files('libs/TuSDKCore-3.0.6.jar')
+    api files('libs/TuSDKFace-3.0.1.jar')
+    api files('libs/TuSDKVideo-3.3.1.jar')
+    compileOnly files('libs/universal-image-loader-1.9.4.jar')
+    compileOnly 'com.github.bumptech.glide:glide:4.9.0'
+}

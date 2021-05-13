@@ -1,0 +1,10 @@
+include ':app', ':faceunity', ':TuSDKFilterEngineModule'
+gradle.ext.uselocalbeauty = true
+include "mmbeautybase"
+project(':mmbeautybase').projectDir = new File(settingsDir,'../mmbeautybase/')
+if(gradle.uselocalbeauty){
+    gradle.ext.userLocalDoki = false
+    gradle.ext.userLocalEffect = false
+    include "mmbeautysdk"
+    project(':mmbeautysdk').projectDir = new File(settingsDir,'../../../../mmsdk/beauty-sdk/beauty')
+}
