@@ -1,0 +1,40 @@
+apply plugin: 'com.android.application'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        applicationId "" // TODO mmbeauty 配置cosmos后台配置的applicationid
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        ndk{
+            abiFilters  rootProject.ext.abiFilters
+        }
+    }
+
+
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_1_8
+        targetCompatibility JavaVersion.VERSION_1_8
+    }
+
+    signingConfigs {
+        config { // TODO mmbeauty 配置cosmos后台配置的keystore
+            keyAlias ''
+            keyPassword ''
+            storeFile file('')
+            storePassword ''
+            v2SigningEnabled true   // android 5.0-8.0，必须用V2，否则会有安全问题
+            v1SigningEnabled true
+        }
+    }
+
+    buildTypes {
+        debug{
+            signingConfig signingConfigs.config
+        }
+    }
+}

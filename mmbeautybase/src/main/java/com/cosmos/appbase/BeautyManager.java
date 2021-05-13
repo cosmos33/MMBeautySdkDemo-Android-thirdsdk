@@ -65,6 +65,10 @@ abstract public class BeautyManager implements IMMRenderModuleManager.CVModelSta
         return texture;
     }
 
+    public int renderWithBytesTexture(byte[] datas, int texture, int dataWidth, int dataHeight, int texWidth, int texHeight, boolean mFrontCamera, int cameraRotaion){
+        return texture;
+    }
+
     public int renderWithBytesAndOesTexture(byte[] bytes, int texture, int texWidth, int texHeight, boolean mFrontCamera, int rotation) {
         return texture;
     }

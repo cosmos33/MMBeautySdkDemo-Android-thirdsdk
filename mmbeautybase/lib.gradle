@@ -1,0 +1,56 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-android-extensions'
+
+android {
+    compileSdkVersion rootProject.ext.compileSdkVersion
+    buildToolsVersion rootProject.ext.buildToolsVersion
+
+    defaultConfig {
+        minSdkVersion rootProject.ext.minSdkVersion
+        targetSdkVersion rootProject.ext.targetSdkVersion
+        versionCode 1
+        versionName "1.0"
+        ndk{
+            abiFilters  rootProject.ext.abiFilters
+        }
+    }
+
+    signingConfigs {
+        config {
+//            keyAlias ''
+//            keyPassword ''
+//            storeFile file('')
+//            storePassword ''
+            v2SigningEnabled true   // android 5.0-8.0，必须用V2，否则会有安全问题
+            v1SigningEnabled true
+        }
+    }
+
+    buildTypes {
+        release {
+            signingConfig signingConfigs.config
+            minifyEnabled true
+            zipAlignEnabled true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+        debug{
+            signingConfig signingConfigs.config
+            minifyEnabled false
+        }
+    }
+
+    compileOptions {
+        sourceCompatibility 1.8
+        targetCompatibility 1.8
+    }
+
+    packagingOptions {
+        exclude "lib/${rootProject.ext.abiFilters}/libmmcv_api_handgesture.so"
+        exclude "lib/${rootProject.ext.abiFilters}/libmmcv_api_express.so"
+        exclude "lib/${rootProject.ext.abiFilters}/libMediaEncoder.so"
+        exclude "lib/${rootProject.ext.abiFilters}/libarcore_sdk_c.so"
+        exclude "lib/${rootProject.ext.abiFilters}/libmediadecoder.so"
+        exclude "lib/${rootProject.ext.abiFilters}/libMediaMuxer.so"
+    }
+}

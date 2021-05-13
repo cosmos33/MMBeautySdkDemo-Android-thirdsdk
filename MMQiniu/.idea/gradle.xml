@@ -13,7 +13,6 @@
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
             <option value="$PROJECT_DIR$/../mmbeautybase" />
-            <option value="$PROJECT_DIR$/../../../../mmsdk/beauty-sdk/beauty" />
           </set>
         </option>
         <option name="resolveModulePerSourceSet" value="false" />
