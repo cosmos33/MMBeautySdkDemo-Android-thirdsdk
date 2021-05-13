@@ -10,6 +10,9 @@ import com.cosmos.beauty.model.datamode.CommonDataMode;
 import com.cosmos.beautyutils.FaceInfoCreatorPBOFilter;
 import com.cosmos.beautyutils.RotateFilter;
 
+/**
+ * 腾讯直播接入美颜sdk管理类
+ */
 public class TencentPushBeautyManager extends BeautyManager {
 
     public TencentPushBeautyManager(Context context) {

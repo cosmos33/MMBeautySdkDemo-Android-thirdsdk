@@ -11,6 +11,9 @@ import com.cosmos.beautyutils.Empty2Filter;
 import com.cosmos.beautyutils.FaceInfoCreatorPBOFilter;
 import com.cosmos.beautyutils.RotateFilter;
 
+/**
+ * 腾讯直播接入美颜sdk管理类
+ */
 public class TencentBeautyManager extends BeautyManager {
     private RotateFilter rotateFilter;
 

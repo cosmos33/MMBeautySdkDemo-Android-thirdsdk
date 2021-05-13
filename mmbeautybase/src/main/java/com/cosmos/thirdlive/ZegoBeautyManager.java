@@ -15,7 +15,9 @@ import com.cosmos.beautyutils.FaceInfoCreatorPBOFilter;
 import com.cosmos.beautyutils.RotateFilter;
 import com.mm.mmutil.app.AppContext;
 
-
+/**
+ * 即构接入美颜sdk管理类
+ */
 public class ZegoBeautyManager extends BeautyManager {
     private TransOesTextureFilter transOesTextureFilter;
     private RotateFilter rotateFilter;

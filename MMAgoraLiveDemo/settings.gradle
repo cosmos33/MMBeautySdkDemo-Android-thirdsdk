@@ -1,0 +1,17 @@
+include ':agora-lib-stream-encrypt'
+include ':agora'
+include ':agora-lib-raw-data'
+include ':agora-lib-switch-external-video'
+include ':agora-lib-component'
+include ':agora-lib-push-externalvideo'
+rootProject.name = "MMAgoraLiveDemo"
+
+gradle.ext.uselocalbeauty = false
+include "mmbeautybase"
+project(':mmbeautybase').projectDir = new File(settingsDir,'../mmbeautybase/')
+if(gradle.uselocalbeauty){
+    gradle.ext.userLocalDoki = false
+    gradle.ext.userLocalEffect = false
+    include "mmbeautysdk"
+    project(':mmbeautysdk').projectDir = new File(settingsDir,'../../../../mmsdk/beauty-sdk/beauty')
+}

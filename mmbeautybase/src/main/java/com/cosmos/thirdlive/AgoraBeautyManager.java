@@ -13,6 +13,9 @@ import com.cosmos.beautyutils.Empty2Filter;
 import com.cosmos.beautyutils.FaceInfoCreatorPBOFilter;
 import com.cosmos.beautyutils.RotateFilter;
 
+/**
+ * 声网接入美颜sdk管理类
+ */
 public class AgoraBeautyManager extends BeautyManager {
     private TransOesTextureFilter transOesTextureFilter;
     private RotateFilter rotateFilter;

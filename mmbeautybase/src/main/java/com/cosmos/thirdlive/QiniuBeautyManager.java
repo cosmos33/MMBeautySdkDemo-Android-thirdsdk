@@ -18,6 +18,9 @@ import com.cosmos.beautyutils.FaceInfoCreatorPBOFilter;
 import com.cosmos.beautyutils.RotateFilter;
 import com.mm.mmutil.app.AppContext;
 
+/**
+ * 七牛接入美颜sdk管理类
+ */
 public class QiniuBeautyManager extends BeautyManager {
     private TransOesTextureFilter transOesTextureFilter;
     private RotateFilter rotateFilter;
