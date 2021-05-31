@@ -19,6 +19,8 @@ import java.util.Date;
 
 import im.zego.expressample.faceu.demo.GetAppIDConfig;
 import com.cosmos.thirdlive.ZegoBeautyManager;
+
+import im.zego.expressample.faceu.demo.process.VideoFilterByProcess;
 import im.zego.expressample.faceu.demo.process.VideoFilterByProcess2;
 import im.zego.expressample.faceu.demo.util.ZegoUtil;
 import im.zego.expressample.faceu.demo.view.BeautyControlView;
@@ -119,13 +121,12 @@ public class FUBeautyActivity extends Activity{
         if (videoCaptureFromCamera != null) {
             videoCaptureFromCamera.onStop(ZegoPublishChannel.MAIN);
         }
-//        if(videoFilterByProcess!=null&&videoBufferType==ZegoVideoBufferType.SURFACE_TEXTURE){
-//            ((VideoFilterByProcess)videoFilterByProcess).stopAndDeAllocate();
-//        }
-//        if(videoFilterByProcess!=null&&videoBufferType==ZegoVideoBufferType.GL_TEXTURE_2D){
-//            ((VideoFilterByProcess2)videoFilterByProcess).stopAndDeAllocate();
-//
-//        }
+        if(videoFilterByProcess!=null&&videoBufferType==ZegoVideoBufferType.SURFACE_TEXTURE){
+            ((VideoFilterByProcess)videoFilterByProcess).stopAndDeAllocate();
+        }
+        if(videoFilterByProcess!=null&&videoBufferType==ZegoVideoBufferType.GL_TEXTURE_2D){
+            ((VideoFilterByProcess2)videoFilterByProcess).stopAndDeAllocate();
+        }
 
         ZegoExpressEngine.getEngine().setCustomVideoCaptureHandler(null);
         // 停止预览
@@ -174,17 +175,18 @@ public class FUBeautyActivity extends Activity{
         //  if (FilterType.FilterType_SurfaceTexture == chooseFilterType) {
 //        if(VideoFilterMainUI.useExpressCustomCapture&&videoBufferType==ZegoVideoBufferType.SURFACE_TEXTURE){
 //            videoCaptureFromCamera=new VideoCaptureFromCamera2((mFURenderer));
-//        }else if(VideoFilterMainUI.useExpressCustomCapture&&videoBufferType==ZegoVideoBufferType.RAW_DATA){
+//        }else if(VideoFilterMainUI.useExpressCustomCaptur e&&videoBufferType==ZegoVideoBufferType.RAW_DATA){
 //            videoCaptureFromCamera = new VideoCaptureFromCamera(mFURenderer);
-//        }else if(!VideoFilterMainUI.useExpressCustomCapture&&videoBufferType == ZegoVideoBufferType.SURFACE_TEXTURE){
-//            videoFilterByProcess =new VideoFilterByProcess(mFURenderer);
 //        }else
-        if(!VideoFilterMainUI.useExpressCustomCapture&&videoBufferType == ZegoVideoBufferType.GL_TEXTURE_2D){
-            boolean isFront = false;//是否前置摄像头
-            ZegoExpressEngine.getEngine().useFrontCamera(isFront);
+        boolean isFront = true;//是否前置摄像头
+        if(!VideoFilterMainUI.useExpressCustomCapture&&videoBufferType == ZegoVideoBufferType.SURFACE_TEXTURE){
+            videoFilterByProcess =new VideoFilterByProcess(beautyManager);
+            ((VideoFilterByProcess)videoFilterByProcess).setFrontCamera(isFront);
+        }else if(!VideoFilterMainUI.useExpressCustomCapture&&videoBufferType == ZegoVideoBufferType.GL_TEXTURE_2D){
             videoFilterByProcess =new VideoFilterByProcess2(beautyManager);
             ((VideoFilterByProcess2)videoFilterByProcess).setFrontCamera(isFront);
         }
+        ZegoExpressEngine.getEngine().useFrontCamera(isFront);
 //        else if(VideoFilterMainUI.useExpressCustomCapture&&videoBufferType==ZegoVideoBufferType.RAW_DATA){
 //            videoCaptureFromCamera = new VideoCaptureFromCamera(mFURenderer);
 //        }else if(!VideoFilterMainUI.useExpressCustomCapture&&videoBufferType == ZegoVideoBufferType.SURFACE_TEXTURE){

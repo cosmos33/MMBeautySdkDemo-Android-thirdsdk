@@ -27,7 +27,7 @@ public class VideoFilterMainUI extends Activity implements View.OnClickListener 
     public static boolean useExpressCustomCapture=false;//使用自定义采集或前处理实现滤镜
 
     private static final int REQUEST_PERMISSION_CODE = 101;
-    private static ZegoVideoBufferType videoBufferType=ZegoVideoBufferType.GL_TEXTURE_2D;
+    private static ZegoVideoBufferType videoBufferType=ZegoVideoBufferType.SURFACE_TEXTURE;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -99,21 +99,21 @@ public class VideoFilterMainUI extends Activity implements View.OnClickListener 
                 }
             }
         });
-//        binding.processBufferType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-//            @Override
-//            public void onCheckedChanged(RadioGroup group, int checkedId) {
-//                switch (checkedId) {
-//                    case R.id.processTexture2D:
-//                        videoBufferType=ZegoVideoBufferType.GL_TEXTURE_2D;
-//                        break;
-//                    case R.id.processSurfaceTexture:
-//                        videoBufferType=ZegoVideoBufferType.SURFACE_TEXTURE;
-//                        break;
-//                    default:
-//                        break;
-//                }
-//            }
-//        });
+        binding.processBufferType.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
+            @Override
+            public void onCheckedChanged(RadioGroup group, int checkedId) {
+                switch (checkedId) {
+                    case R.id.processTexture2D:
+                        videoBufferType=ZegoVideoBufferType.GL_TEXTURE_2D;
+                        break;
+                    case R.id.processSurfaceTexture:
+                        videoBufferType=ZegoVideoBufferType.SURFACE_TEXTURE;
+                        break;
+                    default:
+                        break;
+                }
+            }
+        });
     }
 
 

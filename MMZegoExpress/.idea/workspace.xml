@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="78e64fb8-af5b-457c-8fb0-c7b5fb60c5aa" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/../mmbeautybase/app_build.gradle" beforeDir="false" afterPath="$PROJECT_DIR$/../mmbeautybase/app_build.gradle" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/../mmbeautybase/src/main/java/com/cosmos/appbase/BeautyManager.java" beforeDir="false" afterPath="$PROJECT_DIR$/../mmbeautybase/src/main/java/com/cosmos/appbase/BeautyManager.java" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$/.." />
+  </component>
+  <component name="ProjectId" id="1sSqHiJXHjJkm2MXqn7VPcN2rdv" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="android.sdk.path" value="$USER_HOME$/Library/Android/sdk" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="78e64fb8-af5b-457c-8fb0-c7b5fb60c5aa" name="Default Changelist" comment="" />
+      <created>1620876252367</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1620876252367</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="537" y="260" width="751" height="625" key="find.popup" timestamp="1620889669770">
+      <screen x="0" y="25" width="1792" height="1095" />
+    </state>
+    <state x="537" y="260" width="751" height="625" key="find.popup/-1857.65.1857.1055/0.25.1792.1095@0.25.1792.1095" timestamp="1620889669770" />
+    <state x="-1345" y="272" width="770" height="616" key="find.popup/-1920.40.1920.1080/0.0.1792.1120@-1920.40.1920.1080" timestamp="1620876262248" />
+    <state x="477" y="88" width="838" height="1032" key="search.everywhere.popup" timestamp="1620888737600">
+      <screen x="0" y="0" width="1792" height="1120" />
+    </state>
+    <state x="477" y="88" width="838" height="1032" key="search.everywhere.popup/-1920.40.1920.1080/0.0.1792.1120@0.0.1792.1120" timestamp="1620888737600" />
+  </component>
+</project>

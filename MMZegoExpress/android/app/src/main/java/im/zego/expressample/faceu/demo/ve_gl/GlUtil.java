@@ -10,6 +10,7 @@ import java.nio.FloatBuffer;
  * Some OpenGL static utility functions.
  */
 public class GlUtil {
+
     private GlUtil() {}
 
     // Assert that no OpenGL ES 2.0 error has been raised.

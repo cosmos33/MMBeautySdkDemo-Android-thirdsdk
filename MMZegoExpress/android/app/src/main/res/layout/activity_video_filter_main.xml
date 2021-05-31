@@ -153,13 +153,13 @@
                     android:layout_height="wrap_content">
 
 
-<!--                    <RadioButton-->
-<!--                        android:id="@+id/processTexture2D"-->
-<!--                        android:layout_width="wrap_content"-->
-<!--                        android:layout_height="wrap_content"-->
-<!--                        android:checked="true"-->
+                    <RadioButton
+                        android:id="@+id/processTexture2D"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:checked="true"
 
-<!--                        android:text="@string/tx_sync_gl_texture_2d" />-->
+                        android:text="@string/tx_sync_gl_texture_2d" />
 
 
                     <RadioButton

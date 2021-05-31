@@ -18,7 +18,7 @@ import im.zego.zegoexpress.constants.ZegoPublishChannel;
  */
 public class VideoFilterByProcess2 extends IZegoCustomVideoProcessHandler {
 
-    // faceunity 美颜处理类
+    // mm 美颜处理类
     private ZegoBeautyManager beautyManager;
     private boolean isFrontCamera = true;
 
