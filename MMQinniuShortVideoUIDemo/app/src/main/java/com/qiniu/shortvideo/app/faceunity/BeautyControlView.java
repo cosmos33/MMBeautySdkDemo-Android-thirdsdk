@@ -22,7 +22,6 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 import androidx.recyclerview.widget.SimpleItemAnimator;
 
-import com.faceunity.FURenderer;
 import com.faceunity.OnFUControlListener;
 import com.faceunity.OnMultiClickListener;
 import com.faceunity.entity.CartoonFilter;
@@ -43,8 +42,8 @@ import com.faceunity.view.adapter.EffectRecyclerAdapter;
 import com.faceunity.view.adapter.StickerOptionAdapter;
 import com.faceunity.view.adapter.StickerOptionItem;
 import com.faceunity.view.adapter.VHSpaceItemDecoration;
-import com.qiniu.shortvideo.app.R;
 import com.faceunity.view.seekbar.DiscreteSeekBar;
+import com.qiniu.shortvideo.app.R;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -529,9 +528,11 @@ public class BeautyControlView extends FrameLayout {
 
     private void updateViewFilterRecycler() {
         mFilterRecyclerAdapter.setFilter(sFilterName);
-        mOnFUControlListener.onFilterNameSelected(sFilterName);
-        float filterLevel = getFilterLevel(sFilterName.filterName());
-        mOnFUControlListener.onFilterLevelSelected(filterLevel);
+        if (mOnFUControlListener != null) {
+            mOnFUControlListener.onFilterNameSelected(sFilterName);
+            float filterLevel = getFilterLevel(sFilterName.filterName());
+            mOnFUControlListener.onFilterLevelSelected(filterLevel);
+        }
     }
 
     private void initViewFaceShape() {
@@ -709,12 +710,8 @@ public class BeautyControlView extends FrameLayout {
                     }
                     if (mHairAdapter.mPositionSelect <= mHairGradientCount) {
                         int hairIndex = mHairAdapter.mPositionSelect - 1;
-                        mOnFUControlListener.onHairLevelSelected(FURenderer.HAIR_GRADIENT, hairIndex,
-                                hairIndex < 0 ? 0 : (sHairLevel[mHairAdapter.mPositionSelect - 1] = 1.0f * value / 100));
                     } else {
                         int hairIndex = mHairAdapter.mPositionSelect - mHairGradientCount - 1;
-                        mOnFUControlListener.onHairLevelSelected(FURenderer.HAIR_NORMAL, hairIndex,
-                                sHairLevel[mHairAdapter.mPositionSelect - 1] = 1.0f * value / 100);
                     }
                 }
             }
@@ -1194,17 +1191,7 @@ public class BeautyControlView extends FrameLayout {
                     }
                     if (mOnFUControlListener != null) {
                         if (mPositionSelect == 0) {
-                            if (lastPos <= mHairGradientCount) {
-                                mOnFUControlListener.onHairSelected(FURenderer.HAIR_GRADIENT, hairIndex, 0.0f);
-                            } else {
-                                mOnFUControlListener.onHairSelected(FURenderer.HAIR_NORMAL, hairIndex, 0.0f);
-                            }
                         } else {
-                            if (mPositionSelect <= mHairGradientCount) {
-                                mOnFUControlListener.onHairSelected(FURenderer.HAIR_GRADIENT, hairIndex, hairLevel);
-                            } else {
-                                mOnFUControlListener.onHairSelected(FURenderer.HAIR_NORMAL, hairIndex, hairLevel);
-                            }
                         }
                     }
                     if (mPositionSelect == 0) {

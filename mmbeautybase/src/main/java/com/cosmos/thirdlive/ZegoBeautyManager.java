@@ -38,13 +38,13 @@ public class ZegoBeautyManager extends BeautyManager {
         }
     }
 
-    public int renderWithYUVTexture(int[] texture, int texWidth, int texHeight, boolean mFrontCamera) {
-        if (transYUVTextureFilter == null) {
-            transYUVTextureFilter = new TransYUVTextureFilter();
-        }
-        int yuvTex = transYUVTextureFilter.newTextureReady(texture, texWidth, texHeight);
-        return renderWithTexture(yuvTex, texWidth, texHeight, mFrontCamera);
-    }
+//    public int renderWithYUVTexture(int[] texture, int texWidth, int texHeight, boolean mFrontCamera) {
+//        if (transYUVTextureFilter == null) {
+//            transYUVTextureFilter = new TransYUVTextureFilter();
+//        }
+//        int yuvTex = transYUVTextureFilter.newTextureReady(texture, texWidth, texHeight);
+//        return renderWithTexture(yuvTex, texWidth, texHeight, mFrontCamera);
+//    }
 
     @Override
     public int renderWithOESTexture(int texture, int texWidth, int texHeight, boolean mFrontCamera, int cameraRotation) {

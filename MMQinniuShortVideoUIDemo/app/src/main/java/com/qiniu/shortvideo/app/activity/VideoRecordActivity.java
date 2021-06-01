@@ -26,24 +26,12 @@ import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.Group;
 
-import com.faceunity.FURenderer;
-import com.qiniu.pili.droid.shortvideo.PLBuiltinFilter;
-import com.qiniu.pili.droid.shortvideo.PLCaptureFrameListener;
-import com.qiniu.pili.droid.shortvideo.PLVideoFrame;
-import com.qiniu.shortvideo.app.R;
-import com.qiniu.shortvideo.app.adapter.FilterItemAdapter;
-import com.qiniu.shortvideo.app.faceunity.BeautyControlView;
-import com.qiniu.shortvideo.app.model.AudioFile;
-import com.qiniu.shortvideo.app.utils.Config;
-import com.qiniu.shortvideo.app.utils.RecordSettings;
-import com.qiniu.shortvideo.app.utils.Utils;
-import com.qiniu.shortvideo.app.utils.ViewOperator;
-import com.qiniu.shortvideo.app.view.ListBottomView;
-import com.qiniu.shortvideo.app.view.SectionProgressBar;
-import com.qiniu.shortvideo.app.utils.ToastUtils;
+import com.faceunity.MMRenderer;
 import com.qiniu.pili.droid.shortvideo.PLAudioEncodeSetting;
+import com.qiniu.pili.droid.shortvideo.PLBuiltinFilter;
 import com.qiniu.pili.droid.shortvideo.PLCameraPreviewListener;
 import com.qiniu.pili.droid.shortvideo.PLCameraSetting;
+import com.qiniu.pili.droid.shortvideo.PLCaptureFrameListener;
 import com.qiniu.pili.droid.shortvideo.PLFaceBeautySetting;
 import com.qiniu.pili.droid.shortvideo.PLFocusListener;
 import com.qiniu.pili.droid.shortvideo.PLMicrophoneSetting;
@@ -52,7 +40,19 @@ import com.qiniu.pili.droid.shortvideo.PLRecordStateListener;
 import com.qiniu.pili.droid.shortvideo.PLShortVideoRecorder;
 import com.qiniu.pili.droid.shortvideo.PLVideoEncodeSetting;
 import com.qiniu.pili.droid.shortvideo.PLVideoFilterListener;
+import com.qiniu.pili.droid.shortvideo.PLVideoFrame;
 import com.qiniu.pili.droid.shortvideo.PLVideoSaveListener;
+import com.qiniu.shortvideo.app.R;
+import com.qiniu.shortvideo.app.adapter.FilterItemAdapter;
+import com.qiniu.shortvideo.app.faceunity.BeautyControlView;
+import com.qiniu.shortvideo.app.model.AudioFile;
+import com.qiniu.shortvideo.app.utils.Config;
+import com.qiniu.shortvideo.app.utils.RecordSettings;
+import com.qiniu.shortvideo.app.utils.ToastUtils;
+import com.qiniu.shortvideo.app.utils.Utils;
+import com.qiniu.shortvideo.app.utils.ViewOperator;
+import com.qiniu.shortvideo.app.view.ListBottomView;
+import com.qiniu.shortvideo.app.view.SectionProgressBar;
 
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
@@ -218,14 +218,13 @@ public class VideoRecordActivity extends AppCompatActivity implements
         // init faceUnity engine
         mCameraId = Camera.CameraInfo.CAMERA_FACING_FRONT;
         mInputProp = getCameraOrientation(mCameraId);
-        mFURenderer = new FURenderer
+        mMMRenderer = new MMRenderer
                 .Builder(this)
                 .inputPropOrientation(mInputProp)
                 .build();
 
         mFaceUnityEffectDescription = findViewById(R.id.face_unity_effect_description);
         mFaceUnityControlView = findViewById(R.id.face_unity_panel);
-        mFaceUnityControlView.setOnFUControlListener(mFURenderer);
         mFaceUnityControlView.setOnDescriptionShowListener(new BeautyControlView.OnDescriptionShowListener() {
             @Override
             public void onDescriptionShowListener(int str) {
@@ -401,7 +400,7 @@ public class VideoRecordActivity extends AppCompatActivity implements
         }
         mInputProp = getCameraOrientation(mCameraId);
         Log.d("mInputProp", mInputProp + "");
-        mFURenderer.onCameraChange(getCameraType(mCameraId), getCameraOrientation(mCameraId), mInputProp);
+        mMMRenderer.onCameraChange(getCameraType(mCameraId), getCameraOrientation(mCameraId), mInputProp);
     }
 
     public void onClickChooseMusic(View v) {
@@ -802,7 +801,7 @@ public class VideoRecordActivity extends AppCompatActivity implements
 
     @Override
     public void onSurfaceCreated() {
-        mFURenderer.loadItems();
+        mMMRenderer.loadItems();
     }
 
     @Override
@@ -812,14 +811,14 @@ public class VideoRecordActivity extends AppCompatActivity implements
 
     @Override
     public void onSurfaceDestroy() {
-        mFURenderer.destroyItems();
+        mMMRenderer.destroyItems();
         mCameraData = null;
     }
 
     @Override
     public int onDrawFrame(int texId, int texWidth, int texHeight, long timeStampNs, float[] transformMatrix) {
         if (mCameraData != null) {
-            return mFURenderer.onDrawFrameByFBO(mCameraData, texId, texWidth, texHeight);
+            return mMMRenderer.onDrawFrameByFBO(mCameraData, texId, texWidth, texHeight);
         }
         return texId;
     }
@@ -827,7 +826,7 @@ public class VideoRecordActivity extends AppCompatActivity implements
 
     //----- FaceUnity SDK  相关 -----//
 
-    private FURenderer mFURenderer;
+    private MMRenderer mMMRenderer;
     private int mCameraId;
     private int mInputProp;
     private BeautyControlView mFaceUnityControlView;

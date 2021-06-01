@@ -7,8 +7,10 @@ import com.cosmos.appbase.BeautyManager;
 import com.cosmos.appbase.orientation.BeautySdkOrientationSwitchListener;
 import com.cosmos.appbase.orientation.ScreenOrientationManager;
 import com.cosmos.beauty.Constants;
+import com.cosmos.beauty.CosmosBeautySDK;
 import com.cosmos.beauty.model.MMRenderFrameParams;
 import com.cosmos.beauty.model.datamode.CameraDataMode;
+import com.cosmos.beauty.module.beauty.SimpleBeautyType;
 import com.cosmos.beautyutils.RotateFilter;
 import com.mm.mmutil.app.AppContext;
 
@@ -98,6 +100,36 @@ public class QiniuShortVideoBeautyManager extends BeautyManager {
         }
         ScreenOrientationManager.release();
     }
+
+    @Override
+    protected void initRender() {
+        iBeautyModule = CosmosBeautySDK.INSTANCE.createBeautyModule();
+        renderModuleManager.registerModule(iBeautyModule);
+        iBeautyModule.setValue(SimpleBeautyType.BIG_EYE, 1f);
+//        iBeautyModule.setValue(SimpleBeautyType.SKIN_SMOOTH, 1.0f);
+//        iBeautyModule.setValue(SimpleBeautyType.SKIN_WHITENING, 1.0f);
+        iBeautyModule.setValue(SimpleBeautyType.THIN_FACE, 1f);
+
+        iLookupModule = CosmosBeautySDK.INSTANCE.createLoopupModule();
+        renderModuleManager.registerModule(iLookupModule);
+//        iLookupModule.setEffect(FilterUtils.INSTANCE.getFilterHomeDir().getAbsolutePath() + "/GrayTone");
+        iLookupModule.setIntensity(0.2f);
+
+//        iStickerModule = CosmosBeautySDK.INSTANCE.createStickerModule();
+//        renderModuleManager.registerModule(iStickerModule);
+//        iStickerModule.addMaskModel(
+//                new File(context.getFilesDir().getAbsolutePath() + "/facemasksource/", "rainbow_engine"),
+//                new MaskLoadCallback() {
+//
+//                    @Override
+//                    public void onMaskLoadSuccess(MaskModel maskModel) {
+//                        if (maskModel == null) {
+//                            Toaster.show("贴纸加载失败");
+//                        }
+//                    }
+//                });
+    }
+
 
     @Override
     public void textureDestoryed() {

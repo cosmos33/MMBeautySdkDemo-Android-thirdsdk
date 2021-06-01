@@ -158,7 +158,7 @@ abstract public class BeautyManager implements IMMRenderModuleManager.CVModelSta
         }
     }
 
-    private void initRender() {
+    protected void initRender() {
         iBeautyModule = CosmosBeautySDK.INSTANCE.createBeautyModule();
         renderModuleManager.registerModule(iBeautyModule);
         iBeautyModule.setValue(SimpleBeautyType.BIG_EYE, 1f);

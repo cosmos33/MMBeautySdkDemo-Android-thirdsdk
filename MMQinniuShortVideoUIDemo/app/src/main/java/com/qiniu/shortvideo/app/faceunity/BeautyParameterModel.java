@@ -1,7 +1,6 @@
 package com.qiniu.shortvideo.app.faceunity;
 
 
-import com.faceunity.FURenderer;
 import com.faceunity.entity.Filter;
 import com.faceunity.entity.FilterEnum;
 import com.qiniu.shortvideo.app.R;
@@ -204,26 +203,8 @@ public abstract class BeautyParameterModel {
     }
 
     public static void resetSkinBeauty() {
-        sSkinDetect = FURenderer.DEFAULT_SKIN_DETECT;
-        sHeavyBlur = FURenderer.DEFAULT_HEAVY_BLUR;
-        sHeavyBlurLevel = FURenderer.DEFAULT_BLUR_LEVEL;
-        sBlurLevel = FURenderer.DEFAULT_BLUR_LEVEL;
-        sColorLevel = FURenderer.DEFAULT_COLOR_LEVEL;
-        sRedLevel = FURenderer.DEFAULT_RED_LEVEL;
-        sEyeBright = FURenderer.DEFAULT_EYE_BRIGHT;
-        sToothWhiten = FURenderer.DEFAULT_TOOTH_WHITEN;
     }
 
     public static void resetFaceShape() {
-        sFaceShape = FURenderer.DEFAULT_FACE_SHAPE;
-        sFaceShapeLevel = FURenderer.DEFAULT_FACE_SHAPE_LEVEL;
-        sEyeEnlarging = FURenderer.DEFAULT_EYE_ENLARGIING;
-        sEyeEnlargingOld = FURenderer.DEFAULT_EYE_ENLARGIING;
-        sCheekThinning = FURenderer.DEFAULT_CHEEK_THINNING;
-        sCheekThinningOld = FURenderer.DEFAULT_CHEEK_THINNING;
-        sIntensityChin = FURenderer.DEFAULT_INTENSITY_CHIN;
-        sIntensityForehead = FURenderer.DEFAULT_INTENSITY_FOREHEAD;
-        sIntensityNose = FURenderer.DEFAULT_INTENSITY_NOSE;
-        sIntensityMouth = FURenderer.DEFAULT_INTENSITY_MOUTH;
     }
 }
