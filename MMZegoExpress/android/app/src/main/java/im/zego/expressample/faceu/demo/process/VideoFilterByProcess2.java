@@ -2,6 +2,9 @@ package im.zego.expressample.faceu.demo.process;
 import android.util.Log;
 
 import com.cosmos.thirdlive.ZegoBeautyManager;
+import com.immomo.baseutil.ContextHolder;
+
+import im.zego.expressample.faceu.demo.application.ZegoApplication;
 import im.zego.expressample.faceu.demo.util.ZegoUtil;
 import im.zego.zegoexpress.ZegoExpressEngine;
 import im.zego.zegoexpress.callback.IZegoCustomVideoProcessHandler;
@@ -31,6 +34,13 @@ public class VideoFilterByProcess2 extends IZegoCustomVideoProcessHandler {
         this.beautyManager = fuRenderer;
     }
 
+    @Override
+    public void onStart(ZegoPublishChannel channel) {//切换摄像头会回调
+        if (beautyManager == null) {
+            beautyManager = new ZegoBeautyManager(ZegoApplication.zegoApplication);
+        }
+    }
+
     /**
      * 释放资源
      *
@@ -41,11 +51,12 @@ public class VideoFilterByProcess2 extends IZegoCustomVideoProcessHandler {
     }
 
     @Override
-    public void onStop(ZegoPublishChannel channel) {
+    public void onStop(ZegoPublishChannel channel) {//切换摄像头会回调
         super.onStop(channel);
         if (beautyManager != null) {
             beautyManager.stopOrientationCallback();
             beautyManager.textureDestoryed();
+            beautyManager = null;
         }
     }
 

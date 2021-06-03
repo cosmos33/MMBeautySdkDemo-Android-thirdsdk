@@ -67,6 +67,7 @@ public class FUBeautyActivity extends Activity{
     private FilterType chooseFilterType;
     private ZegoExpressEngine engine;
     private ZegoVideoBufferType videoBufferType;
+    boolean isFront = true;//是否前置摄像头
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -97,6 +98,14 @@ public class FUBeautyActivity extends Activity{
 
         // 初始化SDK
         initSDK();
+        findViewById(R.id.title).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                isFront = !isFront;
+                ((VideoFilterByProcess2)videoFilterByProcess).setFrontCamera(isFront);
+                ZegoExpressEngine.getEngine().useFrontCamera(isFront);
+            }
+        });
     }
 
     @Override
@@ -178,7 +187,6 @@ public class FUBeautyActivity extends Activity{
 //        }else if(VideoFilterMainUI.useExpressCustomCaptur e&&videoBufferType==ZegoVideoBufferType.RAW_DATA){
 //            videoCaptureFromCamera = new VideoCaptureFromCamera(mFURenderer);
 //        }else
-        boolean isFront = true;//是否前置摄像头
         if(!VideoFilterMainUI.useExpressCustomCapture&&videoBufferType == ZegoVideoBufferType.SURFACE_TEXTURE){
             videoFilterByProcess =new VideoFilterByProcess(beautyManager);
             ((VideoFilterByProcess)videoFilterByProcess).setFrontCamera(isFront);
