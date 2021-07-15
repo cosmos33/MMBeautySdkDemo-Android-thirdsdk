@@ -5,7 +5,7 @@ ext {
     targetSdkVersion = 29
     buildToolsVersion = "29.0.3"
     supportSdkVersion = "26.0.1"
-    VERSION_NAME= "1.4.0_04021420"
+    VERSION_NAME= "1.5.2_06301209"
     ARTIFACT_ID = 15
     ARTIFACT_ID_SUPREME_PROPS = 15
     liteavSdk="com.tencent.liteavsdk:LiteAVSDK_Smart:latest.release"
