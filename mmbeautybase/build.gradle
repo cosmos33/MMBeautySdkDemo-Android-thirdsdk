@@ -36,5 +36,5 @@ dependencies {
     } else {
         api "com.immomo.cosmos.mediax:beautysdk_interact:$VERSION_NAME"
     }
-    api "com.cosmos.mediax:beautyutils:$beautyutils"
+    api "com.immomo.cosmos.mediax:beautyutils:$beautyutils"
 }
