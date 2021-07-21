@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    package="im.zego.expresssample.faceu.demo">
+    package="im.zego.expresssample.mmbeauty.demo">
 
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
     <uses-permission android:name="android.permission.RECORD_AUDIO" />
@@ -14,12 +14,12 @@
     <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
 
     <application
-        android:name="im.zego.expressample.faceu.demo.application.ZegoApplication"
+        android:name="im.zego.expressample.mmbeauty.demo.application.ZegoApplication"
         android:label="ZegoExpressFaceUnity"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:replace="android:label">
-        <activity android:name="im.zego.expressample.faceu.demo.ui.FUBeautyActivity" />
-        <activity android:name="im.zego.expressample.faceu.demo.ui.VideoFilterMainUI" >
+        <activity android:name="im.zego.expressample.mmbeauty.demo.ui.FUBeautyActivity" />
+        <activity android:name="im.zego.expressample.mmbeauty.demo.ui.VideoFilterMainUI" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
                 <category android:name="android.intent.category.LAUNCHER" />

@@ -4,10 +4,5 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <im.zego.expressample.faceu.demo.view.BeautyControlView
-        android:id="@+id/fu_beauty_control"
-        android:layout_width="match_parent"
-        android:layout_height="@dimen/x98"
-        android:layout_gravity="bottom"/>
 </FrameLayout>
 

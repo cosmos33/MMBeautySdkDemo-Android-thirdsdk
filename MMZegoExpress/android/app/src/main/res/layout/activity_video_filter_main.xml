@@ -12,7 +12,7 @@
         android:background="#ebeef5"
         android:orientation="vertical">
 
-        <im.zego.expressample.faceu.demo.view.TitleLayout
+        <im.zego.expressample.mmbeauty.demo.view.TitleLayout
             android:layout_width="match_parent"
             android:layout_height="45dp"
             app:name="@string/tx_video_filter">
@@ -25,7 +25,7 @@
                 android:layout_marginLeft="10dp"
                 android:background="@mipmap/ic_round_left" />
 
-        </im.zego.expressample.faceu.demo.view.TitleLayout>
+        </im.zego.expressample.mmbeauty.demo.view.TitleLayout>
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -199,7 +199,7 @@
 
             </LinearLayout>
 
-            <im.zego.expressample.faceu.demo.view.CustomEditText
+            <im.zego.expressample.mmbeauty.demo.view.CustomEditText
                 android:id="@+id/ed_room_id"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"

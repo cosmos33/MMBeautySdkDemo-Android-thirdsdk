@@ -1,4 +1,4 @@
-rootProject.name='ExpressSDKFaceUDemo'
+rootProject.name='ExpressSDKMMBeautyDemo'
 include ':app'
 gradle.ext.usemmbeauty = true
 gradle.ext.uselocalbeauty = false

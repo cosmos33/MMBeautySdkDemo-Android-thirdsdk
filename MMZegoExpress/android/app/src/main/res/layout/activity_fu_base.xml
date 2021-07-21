@@ -18,7 +18,7 @@
             android:keepScreenOn="true"
             android:orientation="vertical">
 
-            <im.zego.expressample.faceu.demo.view.TitleLayout
+            <im.zego.expressample.mmbeauty.demo.view.TitleLayout
                 android:id="@+id/title"
                 android:layout_width="match_parent"
                 android:layout_height="45dp"
@@ -32,7 +32,7 @@
                     android:layout_marginLeft="10dp"
                     android:background="@mipmap/ic_round_left" />
 
-            </im.zego.expressample.faceu.demo.view.TitleLayout>
+            </im.zego.expressample.mmbeauty.demo.view.TitleLayout>
 
             <RelativeLayout
                 android:layout_width="match_parent"

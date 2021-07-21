@@ -27,6 +27,5 @@ dependencies {
     implementation 'androidx.annotation:annotation:1.1.0'
     implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
     implementation files('libs/ZegoExpressEngine.jar')
-//    implementation files('3rdlibs/nama.jar')
     implementation project(':mmbeautybase')
 }

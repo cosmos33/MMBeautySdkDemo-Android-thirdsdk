@@ -6,7 +6,7 @@
     android:layout_gravity="bottom"
     android:background="#BD050F14">
 
-    <im.zego.expressample.faceu.demo.view.seekbar.DiscreteSeekBar
+    <im.zego.expressample.mmbeauty.demo.view.seekbar.DiscreteSeekBar
         android:id="@+id/beauty_seek_bar"
         android:layout_width="@dimen/x528"
         android:layout_height="wrap_content"
@@ -63,14 +63,14 @@
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent">
 
-        <im.zego.expressample.faceu.demo.view.BeautyBoxGroup
+        <im.zego.expressample.mmbeauty.demo.view.BeautyBoxGroup
             android:id="@+id/beauty_group_skin_beauty"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:gravity="center_horizontal|bottom"
             android:orientation="horizontal">
 
-            <im.zego.expressample.faceu.demo.view.BeautyBox
+            <im.zego.expressample.mmbeauty.demo.view.BeautyBox
                 android:id="@+id/beauty_box_skin_detect"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -81,7 +81,7 @@
                 app:drawable_open_normal="@drawable/beauty_skin_control_all_blur_open_normal"
                 app:text_normal="@string/beauty_box_skin_detect" />
 
-            <im.zego.expressample.faceu.demo.view.BeautyBox
+            <im.zego.expressample.mmbeauty.demo.view.BeautyBox
                 android:id="@+id/beauty_box_heavy_blur"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -93,7 +93,7 @@
                 app:text_double="@string/beauty_box_heavy_blur_double"
                 app:text_normal="@string/beauty_box_heavy_blur_normal" />
 
-            <im.zego.expressample.faceu.demo.view.BeautyBox
+            <im.zego.expressample.mmbeauty.demo.view.BeautyBox
                 android:id="@+id/beauty_box_blur_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -104,7 +104,7 @@
                 app:drawable_open_normal="@drawable/beauty_skin_control_blur_open_normal"
                 app:text_normal="@string/beauty_box_blur_level" />
 
-            <im.zego.expressample.faceu.demo.view.BeautyBox
+            <im.zego.expressample.mmbeauty.demo.view.BeautyBox
                 android:id="@+id/beauty_box_color_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -114,7 +114,7 @@
                 app:drawable_open_normal="@drawable/beauty_skin_control_color_open_normal"
                 app:text_normal="@string/beauty_box_color_level" />
 
-            <im.zego.expressample.faceu.demo.view.BeautyBox
+            <im.zego.expressample.mmbeauty.demo.view.BeautyBox
                 android:id="@+id/beauty_box_red_level"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -124,7 +124,7 @@
                 app:drawable_open_normal="@drawable/beauty_skin_control_red_open_normal"
                 app:text_normal="@string/beauty_box_red_level" />
 
-            <im.zego.expressample.faceu.demo.view.BeautyBox
+            <im.zego.expressample.mmbeauty.demo.view.BeautyBox
                 android:id="@+id/beauty_box_eye_bright"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -134,7 +134,7 @@
                 app:drawable_open_normal="@drawable/beauty_skin_control_bright_eyes_open_normal"
                 app:text_normal="@string/beauty_box_eye_bright" />
 
-            <im.zego.expressample.faceu.demo.view.BeautyBox
+            <im.zego.expressample.mmbeauty.demo.view.BeautyBox
                 android:id="@+id/beauty_box_tooth_whiten"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
@@ -144,7 +144,7 @@
                 app:drawable_open_normal="@drawable/beauty_skin_control_teeth_open_normal"
                 app:text_normal="@string/beauty_box_tooth_whiten" />
 
-        </im.zego.expressample.faceu.demo.view.BeautyBoxGroup>
+        </im.zego.expressample.mmbeauty.demo.view.BeautyBoxGroup>
     </HorizontalScrollView>
 
     <FrameLayout
@@ -200,14 +200,14 @@
             android:layout_marginLeft="@dimen/x134"
             android:scrollbars="none">
 
-            <im.zego.expressample.faceu.demo.view.BeautyBoxGroup
+            <im.zego.expressample.mmbeauty.demo.view.BeautyBoxGroup
                 android:id="@+id/beauty_group_face_shape"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:gravity="center_horizontal|bottom"
                 android:orientation="horizontal">
 
-                <im.zego.expressample.faceu.demo.view.BeautyBox
+                <im.zego.expressample.mmbeauty.demo.view.BeautyBox
                     android:id="@+id/beauty_box_cheek_thinning"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -217,7 +217,7 @@
                     app:drawable_open_normal="@drawable/beauty_type_control_cheekthin_level_open_normal"
                     app:text_normal="@string/beauty_box_cheek_thinning" />
 
-                <im.zego.expressample.faceu.demo.view.BeautyBox
+                <im.zego.expressample.mmbeauty.demo.view.BeautyBox
                     android:id="@+id/beauty_box_cheek_v"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -227,7 +227,7 @@
                     app:drawable_open_normal="@drawable/demo_icon_v_nor_open"
                     app:text_normal="@string/beauty_box_cheek_v" />
 
-                <im.zego.expressample.faceu.demo.view.BeautyBox
+                <im.zego.expressample.mmbeauty.demo.view.BeautyBox
                     android:id="@+id/beauty_box_cheek_narrow"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -237,7 +237,7 @@
                     app:drawable_open_normal="@drawable/demo_icon_narrow_face_nor_open"
                     app:text_normal="@string/beauty_box_cheek_narrow" />
 
-                <im.zego.expressample.faceu.demo.view.BeautyBox
+                <im.zego.expressample.mmbeauty.demo.view.BeautyBox
                     android:id="@+id/beauty_box_cheek_small"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -247,7 +247,7 @@
                     app:drawable_open_normal="@drawable/demo_icon_little_face_nor_open"
                     app:text_normal="@string/beauty_box_cheek_small" />
 
-                <im.zego.expressample.faceu.demo.view.BeautyBox
+                <im.zego.expressample.mmbeauty.demo.view.BeautyBox
                     android:id="@+id/beauty_box_eye_enlarge"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -257,7 +257,7 @@
                     app:drawable_open_normal="@drawable/beauty_type_control_enlarge_eye_level_open_normal"
                     app:text_normal="@string/beauty_box_eye_enlarge" />
 
-                <im.zego.expressample.faceu.demo.view.BeautyBox
+                <im.zego.expressample.mmbeauty.demo.view.BeautyBox
                     android:id="@+id/beauty_box_intensity_chin"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -267,7 +267,7 @@
                     app:drawable_open_normal="@drawable/beauty_type_control_chin_level_open_normal"
                     app:text_normal="@string/beauty_box_intensity_chin" />
 
-                <im.zego.expressample.faceu.demo.view.BeautyBox
+                <im.zego.expressample.mmbeauty.demo.view.BeautyBox
                     android:id="@+id/beauty_box_intensity_forehead"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -277,7 +277,7 @@
                     app:drawable_open_normal="@drawable/beauty_type_control_forehead_level_open_normal"
                     app:text_normal="@string/beauty_box_intensity_forehead" />
 
-                <im.zego.expressample.faceu.demo.view.BeautyBox
+                <im.zego.expressample.mmbeauty.demo.view.BeautyBox
                     android:id="@+id/beauty_box_intensity_nose"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -287,7 +287,7 @@
                     app:drawable_open_normal="@drawable/beauty_type_control_thin_nose_level_open_normal"
                     app:text_normal="@string/beauty_box_intensity_nose" />
 
-                <im.zego.expressample.faceu.demo.view.BeautyBox
+                <im.zego.expressample.mmbeauty.demo.view.BeautyBox
                     android:id="@+id/beauty_box_intensity_mouth"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -297,7 +297,7 @@
                     app:drawable_open_normal="@drawable/beauty_type_control_mouth_shape_open_normal"
                     app:text_normal="@string/beauty_box_intensity_mouth" />
 
-            </im.zego.expressample.faceu.demo.view.BeautyBoxGroup>
+            </im.zego.expressample.mmbeauty.demo.view.BeautyBoxGroup>
         </HorizontalScrollView>
     </FrameLayout>
 
@@ -339,7 +339,7 @@
         android:background="#33E5E5E5"
         app:layout_constraintBottom_toTopOf="@id/beauty_radio_group" />
 
-    <im.zego.expressample.faceu.demo.view.CheckGroup
+    <im.zego.expressample.mmbeauty.demo.view.CheckGroup
         android:id="@+id/beauty_radio_group"
         android:layout_width="match_parent"
         android:layout_height="@dimen/x98"
@@ -406,5 +406,5 @@
             android:textColor="@color/beauty_control_bottom_radio_color"
             android:textSize="13sp" />
 
-    </im.zego.expressample.faceu.demo.view.CheckGroup>
+    </im.zego.expressample.mmbeauty.demo.view.CheckGroup>
 </androidx.constraintlayout.widget.ConstraintLayout>
