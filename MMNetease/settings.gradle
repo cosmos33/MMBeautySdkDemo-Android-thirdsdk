@@ -1,0 +1,27 @@
+/*
+ * Copyright (c) 2021 NetEase, Inc.  All rights reserved.
+ * Use of this source code is governed by a MIT license that can be found in the LICENSE file.
+ */
+
+rootProject.name = "PkLiveDemo"
+
+include ':app'
+
+include ':biz-user'
+include ':biz-live'
+
+include ':lib-modularity'
+include ':lib-basic'
+include ':lib-utils'
+include ':lib-live'
+include ':lib-user'
+
+gradle.ext.uselocalbeauty = false
+include "mmbeautybase"
+project(':mmbeautybase').projectDir = new File(settingsDir,'../mmbeautybase/')
+if(gradle.uselocalbeauty){
+    gradle.ext.userLocalDoki = false
+    gradle.ext.userLocalEffect = false
+    include "mmbeautysdk"
+    project(':mmbeautysdk').projectDir = new File(settingsDir,'../../../../mmsdk/beauty-sdk/beauty')
+}
