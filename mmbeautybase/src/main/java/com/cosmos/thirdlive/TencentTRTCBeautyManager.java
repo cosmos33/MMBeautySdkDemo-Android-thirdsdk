@@ -15,7 +15,7 @@ import com.cosmos.beautyutils.RotateFilter;
  */
 public class TencentTRTCBeautyManager extends BeautyManager {
     private RotateFilter rotateFilter;
-
+    private RotateFilter revertRotateFilter;
     public TencentTRTCBeautyManager(Context context) {
         super(context, cosmosAppid);
     }
@@ -25,6 +25,7 @@ public class TencentTRTCBeautyManager extends BeautyManager {
         if (resourceReady) {
             if (rotateFilter == null) {
                 rotateFilter = new RotateFilter(RotateFilter.ROTATE_VERTICAL);
+                revertRotateFilter = new RotateFilter(RotateFilter.ROTATE_VERTICAL);
                 faceInfoCreatorPBOFilter = new FaceInfoCreatorPBOFilter(texWidth, texHeight);
                 emptyFilter = new Empty2Filter();
                 emptyFilter.setWidth(texWidth);
@@ -47,9 +48,22 @@ public class TencentTRTCBeautyManager extends BeautyManager {
                         texHeight,
                         ImageFrame.MMFormat.FMT_RGBA
                 ));
-                return rotateFilter.rotateTexture(beautyTexture, texWidth, texHeight);
+                return revertRotateFilter.rotateTexture(beautyTexture, texWidth, texHeight);
             }
         }
         return texture;
+    }
+
+    @Override
+    public void textureDestoryed() {
+        super.textureDestoryed();
+        if (rotateFilter != null) {
+            rotateFilter.destory();
+            rotateFilter = null;
+        }
+        if (revertRotateFilter != null) {
+            revertRotateFilter.destory();
+            revertRotateFilter = null;
+        }
     }
 }

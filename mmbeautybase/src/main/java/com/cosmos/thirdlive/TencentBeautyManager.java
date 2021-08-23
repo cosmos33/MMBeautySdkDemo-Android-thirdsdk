@@ -4,7 +4,6 @@ import android.content.Context;
 
 import com.core.glcore.util.ImageFrame;
 import com.cosmos.appbase.BeautyManager;
-import com.cosmos.appbase.TransOesTextureFilter;
 import com.cosmos.beauty.model.MMRenderFrameParams;
 import com.cosmos.beauty.model.datamode.CommonDataMode;
 import com.cosmos.beautyutils.Empty2Filter;
@@ -16,6 +15,7 @@ import com.cosmos.beautyutils.RotateFilter;
  */
 public class TencentBeautyManager extends BeautyManager {
     private RotateFilter rotateFilter;
+    private RotateFilter revertRotateFilter;
 
     public TencentBeautyManager(Context context) {
         super(context, cosmosAppid);
@@ -26,6 +26,7 @@ public class TencentBeautyManager extends BeautyManager {
         if (resourceReady) {
             if (rotateFilter == null) {
                 rotateFilter = new RotateFilter(RotateFilter.ROTATE_VERTICAL);
+                revertRotateFilter = new RotateFilter(RotateFilter.ROTATE_VERTICAL);
                 faceInfoCreatorPBOFilter = new FaceInfoCreatorPBOFilter(texWidth, texHeight);
                 emptyFilter = new Empty2Filter();
                 emptyFilter.setWidth(texWidth);
@@ -48,9 +49,22 @@ public class TencentBeautyManager extends BeautyManager {
                         texHeight,
                         ImageFrame.MMFormat.FMT_RGBA
                 ));
-                return rotateFilter.rotateTexture(beautyTexture, texWidth, texHeight);
+                return revertRotateFilter.rotateTexture(beautyTexture, texWidth, texHeight);
             }
         }
         return texture;
+    }
+
+    @Override
+    public void textureDestoryed() {
+        super.textureDestoryed();
+        if (rotateFilter != null) {
+            rotateFilter.destory();
+            rotateFilter = null;
+        }
+        if (revertRotateFilter != null) {
+            revertRotateFilter.destory();
+            revertRotateFilter = null;
+        }
     }
 }
