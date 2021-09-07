@@ -1,0 +1,117 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.tencent.liteav.demo.livepusher"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="28" />
+9-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml
+10
+11    <uses-feature android:name="android.hardware.camera" />
+11-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:30:5-60
+11-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:30:19-57
+12    <uses-feature android:name="android.hardware.camera.autofocus" />
+12-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:31:5-70
+12-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:31:19-67
+13
+14    <uses-permission android:name="android.permission.INTERNET" />
+14-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:33:5-67
+14-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:33:22-64
+15    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+15-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:34:5-79
+15-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:34:22-76
+16    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+16-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:35:5-76
+16-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:35:22-73
+17    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+17-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:36:5-75
+17-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:36:22-72
+18    <uses-permission android:name="android.permission.CALL_PHONE" />
+18-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:37:5-69
+18-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:37:22-66
+19    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+19-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:38:5-81
+19-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:38:22-78
+20    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+20-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:39:5-80
+20-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:39:22-77
+21    <uses-permission android:name="android.permission.READ_LOGS" />
+21-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:40:5-68
+21-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:40:22-65
+22    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+22-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:41:5-71
+22-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:41:22-68
+23    <uses-permission android:name="android.permission.CAMERA" />
+23-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:42:5-65
+23-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:42:22-62
+24    <uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT" />
+24-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:43:5-79
+24-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:43:22-76
+25    <uses-permission android:name="android.permission.CAPTURE_VIDEO_OUTPUT" />
+25-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:44:5-79
+25-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:44:22-76
+26    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+26-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:46:5-80
+26-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:46:22-77
+27    <uses-permission android:name="android.permission.BLUETOOTH" />
+27-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:47:5-68
+27-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:47:22-65
+28    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+28-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:49:5-78
+28-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:49:22-75
+29    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+29-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:50:5-79
+29-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:50:22-76
+30    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+30-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:52:5-73
+30-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:52:22-70
+31
+32    <application android:theme="@style/AppTheme" >
+32-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:4:5-28:19
+32-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:4:18-49
+33        <activity
+33-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:6:9-10:67
+34            android:name="com.tencent.liteav.demo.livepusher.camerapush.ui.CameraPushMainActivity"
+34-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:7:13-65
+35            android:configChanges="keyboardHidden|orientation|screenSize"
+35-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:8:13-74
+36            android:screenOrientation="portrait"
+36-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:9:13-49
+37            android:windowSoftInputMode="adjustPan|stateHidden" />
+37-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:10:13-64
+38        <activity
+38-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:12:9-14:52
+39            android:name="com.tencent.liteav.demo.livepusher.camerapush.ui.QRCodeScanActivity"
+39-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:13:13-61
+40            android:screenOrientation="portrait" />
+40-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:14:13-49
+41        <activity
+41-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:16:9-17:51
+42            android:name="com.tencent.liteav.demo.livepusher.camerapush.ui.CameraPushEntranceActivity"
+42-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:16:19-75
+43            android:screenOrientation="portrait" />
+43-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:17:13-49
+44
+45        <provider
+45-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:19:9-27:20
+46            android:name="androidx.core.content.FileProvider"
+46-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:20:13-62
+47            android:authorities="com.tencent.liteav.demo"
+47-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:21:13-58
+48            android:exported="false"
+48-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:22:13-37
+49            android:grantUriPermissions="true" >
+49-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:23:13-47
+50            <meta-data
+50-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:24:13-26:54
+51                android:name="android.support.FILE_PROVIDER_PATHS"
+51-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:25:17-67
+52                android:resource="@xml/file_paths" />
+52-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/livepusherdemo/src/main/AndroidManifest.xml:26:17-51
+53        </provider>
+54    </application>
+55
+56</manifest>

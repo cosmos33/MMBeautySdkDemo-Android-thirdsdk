@@ -1,0 +1,39 @@
+-- Merging decision tree log ---
+manifest
+ADDED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml:1:1-6:12
+INJECTED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml:1:1-6:12
+INJECTED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml:1:1-6:12
+INJECTED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml:1:1-6:12
+INJECTED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml:1:1-6:12
+INJECTED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml:1:1-6:12
+INJECTED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml:1:1-6:12
+	package
+		ADDED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml:1:11-45
+		INJECTED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml
+		INJECTED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml
+	android:versionName
+		INJECTED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml
+		ADDED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml:1:1-6:12
+		INJECTED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml
+	xmlns:android
+		ADDED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml:1:1-6:12
+	android:versionCode
+		INJECTED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml
+		ADDED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml:1:1-6:12
+		INJECTED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml
+application
+ADDED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml:4:5-32
+uses-sdk
+INJECTED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml reason: use-sdk injection requested
+INJECTED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml
+INJECTED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml
+INJECTED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml
+INJECTED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml
+	android:targetSdkVersion
+		INJECTED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml
+		ADDED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml
+		INJECTED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml
+	android:minSdkVersion
+		INJECTED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml
+		ADDED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml
+		INJECTED from /Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/debug/src/main/AndroidManifest.xml

@@ -1,0 +1,107 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.tencent.liteav.demo.liveroom"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="19"
+8-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="26" />
+9-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml
+10
+11    <uses-feature android:name="android.hardware.camera" />
+11-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:24:5-60
+11-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:24:19-57
+12    <uses-feature android:name="android.hardware.camera.autofocus" />
+12-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:25:5-70
+12-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:25:19-67
+13
+14    <uses-permission android:name="android.permission.INTERNET" />
+14-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:27:5-67
+14-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:27:22-64
+15    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+15-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:28:5-79
+15-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:28:22-76
+16    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+16-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:29:5-76
+16-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:29:22-73
+17    <uses-permission android:name="android.permission.READ_PHONE_STATE" />
+17-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:30:5-75
+17-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:30:22-72
+18    <uses-permission android:name="android.permission.CALL_PHONE" />
+18-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:31:5-69
+18-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:31:22-66
+19    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+19-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:32:5-81
+19-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:32:22-78
+20    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+20-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:33:5-80
+20-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:33:22-77
+21    <uses-permission android:name="android.permission.READ_LOGS" />
+21-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:34:5-68
+21-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:34:22-65
+22    <uses-permission android:name="android.permission.RECORD_AUDIO" />
+22-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:35:5-71
+22-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:35:22-68
+23    <uses-permission android:name="android.permission.CAMERA" />
+23-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:36:5-65
+23-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:36:22-62
+24    <uses-permission android:name="android.permission.CAPTURE_AUDIO_OUTPUT" />
+24-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:37:5-79
+24-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:37:22-76
+25    <uses-permission android:name="android.permission.CAPTURE_VIDEO_OUTPUT" />
+25-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:38:5-79
+25-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:38:22-76
+26    <uses-permission android:name="android.permission.MODIFY_AUDIO_SETTINGS" />
+26-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:40:5-80
+26-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:40:22-77
+27    <uses-permission android:name="android.permission.BLUETOOTH" />
+27-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:41:5-68
+27-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:41:22-65
+28    <uses-permission android:name="android.permission.SYSTEM_ALERT_WINDOW" />
+28-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:43:5-78
+28-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:43:22-75
+29    <uses-permission android:name="android.permission.CHANGE_CONFIGURATION" />
+29-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:44:5-79
+29-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:44:22-76
+30    <uses-permission android:name="android.permission.WRITE_SETTINGS" />
+30-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:46:5-73
+30-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:46:22-70
+31
+32    <application android:theme="@style/AppTheme" >
+32-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:4:5-22:19
+32-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:4:18-49
+33        <activity
+33-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:6:9-11:59
+34            android:name="com.tencent.liteav.demo.liveroom.ui.LiveRoomActivity"
+34-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:7:13-48
+35            android:label="@string/mlvb_title_activity_rtmp_room_demo"
+35-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:8:13-71
+36            android:screenOrientation="portrait"
+36-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:9:13-49
+37            android:theme="@style/MlvbRtmpRoomActivityTheme"
+37-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:10:13-61
+38            android:windowSoftInputMode="adjustNothing" />
+38-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:11:13-56
+39
+40        <provider
+40-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:13:9-21:20
+41            android:name="android.support.v4.content.FileProvider"
+41-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:14:13-67
+42            android:authorities="com.tencent.liteav.demo"
+42-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:15:13-58
+43            android:exported="false"
+43-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:16:13-37
+44            android:grantUriPermissions="true" >
+44-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:17:13-47
+45            <meta-data
+45-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:18:13-20:54
+46                android:name="android.support.FILE_PROVIDER_PATHS"
+46-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:19:17-67
+47                android:resource="@xml/file_paths" />
+47-->/Users/momo/Documents/android/githubprojects/MLVBSDK/Android/Demo/mlvbliveroomdemo/src/main/AndroidManifest.xml:20:17-51
+48        </provider>
+49    </application>
+50
+51</manifest>

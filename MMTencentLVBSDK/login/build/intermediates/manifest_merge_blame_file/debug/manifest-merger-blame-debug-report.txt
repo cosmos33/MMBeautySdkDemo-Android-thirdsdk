@@ -1,0 +1,38 @@
+1<?xml version="1.0" encoding="utf-8"?>
+2<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+3    package="com.tencent.liteav.login"
+4    android:versionCode="1"
+5    android:versionName="1.0" >
+6
+7    <uses-sdk
+8        android:minSdkVersion="21"
+8-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/login/src/main/AndroidManifest.xml
+9        android:targetSdkVersion="28" />
+9-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/login/src/main/AndroidManifest.xml
+10
+11    <application>
+11-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/login/src/main/AndroidManifest.xml:5:5-16:19
+12        <activity
+12-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/login/src/main/AndroidManifest.xml:6:9-15:20
+13            android:name="com.tencent.liteav.login.ui.LoginActivity"
+13-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/login/src/main/AndroidManifest.xml:7:13-45
+14            android:screenOrientation="portrait"
+14-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/login/src/main/AndroidManifest.xml:9:13-49
+15            android:theme="@style/Theme.AppCompat.NoActionBar" >
+15-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/login/src/main/AndroidManifest.xml:8:13-63
+16            <intent-filter>
+16-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/login/src/main/AndroidManifest.xml:10:13-14:29
+17
+18                <!-- <action android:name="android.intent.action.MAIN" /> -->
+19                <action android:name="com.tencent.liteav.action.startLogin" />
+19-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/login/src/main/AndroidManifest.xml:12:17-79
+19-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/login/src/main/AndroidManifest.xml:12:25-76
+20
+21                <category android:name="android.intent.category.DEFAULT" />
+21-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/login/src/main/AndroidManifest.xml:13:17-76
+21-->/Users/momo/Documents/android/githubprojects/beauty-live/cosmosbeauty-live/MMTencentLVBSDK/login/src/main/AndroidManifest.xml:13:27-73
+22            </intent-filter>
+23        </activity>
+24    </application>
+25
+26</manifest>
