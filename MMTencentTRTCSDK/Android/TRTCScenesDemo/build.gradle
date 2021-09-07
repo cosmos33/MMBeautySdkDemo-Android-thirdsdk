@@ -17,13 +17,13 @@ buildscript {
 
 allprojects {
     repositories {
+        mavenCentral()
         flatDir {
             dirs 'libs'
             dirs project(':app').file('libs')
         }
         jcenter()
         google()
-        mavenCentral()
         maven { url 'https://cosmos1602.bintray.com/cosmos/' }
         maven { url 'https://cosmos1602.bintray.com/mediax/' }
     }
@@ -39,7 +39,8 @@ ext {
     supportSdkVersion = "26.0.1"
     minSdkVersion = 19
     targetSdkVersion = 26
-    liteavSdk_trtc="com.tencent.liteav:LiteAVSDK_TRTC:latest.release"
+//    liteavSdk_trtc="com.tencent.liteav:LiteAVSDK_TRTC:8.3.10263"
+    liteavSdk_trtc="com.tencent.liteav:LiteAVSDK_TRTC:8.8.10260"
     imSdk = 'com.tencent.imsdk:imsdk:4.9.1'
     versionCode = 1
     versionName = "v1.0"
