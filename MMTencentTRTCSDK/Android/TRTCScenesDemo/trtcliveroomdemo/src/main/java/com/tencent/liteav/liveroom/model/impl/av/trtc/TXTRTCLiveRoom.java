@@ -213,6 +213,11 @@ public class TXTRTCLiveRoom extends TRTCCloudListener implements ITRTCTXLiveRoom
     @Override
     public void startCameraPreview(boolean isFront, TXCloudVideoView view, TXCallback callback) {
         TRTCLogger.i(TAG, "start camera preview.");
+        TRTCCloudDef.TRTCRenderParams params = new TRTCCloudDef.TRTCRenderParams();
+        params.fillMode = 0;
+        params.mirrorType = 0;
+        params.rotation = 0;
+        mTRTCCloud.setLocalRenderParams(params);
         mTRTCCloud.startLocalPreview(isFront, view);
         if (callback != null) {
             callback.onCallback(0, "success");
