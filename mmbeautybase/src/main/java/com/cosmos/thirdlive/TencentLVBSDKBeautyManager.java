@@ -11,12 +11,13 @@ import com.cosmos.beautyutils.FaceInfoCreatorPBOFilter;
 import com.cosmos.beautyutils.RotateFilter;
 
 /**
- * 腾讯TRTC接入美颜sdk管理类
+ * 腾讯LVBSDK接入美颜sdk管理类
  */
-public class TencentTRTCBeautyManager extends BeautyManager {
+public class TencentLVBSDKBeautyManager extends BeautyManager {
     private RotateFilter rotateFilter;
     private RotateFilter revertRotateFilter;
-    public TencentTRTCBeautyManager(Context context) {
+
+    public TencentLVBSDKBeautyManager(Context context) {
         super(context, cosmosAppid);
     }
 
