@@ -20,7 +20,7 @@ if (!videoEngineSourcePath.isEmpty()) {
     apply from: new File(settingsDir, '../source_link_gradle/videoengine_source_settings.gradle').getAbsolutePath()
 }
 
-gradle.ext.uselocalbeauty = true
+gradle.ext.uselocalbeauty = false
 gradle.ext.buildsdk = false
 gradle.ext.userLocalEffect = false
 gradle.ext.userLocalFilter = false
