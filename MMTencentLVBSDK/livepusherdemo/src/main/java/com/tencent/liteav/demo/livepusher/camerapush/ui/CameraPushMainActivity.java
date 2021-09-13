@@ -14,9 +14,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Looper;
 import android.provider.Settings;
-import androidx.annotation.StringRes;
-import androidx.fragment.app.FragmentActivity;
-import androidx.core.content.FileProvider;
 import android.telephony.PhoneStateListener;
 import android.telephony.TelephonyManager;
 import android.text.SpannableStringBuilder;
@@ -35,11 +32,14 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import androidx.annotation.StringRes;
+import androidx.core.content.FileProvider;
+import androidx.fragment.app.FragmentActivity;
+
 import com.blankj.utilcode.constant.PermissionConstants;
 import com.blankj.utilcode.util.PermissionUtils;
 import com.blankj.utilcode.util.ToastUtils;
 import com.cosmos.thirdlive.TencentLVBSDKBeautyManager;
-import com.cosmos.thirdlive.TencentTRTCBeautyManager;
 import com.tencent.liteav.audiosettingkit.AudioEffectPanel;
 import com.tencent.liteav.demo.beauty.view.BeautyPanel;
 import com.tencent.liteav.demo.livepusher.R;
@@ -560,8 +560,10 @@ public class CameraPushMainActivity extends FragmentActivity implements
             param.videoResolutionMode = mIsLandscape ? V2TXLiveVideoResolutionModeLandscape : V2TXLiveVideoResolutionModePortrait;
             mLivePusher.setVideoQuality(param);
 
+            // TODO mmbeauty 接入MMbeauty贴纸保持正常显示，需要下边两个分别设置为false，diable  或者 true enable
             // 是否开启观众端镜像观看
-            mLivePusher.setEncoderMirror(mIsMirrorEnable);
+            mLivePusher.setEncoderMirror(true);
+            mLivePusher.setRenderMirror(V2TXLiveDef.V2TXLiveMirrorType.V2TXLiveMirrorTypeEnable);
             // 是否打开调试信息
             mPusherView.showLog(mIsDebugInfo);
 
