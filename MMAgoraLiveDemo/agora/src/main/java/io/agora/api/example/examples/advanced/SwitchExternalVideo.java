@@ -35,10 +35,7 @@ import java.io.File;
 import io.agora.advancedvideo.externvideosource.ExternalVideoInputManager;
 import io.agora.advancedvideo.externvideosource.ExternalVideoInputService;
 import io.agora.advancedvideo.externvideosource.IExternalVideoInputService;
-import io.agora.api.example.AgoraApplication;
 import io.agora.api.example.R;
-import io.agora.api.example.R2;
-import io.agora.api.example.annotation.Example;
 import io.agora.api.example.common.BaseFragment;
 import io.agora.api.example.utils.CommonUtil;
 import io.agora.rtc.Constants;
@@ -50,7 +47,6 @@ import io.agora.rtc.video.VideoEncoderConfiguration;
 import static android.app.Activity.RESULT_OK;
 import static io.agora.api.component.Constant.ENGINE;
 import static io.agora.api.component.Constant.TEXTUREVIEW;
-import static io.agora.api.example.common.model.Examples.ADVANCED;
 import static io.agora.rtc.Constants.REMOTE_VIDEO_STATE_STARTING;
 import static io.agora.rtc.video.VideoCanvas.RENDER_MODE_HIDDEN;
 

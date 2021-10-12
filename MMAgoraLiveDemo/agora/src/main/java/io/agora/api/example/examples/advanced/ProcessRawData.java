@@ -16,6 +16,7 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.cosmos.thirdlive.AgoraRawDataBeautyManager;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.runtime.Permission;
 
@@ -23,30 +24,32 @@ import io.agora.advancedvideo.rawdata.MediaDataAudioObserver;
 import io.agora.advancedvideo.rawdata.MediaDataObserverPlugin;
 import io.agora.advancedvideo.rawdata.MediaDataVideoObserver;
 import io.agora.advancedvideo.rawdata.MediaPreProcessing;
+import io.agora.api.example.MainApplication;
 import io.agora.api.example.R;
+import io.agora.api.example.R2;
+import io.agora.api.example.annotation.Example;
 import io.agora.api.example.common.BaseFragment;
 import io.agora.api.example.utils.CommonUtil;
 import io.agora.api.example.utils.YUVUtils;
 import io.agora.rtc.Constants;
 import io.agora.rtc.IRtcEngineEventHandler;
 import io.agora.rtc.RtcEngine;
+import io.agora.rtc.models.ChannelMediaOptions;
 import io.agora.rtc.video.VideoCanvas;
 import io.agora.rtc.video.VideoEncoderConfiguration;
 
+import static io.agora.api.example.common.model.Examples.ADVANCED;
 import static io.agora.rtc.Constants.RAW_AUDIO_FRAME_OP_MODE_READ_ONLY;
 import static io.agora.rtc.video.VideoCanvas.RENDER_MODE_HIDDEN;
-import static io.agora.rtc.video.VideoEncoderConfiguration.FRAME_RATE.FRAME_RATE_FPS_15;
-import static io.agora.rtc.video.VideoEncoderConfiguration.ORIENTATION_MODE.ORIENTATION_MODE_ADAPTIVE;
 import static io.agora.rtc.video.VideoEncoderConfiguration.STANDARD_BITRATE;
-import static io.agora.rtc.video.VideoEncoderConfiguration.VD_640x360;
 
-//@Example(
-//        index = 10,
-//        group = ADVANCED,
-//        name = R2.string.item_processraw,
-//        actionId = R2.id.action_mainFragment_to_ProcessRawData,
-//        tipsId = R2.string.processrawdata
-//)
+@Example(
+        index = 10,
+        group = ADVANCED,
+        name = "原始音频/视频数据",
+        actionId = R2.id.action_mainFragment_to_ProcessRawData,
+        tipsId = "此示例演示了在音视频通话过程中如何通过回调获取裸数据，以及在数据被处理后如何返回给SDK的功能。\\nPS：裸数据包括视频帧和音频帧。"
+)
 public class ProcessRawData extends BaseFragment implements View.OnClickListener, MediaDataVideoObserver,
         MediaDataAudioObserver {
     private static final String TAG = ProcessRawData.class.getSimpleName();
@@ -58,6 +61,8 @@ public class ProcessRawData extends BaseFragment implements View.OnClickListener
     private int myUid;
     private boolean joined = false, blur = true;
     private MediaDataObserverPlugin mediaDataObserverPlugin;
+    String channelId = "mmbeautytest";
+    private AgoraRawDataBeautyManager agoraRawDataBeautyManager;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -98,6 +103,7 @@ public class ProcessRawData extends BaseFragment implements View.OnClickListener
         blurBtn.setOnClickListener(this);
         fl_local = view.findViewById(R.id.fl_local);
         fl_remote = view.findViewById(R.id.fl_remote);
+        et_channel.setText(channelId);
     }
 
     @Override
@@ -107,6 +113,7 @@ public class ProcessRawData extends BaseFragment implements View.OnClickListener
         MediaPreProcessing.setCallback(mediaDataObserverPlugin);
         MediaPreProcessing.setVideoCaptureByteBuffer(mediaDataObserverPlugin.byteBufferCapture);
         mediaDataObserverPlugin.addVideoObserver(this);
+        agoraRawDataBeautyManager = new AgoraRawDataBeautyManager(getContext());
     }
 
     @Override
@@ -131,7 +138,6 @@ public class ProcessRawData extends BaseFragment implements View.OnClickListener
             if (!joined) {
                 CommonUtil.hideInputBoard(getActivity(), et_channel);
                 // call when join button hit
-                String channelId = et_channel.getText().toString();
                 // Check permission
                 if (AndPermission.hasPermissions(this, Permission.Group.STORAGE, Permission.Group.MICROPHONE, Permission.Group.CAMERA)) {
                     joinChannel(channelId);
@@ -209,10 +215,10 @@ public class ProcessRawData extends BaseFragment implements View.OnClickListener
         engine.enableVideo();
         // Setup video encoding configs
         engine.setVideoEncoderConfiguration(new VideoEncoderConfiguration(
-                VD_640x360,
-                FRAME_RATE_FPS_15,
+                ((MainApplication) getActivity().getApplication()).getGlobalSettings().getVideoEncodingDimensionObject(),
+                VideoEncoderConfiguration.FRAME_RATE.valueOf(((MainApplication) getActivity().getApplication()).getGlobalSettings().getVideoEncodingFrameRate()),
                 STANDARD_BITRATE,
-                ORIENTATION_MODE_ADAPTIVE
+                VideoEncoderConfiguration.ORIENTATION_MODE.valueOf(((MainApplication) getActivity().getApplication()).getGlobalSettings().getVideoEncodingOrientation())
         ));
         /**Set up to play remote sound with receiver*/
         engine.setDefaultAudioRoutetoSpeakerphone(false);
@@ -260,7 +266,11 @@ public class ProcessRawData extends BaseFragment implements View.OnClickListener
         }
         /** Allows a user to join a channel.
          if you do not specify the uid, we will generate the uid for you*/
-        int res = engine.joinChannel(accessToken, channelId, "Extra Optional Data", 0);
+
+        ChannelMediaOptions option = new ChannelMediaOptions();
+        option.autoSubscribeAudio = true;
+        option.autoSubscribeVideo = true;
+        int res = engine.joinChannel(accessToken, channelId, "Extra Optional Data", 0, option);
         if (res != 0) {
             // Usually happens with invalid parameters
             // Error code description can be found at:
@@ -313,6 +323,7 @@ public class ProcessRawData extends BaseFragment implements View.OnClickListener
         public void onJoinChannelSuccess(String channel, int uid, int elapsed) {
             Log.i(TAG, String.format("onJoinChannelSuccess channel %s uid %d", channel, uid));
             showLongToast(String.format("onJoinChannelSuccess channel %s uid %d", channel, uid));
+            mediaDataObserverPlugin.addDecodeBuffer(uid);
             myUid = uid;
             joined = true;
             handler.post(new Runnable() {
@@ -390,14 +401,12 @@ public class ProcessRawData extends BaseFragment implements View.OnClickListener
 
     @Override
     public void onCaptureVideoFrame(byte[] data, int frameType, int width, int height, int bufferLength, int yStride, int uStride, int vStride, int rotation, long renderTimeMs) {
-        /**You can do some processing on the video frame here*/
-        Log.e(TAG, "onCaptureVideoFrame0");
-        if (blur) {
-            return;
+        byte[] NV21 = new byte[bufferLength];
+        YUVUtils.swapYU12toYUV420SP(data, NV21, width, height, yStride, uStride, vStride);
+        Bitmap bitmap = agoraRawDataBeautyManager.renderWithRawData(NV21, width, height, rotation, true);
+        if (bitmap != null) {
+            System.arraycopy(YUVUtils.bitmapToI420(width, height, bitmap), 0, data, 0, bufferLength);
         }
-        Bitmap bitmap = YUVUtils.i420ToBitmap(width, height, rotation, bufferLength, data, yStride, uStride, vStride);
-        Bitmap bmp = YUVUtils.blur(getContext(), bitmap, 4);
-        System.arraycopy(YUVUtils.bitmapToI420(width, height, bmp), 0, data, 0, bufferLength);
     }
 
     @Override

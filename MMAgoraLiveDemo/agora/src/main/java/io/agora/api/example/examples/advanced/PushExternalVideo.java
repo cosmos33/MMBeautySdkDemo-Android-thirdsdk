@@ -22,16 +22,15 @@ import android.widget.FrameLayout;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
+import com.cosmos.thirdlive.AgoraLiveBeautyManager;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.runtime.Permission;
 
 import java.io.IOException;
 
-import com.cosmos.thirdlive.AgoraLiveBeautyManager;
 import io.agora.api.component.gles.ProgramTexture2d;
 import io.agora.api.component.gles.core.EglCore;
 import io.agora.api.component.gles.core.GlUtil;
-import io.agora.api.example.AgoraApplication;
 import io.agora.api.example.R;
 import io.agora.api.example.R2;
 import io.agora.api.example.annotation.Example;

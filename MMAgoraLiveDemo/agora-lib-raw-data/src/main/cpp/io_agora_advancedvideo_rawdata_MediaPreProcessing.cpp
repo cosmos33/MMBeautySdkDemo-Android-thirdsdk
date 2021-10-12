@@ -27,6 +27,7 @@ void *_javaDirectPlayBufferPlayAudio = nullptr;
 void *_javaDirectPlayBufferBeforeMixAudio = nullptr;
 void *_javaDirectPlayBufferMixAudio = nullptr;
 map<int, void *> decodeBufferMap;
+volatile bool mAvailable = false;
 
 static JavaVM *gJVM = nullptr;
 
@@ -62,6 +63,12 @@ public:
                widthAndHeight / 4);
         memcpy((uint8_t *) _byteBufferObject + widthAndHeight * 5 / 4, videoFrame.vBuffer,
                widthAndHeight / 4);
+
+
+        if (!mAvailable) {
+            // check gCallBack is available.
+            return;
+        }
 
         if (uid == 0) {
             env->CallVoidMethod(gCallBack, jmethodID, videoFrame.type, width, height, length,
@@ -158,6 +165,9 @@ public:
         return true;
     }
 
+    virtual VIDEO_FRAME_TYPE getVideoFormatPreference() override {
+        return FRAME_TYPE_YUV420; // Please don't modify videoFormatPreference in this raw data processing plugin, otherwise it won't work.
+    }
 };
 
 /**Listener to get audio frame*/
@@ -184,6 +194,11 @@ public:
         }
         int len = audioFrame.samples * audioFrame.bytesPerSample;
         memcpy(_byteBufferObject, audioFrame.buffer, (size_t) len); // * sizeof(int16_t)
+
+        if (!mAvailable) {
+            // check gCallBack is available.
+            return;
+        }
 
         if (uid == 0) {
             env->CallVoidMethod(gCallBack, jmethodID, audioFrame.type, audioFrame.samples,
@@ -255,6 +270,8 @@ public:
         writebackAudioFrame(audioFrame, _javaDirectPlayBufferMixAudio);
         return true;
     }
+
+
 };
 
 
@@ -339,6 +356,8 @@ JNIEXPORT void JNICALL Java_io_agora_advancedvideo_rawdata_MediaPreProcessing_se
 
         __android_log_print(ANDROID_LOG_DEBUG, "setCallback", "setCallback done successfully");
     }
+
+    mAvailable = true;
 }
 
 JNIEXPORT void JNICALL
@@ -385,6 +404,8 @@ Java_io_agora_advancedvideo_rawdata_MediaPreProcessing_setVideoDecodeByteBuffer
 
 JNIEXPORT void JNICALL Java_io_agora_advancedvideo_rawdata_MediaPreProcessing_releasePoint
         (JNIEnv *env, jclass) {
+    mAvailable = false;
+
     agora::util::AutoPtr<agora::media::IMediaEngine> mediaEngine;
     mediaEngine.queryInterface(rtcEngine, agora::INTERFACE_ID_TYPE::AGORA_IID_MEDIA_ENGINE);
 

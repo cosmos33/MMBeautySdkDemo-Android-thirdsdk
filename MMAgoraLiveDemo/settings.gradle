@@ -10,8 +10,9 @@ gradle.ext.uselocalbeauty = false
 include "mmbeautybase"
 project(':mmbeautybase').projectDir = new File(settingsDir,'../mmbeautybase/')
 if(gradle.uselocalbeauty){
-    gradle.ext.userLocalDoki = false
-    gradle.ext.userLocalEffect = false
+    gradle.ext.userLocalMedia = false
+    gradle.ext.buildsdk = false
+    gradle.ext.authFree = false
     include "mmbeautysdk"
     project(':mmbeautysdk').projectDir = new File(settingsDir,'../../../../mmsdk/beauty-sdk/beauty')
 }

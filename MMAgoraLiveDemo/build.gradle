@@ -30,3 +30,10 @@ task clean(type: Delete) {
 }
 
 apply from: "../mmbeautybase/ext_build.gradle"
+ext {
+    if (gradle.uselocalbeauty) {
+        ARTIFACT_ID_DEMO='beautysdk_demo'
+        apply from: "'../../../../../../mmsdk/beauty-sdk/build_ext.gradle"
+        compileSdkVersion = 29
+    }
+}

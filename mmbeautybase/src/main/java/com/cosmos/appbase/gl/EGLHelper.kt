@@ -1,6 +1,7 @@
 package com.cosmos.appbase.gl
 
 import android.opengl.*
+import android.opengl.GLUtils
 import com.cosmos.appbase.utils.LogUtil
 import javax.microedition.khronos.egl.EGL10
 
@@ -139,10 +140,14 @@ class EGLHelper private constructor() {
     private fun check(): Boolean {
         val error = EGL14.eglGetError()
         if (error != EGL14.EGL_SUCCESS) {
-            LogUtil.v(TAG, String.format("eglGetError: 0x%x!", error))
+            LogUtil.v(TAG, String.format("eglGetError: %s", GLUtils.getEGLErrorString(error)))
             return false
         }
         return true
+    }
+
+    fun checkContext(): Boolean {
+        return EGL14.eglGetCurrentContext() != EGL14.EGL_NO_CONTEXT
     }
 
     companion object {
@@ -152,9 +157,5 @@ class EGLHelper private constructor() {
         private const val EGL_RECORDABLE_ANDROID = 0x3142
         val instance: EGLHelper
             get() = EGLHelperWrapper.eglHelper
-    }
-
-    init {
-//        init()
     }
 }
