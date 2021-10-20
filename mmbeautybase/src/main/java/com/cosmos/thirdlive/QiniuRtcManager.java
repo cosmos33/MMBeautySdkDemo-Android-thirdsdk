@@ -72,5 +72,25 @@ public class QiniuRtcManager extends BeautyManager {
     @Override
     public void textureDestoryed() {
         super.textureDestoryed();
+        if (rotateFilter != null) {
+            rotateFilter.destory();
+            rotateFilter = null;
+        }
+        if (mirrorFilter != null) {
+            mirrorFilter.destory();
+            mirrorFilter = null;
+        }
+        if (resetFilter != null) {
+            resetFilter.destory();
+            resetFilter = null;
+        }
+        if (resetMirrorFilter != null) {
+            resetMirrorFilter.destory();
+            resetMirrorFilter = null;
+        }
+        if (backRotateFilter != null) {
+            backRotateFilter.destory();
+            backRotateFilter = null;
+        }
     }
 }
