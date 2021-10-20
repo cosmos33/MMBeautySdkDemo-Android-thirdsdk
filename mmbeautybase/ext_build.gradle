@@ -5,7 +5,7 @@ ext {
     targetSdkVersion = 29
     buildToolsVersion = "29.0.3"
     supportSdkVersion = "26.0.1"
-    VERSION_NAME= "2.1.1_08311519"
+    VERSION_NAME= "2.2.0_10121617"
     ARTIFACT_ID = 15
     ARTIFACT_ID_SUPREME_PROPS = 15
     liteavSdk="LiteAVSDK_Professional_8.8.10263"

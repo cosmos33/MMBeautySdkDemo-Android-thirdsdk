@@ -17,8 +17,6 @@ import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
 import android.os.IBinder;
-import android.support.v4.content.ContextCompat;
-import android.support.v7.widget.RecyclerView;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Gravity;
@@ -30,6 +28,11 @@ import android.view.WindowManager;
 import android.widget.PopupWindow;
 import android.widget.Toast;
 
+import androidx.core.content.ContextCompat;
+import androidx.recyclerview.widget.RecyclerView;
+
+import com.cosmos.thirdlive.QiniuBeautyManager;
+import com.cosmos.thirdlive.QiniuRtcManager;
 import com.qiniu.droid.rtc.QNBeautySetting;
 import com.qiniu.droid.rtc.QNCameraSwitchResultCallback;
 import com.qiniu.droid.rtc.QNCaptureVideoCallback;
@@ -132,6 +135,8 @@ public class RoomActivity extends Activity implements QNRTCEngineEventListener, 
     private int mCaptureMode = Config.CAMERA_CAPTURE;
 
     private TrackWindowMgr mTrackWindowMgr;
+    private QiniuRtcManager qiniuRtcManager;
+    private boolean frontCamera = true;
 
     /**
      * 合流相关
@@ -267,6 +272,7 @@ public class RoomActivity extends Activity implements QNRTCEngineEventListener, 
         List<QNTrackInfo> localTrackListExcludeScreenTrack = new ArrayList<>(mLocalTrackList);
         localTrackListExcludeScreenTrack.remove(mLocalScreenTrack);
         mTrackWindowMgr.addTrackInfo(mUserId, localTrackListExcludeScreenTrack);
+        qiniuRtcManager = new QiniuRtcManager(RoomActivity.this);
     }
 
     @Override
@@ -398,23 +404,41 @@ public class RoomActivity extends Activity implements QNRTCEngineEventListener, 
 
             @Override
             public void onCaptureStarted() {
-
             }
 
+            private byte[] data;
+            private int width;
+            private int height;
+            private int rotation;
             @Override
             public void onRenderingFrame(VideoFrame.TextureBuffer texBuf, long timestampNs) {
-
+                if (data == null || qiniuRtcManager == null) {
+                    return;
+                }
+                int beautyTexId = qiniuRtcManager.renderWithBytesTexture(data, texBuf.getTextureId(), width, height, frontCamera, rotation);
+                if (beautyTexId != 0) {
+                    texBuf.setTextureId(beautyTexId);
+                }
             }
 
             @Override
             public void onPreviewFrame(byte[] data, int width, int height, int rotation, int fmt, long timestampNs) {
-
+                if (this.data == null || this.data.length != data.length) {
+                    this.data = new byte[width * height/2*3];
+                }
+                System.arraycopy(data,0,this.data,0,this.data.length);
+                this.width = width;
+                this.height = height;
+                this.rotation = rotation;
             }
 
             @Override
             public void onCaptureStopped() {
                 mCaptureStoppedSem.drainPermits();
                 mCaptureStoppedSem.release();
+                if (qiniuRtcManager != null) {
+                    qiniuRtcManager.textureDestoryed();
+                }
             }
         });
     }
@@ -1255,6 +1279,7 @@ public class RoomActivity extends Activity implements QNRTCEngineEventListener, 
             mEngine.switchCamera(new QNCameraSwitchResultCallback() {
                 @Override
                 public void onCameraSwitchDone(boolean isFrontCamera) {
+                    frontCamera = isFrontCamera;
                 }
 
                 @Override

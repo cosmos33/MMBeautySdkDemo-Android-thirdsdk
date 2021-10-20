@@ -162,14 +162,12 @@ abstract public class BeautyManager implements IMMRenderModuleManager.CVModelSta
         iBeautyModule = CosmosBeautySDK.INSTANCE.createBeautyModule();
         renderModuleManager.registerModule(iBeautyModule);
         iBeautyModule.setValue(SimpleBeautyType.BIG_EYE, 1f);
-//        iBeautyModule.setValue(SimpleBeautyType.SKIN_SMOOTH, 1.0f);
-//        iBeautyModule.setValue(SimpleBeautyType.SKIN_WHITENING, 1.0f);
+        iBeautyModule.setValue(SimpleBeautyType.SKIN_SMOOTH, 1.0f);
+        iBeautyModule.setValue(SimpleBeautyType.SKIN_WHITENING, 1.0f);
         iBeautyModule.setValue(SimpleBeautyType.THIN_FACE, 1f);
 
         iLookupModule = CosmosBeautySDK.INSTANCE.createLoopupModule();
         renderModuleManager.registerModule(iLookupModule);
-//        iLookupModule.setEffect(FilterUtils.INSTANCE.getFilterHomeDir().getAbsolutePath() + "/GrayTone");
-        iLookupModule.setIntensity(0.2f);
 
         iStickerModule = CosmosBeautySDK.INSTANCE.createStickerModule();
         renderModuleManager.registerModule(iStickerModule);
@@ -187,11 +185,16 @@ abstract public class BeautyManager implements IMMRenderModuleManager.CVModelSta
     }
 
     @Override
-    public void onCvModelStatus(boolean loadCvModelSuccess) {
-        if (loadCvModelSuccess) {
+    public void onCvModelDownloadStatus(boolean success) {
+        if (success) {
             cvModelSuccess = true;
             checkResouceReady();
         }
+    }
+
+    @Override
+    public void onCvModelLoadSatus(boolean success) {
+
     }
 
     @Override

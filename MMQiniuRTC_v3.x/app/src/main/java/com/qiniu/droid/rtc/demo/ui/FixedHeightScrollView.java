@@ -3,11 +3,12 @@ package com.qiniu.droid.rtc.demo.ui;
 import android.app.Activity;
 import android.content.Context;
 import android.os.Build;
-import android.support.annotation.RequiresApi;
 import android.util.AttributeSet;
 import android.util.DisplayMetrics;
 import android.view.Display;
 import android.widget.ScrollView;
+
+import androidx.annotation.RequiresApi;
 
 public class FixedHeightScrollView extends ScrollView {
     private Context mContext;

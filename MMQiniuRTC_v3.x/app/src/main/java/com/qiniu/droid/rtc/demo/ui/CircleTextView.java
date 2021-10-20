@@ -8,10 +8,12 @@ import android.graphics.Paint;
 import android.graphics.RectF;
 import android.util.AttributeSet;
 
+import androidx.appcompat.widget.AppCompatTextView;
+
 import com.qiniu.droid.rtc.demo.R;
 
 
-public class CircleTextView extends android.support.v7.widget.AppCompatTextView {
+public class CircleTextView extends AppCompatTextView {
     private Paint mPaint;
     private RectF mRectf;
     private int mColor;

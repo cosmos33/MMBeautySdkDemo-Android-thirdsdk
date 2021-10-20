@@ -1,3 +1,12 @@
 include ':app'
 include "mmbeautybase"
 project(':mmbeautybase').projectDir = new File(settingsDir,'../mmbeautybase/')
+
+gradle.ext.uselocalbeauty = false
+if(gradle.uselocalbeauty){
+    gradle.ext.userLocalMedia = false
+    gradle.ext.buildsdk = false
+    gradle.ext.authFree = false
+    include "mmbeautysdk"
+    project(':mmbeautysdk').projectDir = new File(settingsDir,'../../../../mmsdk/beauty-sdk/beauty')
+}

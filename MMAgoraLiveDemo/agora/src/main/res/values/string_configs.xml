@@ -3,7 +3,7 @@
     <!--    <string name="agora_app_id" translatable="false">YOUR APP ID</string>-->
     <!--    <string name="agora_access_token" translatable="false">YOUR ACCESS TOKEN</string>-->
     <string name="agora_app_id" translatable="false">3d49d27e09094021bb2a3ec60ac555ed</string>
-    <string name="agora_access_token" translatable="false">0063d49d27e09094021bb2a3ec60ac555edIACwu2rr7UU++FiEYAbPriIfXYx0eaXGLSPBkKTWvyGwiMBT1aoAAAAAEACXXodmtoBmYQEAAQC1gGZh</string>
+    <string name="agora_access_token" translatable="false">0063d49d27e09094021bb2a3ec60ac555edIACSVSMkIBqIct6/eg34IiUAy49KStoVVIf24euNatU4p8BT1aoAAAAAEAAH5dGQACZwYQEAAQAAJnBh</string>
     <!--    <string name="agora_app_id" translatable="false"></string>-->
     <!--    <string name="agora_access_token" translatable="false"></string>-->
 </resources>
