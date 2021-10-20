@@ -10,7 +10,7 @@ ext {
     ARTIFACT_ID_SUPREME_PROPS = 15
     liteavSdk="LiteAVSDK_Professional_8.8.10263"
     ARTIFACT_ID_LEVEL= "15"
-    beautyutils = "1.0.2_07151537"
+    beautyutils = "1.0.3_10201722"
     appcompat = "1.2.0"
 
     xesceneVersion = "4.4.4-20200827.1913"

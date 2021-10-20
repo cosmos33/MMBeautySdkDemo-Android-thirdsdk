@@ -1,7 +1,6 @@
 package com.cosmos.thirdlive;
 
 import android.content.Context;
-import android.graphics.Bitmap;
 import android.opengl.EGLSurface;
 
 import com.core.glcore.util.ImageFrame;
@@ -13,7 +12,10 @@ import com.cosmos.beautyutils.Empty2Filter;
 import com.cosmos.beautyutils.RotateFilter;
 import com.cosmos.thirdlive.utils.FaceInfoCreatorPBOSubFilter;
 
+import java.nio.ByteBuffer;
+
 import project.android.imageprocessing.input.NV21PreviewInput;
+import project.android.imageprocessing.input.NewNV21PreviewInput;
 
 /**
  * 声网接入美颜sdk管理类
@@ -28,14 +30,17 @@ public class AgoraRawDataBeautyManager extends BeautyManager {
         super(context, cosmosAppid);
     }
 
-    public Bitmap renderWithRawData(byte[] data, int width, int height, int rotation, boolean mFrontCamera) {
+    public ByteBuffer renderWithRawData(byte[] data, int width, int height, int rotation, boolean mFrontCamera) {
+        if (!resourceReady) {
+            return null;
+        }
         if (!EGLHelper.Companion.getInstance().checkContext()) {
             EGLHelper.Companion.getInstance().init();
             EGLSurface eglSurface = EGLHelper.Companion.getInstance().genEglSurface(null);
             EGLHelper.Companion.getInstance().makeCurrent(eglSurface);
         }
         if (yuvToTexture == null) {
-            yuvToTexture = new NV21PreviewInput();
+            yuvToTexture = new NewNV21PreviewInput();
             yuvToTexture.setRenderSize(width, height);
             faceInfoCreatorPBOFilter = new FaceInfoCreatorPBOSubFilter(width, height);
             emptyFilter = new Empty2Filter();
@@ -67,12 +72,7 @@ public class AgoraRawDataBeautyManager extends BeautyManager {
         int rotateTexId = rotateFilter.rotateTexture(beautyTexture, width, height);
         int rotateTexId1 = rotateFilter1.rotateTexture(rotateTexId, width, height);
         faceInfoCreatorPBOFilter.newTextureReady(rotateTexId1, emptyFilter, true);
-        if (faceInfoCreatorPBOFilter.byteBuffer != null) {
-            Bitmap curBmp = Bitmap.createBitmap(width, height, Bitmap.Config.ARGB_8888);
-            curBmp.copyPixelsFromBuffer(faceInfoCreatorPBOFilter.byteBuffer);
-            return curBmp;
-        }
-        return null;
+        return faceInfoCreatorPBOFilter.byteBuffer;
     }
 
     @Override

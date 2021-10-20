@@ -20,6 +20,8 @@ import com.cosmos.thirdlive.AgoraRawDataBeautyManager;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.runtime.Permission;
 
+import java.nio.ByteBuffer;
+
 import io.agora.advancedvideo.rawdata.MediaDataAudioObserver;
 import io.agora.advancedvideo.rawdata.MediaDataObserverPlugin;
 import io.agora.advancedvideo.rawdata.MediaDataVideoObserver;
@@ -399,13 +401,19 @@ public class ProcessRawData extends BaseFragment implements View.OnClickListener
         }
     };
 
+    private byte[] temp;
     @Override
     public void onCaptureVideoFrame(byte[] data, int frameType, int width, int height, int bufferLength, int yStride, int uStride, int vStride, int rotation, long renderTimeMs) {
         byte[] NV21 = new byte[bufferLength];
         YUVUtils.swapYU12toYUV420SP(data, NV21, width, height, yStride, uStride, vStride);
-        Bitmap bitmap = agoraRawDataBeautyManager.renderWithRawData(NV21, width, height, rotation, true);
-        if (bitmap != null) {
-            System.arraycopy(YUVUtils.bitmapToI420(width, height, bitmap), 0, data, 0, bufferLength);
+        ByteBuffer bytes = agoraRawDataBeautyManager.renderWithRawData(NV21, width, height, rotation, true);
+        if (bytes != null) {
+            bytes.position(0);
+            if (temp == null || temp.length != bytes.remaining()) {
+                temp = new byte[bytes.remaining()];
+            }
+            bytes.get(temp);
+            YUVUtils.encodeI420(data, temp, width, height);
         }
     }
 
