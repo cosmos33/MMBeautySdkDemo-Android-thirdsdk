@@ -71,7 +71,6 @@ public class VideoFilterMainUI extends Activity implements View.OnClickListener 
         });
 
         binding.zegoSdkVersion.setText("zego sdk version:"+ZegoExpressEngine.getVersion());
-//        binding.faceunitySdkVersion.setText("faceunity sdk version:"+FURenderer.getVersion());
     }
 
     // 获取选定的前处理传递数据的类型

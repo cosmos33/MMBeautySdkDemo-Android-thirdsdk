@@ -10,12 +10,12 @@ import im.zego.zegoexpress.callback.IZegoCustomVideoProcessHandler;
 import im.zego.zegoexpress.constants.ZegoPublishChannel;
 /**
  * VideoFilterByProcess2
- * 通过Zego视频前处理，用户可以获取到Zego SDK采集到的摄像头数据。用户后续将数据塞给FaceUnity处理，最终将处理后的数据塞回Zego SDK进行推流。
+ * 通过Zego视频前处理，用户可以获取到Zego SDK采集到的摄像头数据。用户后续将数据塞给mmbeauty处理，最终将处理后的数据塞回Zego SDK进行推流。
  * 采用GL_TEXTURE_2D方式传递数据
  */
 /**
  * VideoFilterByProcess2
- * Through the Zego video pre-processing, users can obtain the camera data collected by the Zego SDK. The user then stuffs the data to FaceUnity for processing, and finally stuffs the processed data back to Zego SDK for publishing stream.
+ * Through the Zego video pre-processing, users can obtain the camera data collected by the Zego SDK. The user then stuffs the data to mmbeauty for processing, and finally stuffs the processed data back to Zego SDK for publishing stream.
  *Use GL_TEXTURE_2D to transfer data
  */
 public class VideoFilterByProcess2 extends IZegoCustomVideoProcessHandler {
@@ -46,7 +46,6 @@ public class VideoFilterByProcess2 extends IZegoCustomVideoProcessHandler {
      */
 
     public void stopAndDeAllocate() {
-        // 销毁 faceunity 相关的资源
     }
 
     @Override

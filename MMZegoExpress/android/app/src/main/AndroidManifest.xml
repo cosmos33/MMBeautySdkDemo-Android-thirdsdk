@@ -15,7 +15,7 @@
 
     <application
         android:name="im.zego.expressample.mmbeauty.demo.application.ZegoApplication"
-        android:label="ZegoExpressFaceUnity"
+        android:label="ZegoExpressMMBeauty"
         android:theme="@style/Theme.AppCompat.Light.NoActionBar"
         tools:replace="android:label">
         <activity android:name="im.zego.expressample.mmbeauty.demo.ui.FUBeautyActivity" />

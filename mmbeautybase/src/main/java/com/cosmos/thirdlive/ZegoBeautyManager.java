@@ -1,6 +1,7 @@
 package com.cosmos.thirdlive;
 
 import android.content.Context;
+import android.opengl.GLES20;
 
 import com.core.glcore.util.ImageFrame;
 import com.cosmos.appbase.BeautyManager;
@@ -100,6 +101,7 @@ public class ZegoBeautyManager extends BeautyManager {
                         texHeight,
                         ImageFrame.MMFormat.FMT_RGBA
                 ));
+                GLES20.glGetError();
                 if ((currentAngle == 0 && mFrontCamera) || (!mFrontCamera)) {
                     return tempRevert.rotateTexture(beautyTexture, texWidth, texHeight);
                 }

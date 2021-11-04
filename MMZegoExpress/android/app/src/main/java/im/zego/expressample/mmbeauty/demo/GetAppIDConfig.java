@@ -9,7 +9,7 @@ public class GetAppIDConfig {
      * for example:
      *   public static final long appID = 123456789L;
      */
-    public static final long appID = 1476983321; // TODO mmbeauty 配置zego后台申请的appid
+    public static final long appID = 2514125864L; // TODO mmbeauty 配置zego后台申请的appid
 
     /**
      * 64 characters, Please register from ZEGO management console, https://console-express.zego.im/acount/register
@@ -17,5 +17,5 @@ public class GetAppIDConfig {
      * for example:
      *   public static final String appSign = "0123456789012345678901234567890123456789012345678901234567890123;
      */
-    public static final String appSign = "cb6b90e69ca86d0691b6ed1ce111d17cda19db7c9ed1920cead0b0ad36514fe3";// TODO mmbeauty 配置zego后台申请的appSign
+    public static final String appSign = "4142fbee882fbd642e6d22fe5f97ef9a9ffd324574ccd752eccaa098cf38f879";// TODO mmbeauty 配置zego后台申请的appSign
 }

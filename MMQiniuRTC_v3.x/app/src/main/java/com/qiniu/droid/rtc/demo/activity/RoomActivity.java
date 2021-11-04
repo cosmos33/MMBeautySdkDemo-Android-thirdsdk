@@ -211,7 +211,7 @@ public class RoomActivity extends Activity implements QNRTCEngineEventListener, 
         setContentView(R.layout.activity_muti_track_room);
 
         Intent intent = getIntent();
-        mRoomToken = intent.getStringExtra(EXTRA_ROOM_TOKEN);
+        mRoomToken = "IugmkdeOFeeybGUEKXIB7Mp0J7A3l0OY9IRd3EK-:6ZAWb-IKt90y3_bby9TvMJgLZyg=:eyJhcHBJZCI6ImUzbXFqdDd4eiIsInVzZXJJZCI6InAyMjR0MDNveHNzIiwicm9vbU5hbWUiOiJtZWV0X3AyMjR0MDNveHNzIiwicGVybWlzc2lvbiI6ImFkbWluIiwiZXhwaXJlQXQiOjE2MzU0NzcyOTJ9";
         mUserId = intent.getStringExtra(EXTRA_USER_ID);
         mRoomId = intent.getStringExtra(EXTRA_ROOM_ID);
         mIsAdmin = mUserId.equals(QNAppServer.ADMIN_USER);

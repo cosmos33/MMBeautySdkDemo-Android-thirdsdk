@@ -10,7 +10,7 @@
     <string name="i420Mem_describe">异步传递 I420 的图像数据</string>
     <string name="surfaceTexture_describe">传递 SurfaceTexture，SDK 会调用此滤镜的 getSurfaceTexture 获取 SurfaceTexture 对象</string>
     <string name="loading"> Loading </string>
-    <string name="tx_video_filter">ZegoExpressExample-FaceUnity</string>
+    <string name="tx_video_filter">ZegoExpressExample-MMBeauty</string>
     <string name="tx_sync_gl_texture_2d">BUFFER_TYPE_GL_TEXTURE_2D</string>
     <string name="tx_mem_gl_texture_2d">BUFFER_TYPE_HYBRID_MEM_GL_TEXTURE_2D</string>
     <string name="tx_mem_rgba32">BUFFER_TYPE_MEM</string>
@@ -19,7 +19,6 @@
     <string name="tx_filter_type">请选择传递数据类型: </string>
     <string name="room_id_describe">roomID为一个房间的标识，使用长度不超过128字节的字符串表示，需要保证房间ID的全局唯一</string>
     <string name="tx_publish_success">推流完成</string>
-    <!--faceunity 相关text-->
     <string name="home_function_name_beauty">美颜</string>
     <string name="home_function_name_normal">道具贴纸</string>
 
@@ -30,7 +29,6 @@
     <string name="camera_dialog_open">重试</string>
     <string name="camera_dialog_back">退出</string>
 
-    <string name="tx_has_no_fu_authpack">faceunity的证书无效，请替换有效的authpack文件</string>
     <string name="tx_login">登录房间</string>
 
     <string name="fu_base_is_tracking_text">未检测到人脸</string>

@@ -29,7 +29,7 @@ import im.zego.zegoexpress.constants.ZegoPublishChannel;
  */
 /**
  * VideoFilterByProcess
- * Through the Zego video pre-processing, users can obtain the camera data collected by the Zego SDK. The user then stuffs the data to FaceUnity for processing, and finally stuffs the processed data back to Zego SDK for publishing stream.
+ * Through the Zego video pre-processing, users can obtain the camera data collected by the Zego SDK. The user then stuffs the data to mmbeauty for processing, and finally stuffs the processed data back to Zego SDK for publishing stream.
  *Use SURFACE_TEXTURE to transfer data
  */
 

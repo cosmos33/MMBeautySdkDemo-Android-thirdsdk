@@ -1,6 +1,7 @@
 package com.cosmos.thirdlive;
 
 import android.content.Context;
+import android.opengl.GLES20;
 
 import com.core.glcore.util.ImageFrame;
 import com.cosmos.appbase.BeautyManager;
@@ -66,6 +67,7 @@ public class QiniuRtcManager extends BeautyManager {
         } else {
             beautyTexId = rotateFilter.rotateTexture(mirrorFilter.rotateTexture(beautyTexId,dataWidth,dataHeight),dataWidth,dataHeight);
         }
+        GLES20.glGetError();
         return beautyTexId;
     }
 

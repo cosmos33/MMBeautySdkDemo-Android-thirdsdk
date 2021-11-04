@@ -16,7 +16,7 @@
     <string name="memTexture2D_describe"> asynchronous transfer texture ID, SDK will throw RGBA32 image data, can pass the pre-processed texture ID to SDK </string>
     through onProcessCallback method
     <string name="loading"> Loading </string>
-    <string name="tx_video_filter">ZegoExpressExample-FaceUnity</string>
+    <string name="tx_video_filter">ZegoExpressExample-mmbeauty</string>
     <string name="i420Mem_describe"> asynchronous transfer of I420 image data </string>
     <string name="surfaceTexture_describe"> passes the SurfaceTexture, and the SDK calls getSurfaceTexture of this filter to get the SurfaceTexture object </string>
 
@@ -40,7 +40,6 @@
     <string name="tx_asyn_i420_mem">BUFFER_TYPE_I420_MEM</string>
     <string name="tx_surface_texture">BUFFER_TYPE_SURFACE_TEXTURE</string>
 
-    <string name="tx_has_no_fu_authpack"> faceunity ’s certificate is invalid, please replace the valid authpack file </string>
     <string name="tx_login"> Log in to the room </string>
 
     <string name="fu_base_is_tracking_text"> No face detected </string>
