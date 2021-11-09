@@ -5,6 +5,7 @@ import android.opengl.GLES20;
 import android.util.Log;
 
 import com.cosmos.thirdlive.AgoraBeautyManager;
+import com.immomo.medialog.thread.MainThreadExecutor;
 
 import io.agora.capture.framework.modules.channels.VideoChannel;
 import io.agora.capture.framework.modules.processors.IPreprocessor;
@@ -43,14 +44,14 @@ public class PreprocessorMMBeauty implements IPreprocessor {
     public void initPreprocessor() {
         // only call once when app launched
         Log.e(TAG, "initPreprocessor: ");
-        if (render == null) {
-            new Thread(new Runnable() {
-                @Override
-                public void run() {
+        MainThreadExecutor.execute(new Runnable() {
+            @Override
+            public void run() {
+                if (render == null) {
                     render = new AgoraBeautyManager(mContext);
                 }
-            }).start();
-        }
+            }
+        });
     }
 
     @Override
