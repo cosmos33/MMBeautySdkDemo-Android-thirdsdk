@@ -8,7 +8,7 @@ ext {
     VERSION_NAME= "2.2.0_10121617"
     ARTIFACT_ID = 15
     ARTIFACT_ID_SUPREME_PROPS = 15
-    liteavSdk="LiteAVSDK_Professional_8.8.10263"
+    liteavSdk="com.tencent.liteav:LiteAVSDK_Professional:8.8.10263"
     ARTIFACT_ID_LEVEL= "15"
     beautyutils = "1.0.3_10201722"
     appcompat = "1.2.0"
