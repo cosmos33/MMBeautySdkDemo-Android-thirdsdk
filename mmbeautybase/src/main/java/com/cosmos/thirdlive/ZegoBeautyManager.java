@@ -27,6 +27,7 @@ public class ZegoBeautyManager extends BeautyManager {
     private RotateFilter backRevertRotateFilter;
     private BeautySdkOrientationSwitchListener orientationListener;
     private TransYUVTextureFilter transYUVTextureFilter;
+    private byte[] frameData;
 
     public ZegoBeautyManager(Context context) {
         super(context, cosmosAppid);
@@ -87,7 +88,9 @@ public class ZegoBeautyManager extends BeautyManager {
             faceInfoCreatorPBOFilter.newTextureReady(rotateTexture, emptyFilter, true);
 
             if (faceInfoCreatorPBOFilter.byteBuffer != null) {
-                byte[] frameData = new byte[faceInfoCreatorPBOFilter.byteBuffer.remaining()];
+                if (frameData == null || frameData.length != faceInfoCreatorPBOFilter.byteBuffer.remaining()) {
+                    frameData = new byte[faceInfoCreatorPBOFilter.byteBuffer.remaining()];
+                }
                 faceInfoCreatorPBOFilter.byteBuffer.get(frameData);
                 //美颜sdk处理
                 CommonDataMode dataMode = new CommonDataMode();

@@ -20,6 +20,7 @@ public class NeteaseBeautyManager extends BeautyManager {
     private RotateFilter backRotateFilter;
     private RotateFilter revertRotateFilter;
     private RotateFilter backRevertRotateFilter;
+    private byte[] frameData;
 
     public NeteaseBeautyManager(Context context) {
         super(context, cosmosAppid);
@@ -64,7 +65,9 @@ public class NeteaseBeautyManager extends BeautyManager {
             int rotateTexture = tempRotateFilter.rotateTexture(texture, texWidth, texHeight);
             faceInfoCreatorPBOFilter.newTextureReady(rotateTexture, emptyFilter, true);
             if (faceInfoCreatorPBOFilter.byteBuffer != null) {
-                byte[] frameData = new byte[faceInfoCreatorPBOFilter.byteBuffer.remaining()];
+                if (frameData == null || frameData.length != faceInfoCreatorPBOFilter.byteBuffer.remaining()) {
+                    frameData = new byte[faceInfoCreatorPBOFilter.byteBuffer.remaining()];
+                }
                 faceInfoCreatorPBOFilter.byteBuffer.get(frameData);
                 //美颜sdk处理
                 CommonDataMode dataMode = new CommonDataMode();

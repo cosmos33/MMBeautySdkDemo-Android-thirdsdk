@@ -16,6 +16,7 @@ import com.cosmos.beautyutils.RotateFilter;
 public class TencentTRTCBeautyManager extends BeautyManager {
     private RotateFilter rotateFilter;
     private RotateFilter revertRotateFilter;
+    private byte[] frameData;
     public TencentTRTCBeautyManager(Context context) {
         super(context, cosmosAppid);
     }
@@ -34,7 +35,9 @@ public class TencentTRTCBeautyManager extends BeautyManager {
             int rotateTexture = rotateFilter.rotateTexture(texture, texWidth, texHeight);
             faceInfoCreatorPBOFilter.newTextureReady(rotateTexture, emptyFilter, true);
             if (faceInfoCreatorPBOFilter.byteBuffer != null) {
-                byte[] frameData = new byte[faceInfoCreatorPBOFilter.byteBuffer.remaining()];
+                if (frameData == null || frameData.length != faceInfoCreatorPBOFilter.byteBuffer.remaining()) {
+                    frameData = new byte[faceInfoCreatorPBOFilter.byteBuffer.remaining()];
+                }
                 faceInfoCreatorPBOFilter.byteBuffer.get(frameData);
                 //美颜sdk处理
                 CommonDataMode dataMode = new CommonDataMode();

@@ -22,6 +22,7 @@ public class AgoraBeautyManager extends BeautyManager {
     private RotateFilter backRotateFilter;
     private RotateFilter revertRotateFilter;
     private RotateFilter backRevertRotateFilter;
+    private byte[] frameData;
 
     public AgoraBeautyManager(Context context) {
         super(context, cosmosAppid);
@@ -66,7 +67,9 @@ public class AgoraBeautyManager extends BeautyManager {
             int rotateTexture = tempRotateFilter.rotateTexture(texture, texWidth, texHeight);
             faceInfoCreatorPBOFilter.newTextureReady(rotateTexture, emptyFilter, true);
             if (faceInfoCreatorPBOFilter.byteBuffer != null) {
-                byte[] frameData = new byte[faceInfoCreatorPBOFilter.byteBuffer.remaining()];
+                if (frameData == null || frameData.length != faceInfoCreatorPBOFilter.byteBuffer.remaining()) {
+                    frameData = new byte[faceInfoCreatorPBOFilter.byteBuffer.remaining()];
+                }
                 faceInfoCreatorPBOFilter.byteBuffer.get(frameData);
                 //美颜sdk处理
                 CommonDataMode dataMode = new CommonDataMode();
