@@ -5,7 +5,7 @@ android {
     buildToolsVersion rootProject.ext.buildToolsVersion
 
     defaultConfig {
-        applicationId "" // TODO mmbeauty 配置cosmos后台配置的applicationid
+        applicationId "" // TODO mmbeauty 配置applicationid
         minSdkVersion rootProject.ext.minSdkVersion
         targetSdkVersion rootProject.ext.targetSdkVersion
         versionCode 1
@@ -22,7 +22,7 @@ android {
     }
 
     signingConfigs {
-        config { // TODO mmbeauty 配置cosmos后台配置的keystore
+        config { // TODO mmbeauty 配置keystore
             keyAlias ''
             keyPassword ''
             storeFile file('')

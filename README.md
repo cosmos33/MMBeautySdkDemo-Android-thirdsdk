@@ -1,8 +1,8 @@
 ## 本工程为MM美颜SDK接入第三方直播、视频sdk demo
 > ### 接入MM美颜sdk需要修改的部分（可以通过全局搜索**TODO mmbeauty**来快速定位）：
-> - applicationId ""      // 配置cosmos后台配置的applicationid
-> - signingConfigs.config //配置cosmos后台配置的keystore
-> - cosmosAppid.          //需要修改为cosmos后台注册的appid
+> - applicationId ""      // 配置applicationid
+> - signingConfigs.config //配置keystore
+> - cosmosAppid.          //配置appid
 
 
 ### 1.MMAgoraDemoDroid 为接入声网1v1视频sdk demo

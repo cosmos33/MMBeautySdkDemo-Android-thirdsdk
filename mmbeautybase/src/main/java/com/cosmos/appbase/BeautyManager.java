@@ -31,7 +31,7 @@ import org.jetbrains.annotations.Nullable;
 import java.io.File;
 
 abstract public class BeautyManager implements IMMRenderModuleManager.CVModelStatusListener, IMMRenderModuleManager.IDetectFaceCallback, IMMRenderModuleManager.IDetectGestureCallback {
-    protected static String cosmosAppid = "";// TODO mmbeauty 这里需要修改为cosmos后台注册的appid
+    protected static String cosmosAppid = "";// TODO mmbeauty 这里配置appid
     protected IMMRenderModuleManager renderModuleManager;
     protected boolean authSuccess = false;
     protected boolean filterResouceSuccess = false;
