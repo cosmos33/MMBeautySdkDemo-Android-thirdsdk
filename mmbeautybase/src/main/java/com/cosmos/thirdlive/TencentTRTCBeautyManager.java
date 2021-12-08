@@ -9,6 +9,7 @@ import com.cosmos.beauty.model.datamode.CommonDataMode;
 import com.cosmos.beautyutils.Empty2Filter;
 import com.cosmos.beautyutils.FaceInfoCreatorPBOFilter;
 import com.cosmos.beautyutils.RotateFilter;
+import com.cosmos.thirdlive.utils.PBOFilter;
 
 /**
  * 腾讯TRTC接入美颜sdk管理类
@@ -27,18 +28,15 @@ public class TencentTRTCBeautyManager extends BeautyManager {
             if (rotateFilter == null) {
                 rotateFilter = new RotateFilter(RotateFilter.ROTATE_VERTICAL);
                 revertRotateFilter = new RotateFilter(RotateFilter.ROTATE_VERTICAL);
-                faceInfoCreatorPBOFilter = new FaceInfoCreatorPBOFilter(texWidth, texHeight);
-                emptyFilter = new Empty2Filter();
-                emptyFilter.setWidth(texWidth);
-                emptyFilter.setHeight(texHeight);
+                pboFilter = new PBOFilter(texWidth, texHeight);
             }
             int rotateTexture = rotateFilter.rotateTexture(texture, texWidth, texHeight);
-            faceInfoCreatorPBOFilter.newTextureReady(rotateTexture, emptyFilter, true);
-            if (faceInfoCreatorPBOFilter.byteBuffer != null) {
-                if (frameData == null || frameData.length != faceInfoCreatorPBOFilter.byteBuffer.remaining()) {
-                    frameData = new byte[faceInfoCreatorPBOFilter.byteBuffer.remaining()];
+            pboFilter.newTextureReady(rotateTexture, texWidth, texHeight, true);
+            if (pboFilter.byteBuffer != null) {
+                if (frameData == null || frameData.length != pboFilter.byteBuffer.remaining()) {
+                    frameData = new byte[pboFilter.byteBuffer.remaining()];
                 }
-                faceInfoCreatorPBOFilter.byteBuffer.get(frameData);
+                pboFilter.byteBuffer.get(frameData);
                 //美颜sdk处理
                 CommonDataMode dataMode = new CommonDataMode();
                 dataMode.setNeedFlip(mFrontCamera);

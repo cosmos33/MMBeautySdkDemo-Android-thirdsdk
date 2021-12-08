@@ -8,9 +8,9 @@ import com.cosmos.appbase.BeautyManager;
 import com.cosmos.appbase.gl.EGLHelper;
 import com.cosmos.beauty.model.MMRenderFrameParams;
 import com.cosmos.beauty.model.datamode.CameraDataMode;
-import com.cosmos.beautyutils.Empty2Filter;
 import com.cosmos.beautyutils.RotateFilter;
-import com.cosmos.thirdlive.utils.FaceInfoCreatorPBOSubFilter;
+import com.cosmos.thirdlive.utils.PBOFilter;
+import com.cosmos.thirdlive.utils.PBOSubFilter;
 
 import java.nio.ByteBuffer;
 
@@ -42,9 +42,7 @@ public class AgoraRawDataBeautyManager extends BeautyManager {
         if (yuvToTexture == null) {
             yuvToTexture = new NewNV21PreviewInput();
             yuvToTexture.setRenderSize(width, height);
-            faceInfoCreatorPBOFilter = new FaceInfoCreatorPBOSubFilter(width, height);
-            emptyFilter = new Empty2Filter();
-            emptyFilter.setRenderSize(width, height);
+            pboFilter = new PBOSubFilter(width, height);
             rotateFilter = new RotateFilter(RotateFilter.ROTATE_HORIZONTAL);
             rotateFilter1 = new RotateFilter(RotateFilter.ROTATE_270);
             rotateFilter2 = new RotateFilter(RotateFilter.ROTATE_90);
@@ -71,8 +69,8 @@ public class AgoraRawDataBeautyManager extends BeautyManager {
         ));
         int rotateTexId = rotateFilter.rotateTexture(beautyTexture, width, height);
         int rotateTexId1 = rotateFilter1.rotateTexture(rotateTexId, width, height);
-        faceInfoCreatorPBOFilter.newTextureReady(rotateTexId1, emptyFilter, true);
-        return faceInfoCreatorPBOFilter.byteBuffer;
+        pboFilter.newTextureReady(rotateTexId1, width, height, true);
+        return pboFilter.byteBuffer;
     }
 
     @Override

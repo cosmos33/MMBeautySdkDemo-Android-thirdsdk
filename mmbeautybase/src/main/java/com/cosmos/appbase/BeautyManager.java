@@ -2,7 +2,6 @@ package com.cosmos.appbase;
 
 import android.content.Context;
 
-import com.core.glcore.cv.MMCVInfo;
 import com.cosmos.appbase.listener.OnFilterResourcePrepareListener;
 import com.cosmos.appbase.listener.OnStickerResourcePrepareListener;
 import com.cosmos.appbase.utils.FilterUtils;
@@ -19,14 +18,12 @@ import com.cosmos.beauty.module.sticker.DetectRect;
 import com.cosmos.beauty.module.sticker.IStickerModule;
 import com.cosmos.beauty.module.sticker.MaskLoadCallback;
 import com.cosmos.beautyutils.BuildConfig;
-import com.cosmos.beautyutils.Empty2Filter;
-import com.cosmos.beautyutils.FaceInfoCreatorPBOFilter;
+import com.cosmos.thirdlive.utils.PBOFilter;
 import com.immomo.resdownloader.utils.MainThreadExecutor;
 import com.mm.mmutil.toast.Toaster;
 import com.momo.mcamera.mask.MaskModel;
 
 import org.jetbrains.annotations.NotNull;
-import org.jetbrains.annotations.Nullable;
 
 import java.io.File;
 
@@ -43,8 +40,7 @@ abstract public class BeautyManager implements IMMRenderModuleManager.CVModelSta
     protected boolean resourceReady = false;
     protected Context context;
     protected String appId;
-    protected FaceInfoCreatorPBOFilter faceInfoCreatorPBOFilter;
-    protected Empty2Filter emptyFilter;
+    protected PBOFilter pboFilter;
     protected TransOesTextureFilter transOesTextureFilter;
 
     public BeautyManager(Context context, String appId) {
@@ -78,13 +74,9 @@ abstract public class BeautyManager implements IMMRenderModuleManager.CVModelSta
             transOesTextureFilter.destroy();
             transOesTextureFilter = null;
         }
-        if (faceInfoCreatorPBOFilter != null) {
-            faceInfoCreatorPBOFilter.destroy();
-            faceInfoCreatorPBOFilter = null;
-        }
-        if (emptyFilter != null) {
-            emptyFilter.destroy();
-            emptyFilter = null;
+        if (pboFilter != null) {
+            pboFilter.destroy();
+            pboFilter = null;
         }
         if (renderModuleManager != null) {
             if (iBeautyModule != null) {
@@ -198,7 +190,7 @@ abstract public class BeautyManager implements IMMRenderModuleManager.CVModelSta
     }
 
     @Override
-    public void onDetectHead(@Nullable MMCVInfo info) {
+    public void onDetectFace(int faceCount) {
 
     }
 

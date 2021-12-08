@@ -14,6 +14,7 @@ import com.cosmos.beauty.model.datamode.CommonDataMode;
 import com.cosmos.beautyutils.Empty2Filter;
 import com.cosmos.beautyutils.FaceInfoCreatorPBOFilter;
 import com.cosmos.beautyutils.RotateFilter;
+import com.cosmos.thirdlive.utils.PBOFilter;
 import com.mm.mmutil.app.AppContext;
 
 /**
@@ -61,15 +62,12 @@ public class ZegoBeautyManager extends BeautyManager {
     @Override
     public int renderWithTexture(int texture, int texWidth, int texHeight, boolean mFrontCamera) {
         if (resourceReady) {
-            if (faceInfoCreatorPBOFilter == null) {
+            if (pboFilter == null) {
                 rotateFilter = new RotateFilter(RotateFilter.ROTATE_VERTICAL);
                 backRotateFilter = new RotateFilter(RotateFilter.ROTATE_180);
                 revertRotateFilter = new RotateFilter(RotateFilter.ROTATE_VERTICAL);
                 backRevertRotateFilter = new RotateFilter(RotateFilter.ROTATE_180);
-                faceInfoCreatorPBOFilter = new FaceInfoCreatorPBOFilter(texWidth, texHeight);
-                emptyFilter = new Empty2Filter();
-                emptyFilter.setWidth(texWidth);
-                emptyFilter.setHeight(texHeight);
+                pboFilter = new PBOFilter(texWidth, texHeight);
             }
             float currentAngle = orientationListener.getCurrentAngle();
             int rotateTexture = texture;
@@ -78,20 +76,20 @@ public class ZegoBeautyManager extends BeautyManager {
             if (!mFrontCamera && currentAngle != 0) {//后置相机，手机水平
                 temp = backRotateFilter;
                 tempRevert = backRevertRotateFilter;
-            }else {
+            } else {
                 temp = rotateFilter;
                 tempRevert = revertRotateFilter;
             }
             if ((currentAngle == 0 && mFrontCamera) || (!mFrontCamera)) {
                 rotateTexture = temp.rotateTexture(texture, texWidth, texHeight);
             }
-            faceInfoCreatorPBOFilter.newTextureReady(rotateTexture, emptyFilter, true);
+            pboFilter.newTextureReady(rotateTexture, texWidth, texHeight, true);
 
-            if (faceInfoCreatorPBOFilter.byteBuffer != null) {
-                if (frameData == null || frameData.length != faceInfoCreatorPBOFilter.byteBuffer.remaining()) {
-                    frameData = new byte[faceInfoCreatorPBOFilter.byteBuffer.remaining()];
+            if (pboFilter.byteBuffer != null) {
+                if (frameData == null || frameData.length != pboFilter.byteBuffer.remaining()) {
+                    frameData = new byte[pboFilter.byteBuffer.remaining()];
                 }
-                faceInfoCreatorPBOFilter.byteBuffer.get(frameData);
+                pboFilter.byteBuffer.get(frameData);
                 //美颜sdk处理
                 CommonDataMode dataMode = new CommonDataMode();
                 dataMode.setNeedFlip(false);

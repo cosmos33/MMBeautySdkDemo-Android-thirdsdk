@@ -10,6 +10,7 @@ import com.cosmos.beauty.model.datamode.CommonDataMode;
 import com.cosmos.beautyutils.Empty2Filter;
 import com.cosmos.beautyutils.FaceInfoCreatorPBOFilter;
 import com.cosmos.beautyutils.RotateFilter;
+import com.cosmos.thirdlive.utils.PBOFilter;
 
 /**
  * 云信接入美颜sdk管理类
@@ -43,15 +44,12 @@ public class NeteaseBeautyManager extends BeautyManager {
     @Override
     public int renderWithTexture(int texture, int texWidth, int texHeight, boolean mFrontCamera) {
         if (resourceReady) {
-            if (faceInfoCreatorPBOFilter == null) {
+            if (pboFilter == null) {
                 rotateFilter = new RotateFilter(RotateFilter.ROTATE_90);
                 backRotateFilter = new RotateFilter(RotateFilter.ROTATE_270);
                 revertRotateFilter = new RotateFilter(RotateFilter.ROTATE_270);
                 backRevertRotateFilter = new RotateFilter(RotateFilter.ROTATE_90);
-                faceInfoCreatorPBOFilter = new FaceInfoCreatorPBOFilter(texWidth, texHeight);
-                emptyFilter = new Empty2Filter();
-                emptyFilter.setWidth(texWidth);
-                emptyFilter.setHeight(texHeight);
+                pboFilter = new PBOFilter(texWidth, texHeight);
             }
             RotateFilter tempRotateFilter;
             RotateFilter tempRevertRotateFilter;
@@ -63,12 +61,12 @@ public class NeteaseBeautyManager extends BeautyManager {
                 tempRevertRotateFilter = backRevertRotateFilter;
             }
             int rotateTexture = tempRotateFilter.rotateTexture(texture, texWidth, texHeight);
-            faceInfoCreatorPBOFilter.newTextureReady(rotateTexture, emptyFilter, true);
-            if (faceInfoCreatorPBOFilter.byteBuffer != null) {
-                if (frameData == null || frameData.length != faceInfoCreatorPBOFilter.byteBuffer.remaining()) {
-                    frameData = new byte[faceInfoCreatorPBOFilter.byteBuffer.remaining()];
+            pboFilter.newTextureReady(rotateTexture, texWidth, texHeight, true);
+            if (pboFilter.byteBuffer != null) {
+                if (frameData == null || frameData.length != pboFilter.byteBuffer.remaining()) {
+                    frameData = new byte[pboFilter.byteBuffer.remaining()];
                 }
-                faceInfoCreatorPBOFilter.byteBuffer.get(frameData);
+                pboFilter.byteBuffer.get(frameData);
                 //美颜sdk处理
                 CommonDataMode dataMode = new CommonDataMode();
                 dataMode.setNeedFlip(mFrontCamera);
