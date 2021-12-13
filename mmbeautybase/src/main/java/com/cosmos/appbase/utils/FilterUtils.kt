@@ -3,8 +3,8 @@ package com.cosmos.appbase.utils
 import android.content.Context
 import com.cosmos.appbase.listener.OnFilterResourcePrepareListener
 import com.cosmos.appbase.listener.OnStickerResourcePrepareListener
-import com.immomo.doki.DokiContextHolder
 import com.mm.mmutil.FileUtil
+import com.mm.mmutil.app.AppContext
 import com.mm.mmutil.task.ThreadUtils
 import java.io.File
 
@@ -48,7 +48,7 @@ object FilterUtils {
 
     fun getBeautyDirectory(): File? {
         return File(
-            DokiContextHolder.getAppContext().filesDir?.absolutePath,
+            AppContext.getContext().filesDir?.absolutePath,
             "/beauty"
         )
     }
