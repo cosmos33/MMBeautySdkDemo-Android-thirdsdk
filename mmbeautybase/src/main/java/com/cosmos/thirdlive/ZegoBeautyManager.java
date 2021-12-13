@@ -43,10 +43,10 @@ public class ZegoBeautyManager extends BeautyManager {
     public int renderWithTexture(int texture, int texWidth, int texHeight, boolean mFrontCamera) {
         if (resourceReady) {
             if (faceInfoCreatorPBOFilter == null) {
-                rotateFilter = new RotateFilter(RotateFilter.ROTATE_VERTICAL);
-                backRotateFilter = new RotateFilter(RotateFilter.ROTATE_180);
-                revertRotateFilter = new RotateFilter(RotateFilter.ROTATE_VERTICAL);
-                backRevertRotateFilter = new RotateFilter(RotateFilter.ROTATE_180);
+                rotateFilter = new RotateFilter(RotateFilter.ROTATE_180);
+                backRotateFilter = new RotateFilter(RotateFilter.ROTATE_VERTICAL);
+                revertRotateFilter = new RotateFilter(RotateFilter.ROTATE_180);
+                backRevertRotateFilter = new RotateFilter(RotateFilter.ROTATE_VERTICAL);
                 faceInfoCreatorPBOFilter = new FaceInfoCreatorPBOFilter(texWidth, texHeight);
                 emptyFilter = new Empty2Filter();
                 emptyFilter.setWidth(texWidth);
