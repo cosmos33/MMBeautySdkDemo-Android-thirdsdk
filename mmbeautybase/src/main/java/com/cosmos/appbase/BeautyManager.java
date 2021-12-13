@@ -31,7 +31,6 @@ abstract public class BeautyManager implements IMMRenderModuleManager.CVModelSta
     protected static String cosmosAppid = "";// TODO mmbeauty 这里配置appid
     protected IMMRenderModuleManager renderModuleManager;
     protected boolean authSuccess = false;
-    protected boolean filterResouceSuccess = false;
     protected boolean cvModelSuccess = false;
     protected boolean stickerSuccess;
     protected IBeautyModule iBeautyModule;
@@ -121,12 +120,6 @@ abstract public class BeautyManager implements IMMRenderModuleManager.CVModelSta
             }
         });
 
-        FilterUtils.INSTANCE.prepareFilterResource(context, new OnFilterResourcePrepareListener() {
-            public void onFilterReady() {
-                filterResouceSuccess = true;
-                checkResouceReady();
-            }
-        });
         FilterUtils.INSTANCE.prepareStikcerResource(context, new OnStickerResourcePrepareListener() {
             public void onStickerReady(String rootPath) {
                 stickerSuccess = true;
@@ -138,7 +131,7 @@ abstract public class BeautyManager implements IMMRenderModuleManager.CVModelSta
     }
 
     private void checkResouceReady() {
-        if (cvModelSuccess && filterResouceSuccess && authSuccess && stickerSuccess) {
+        if (cvModelSuccess && authSuccess && stickerSuccess) {
 //            Toaster.show("美颜sdk资源准备就绪！！");
             MainThreadExecutor.post(new Runnable() {
                 @Override
@@ -164,7 +157,7 @@ abstract public class BeautyManager implements IMMRenderModuleManager.CVModelSta
         iStickerModule = CosmosBeautySDK.INSTANCE.createStickerModule();
         renderModuleManager.registerModule(iStickerModule);
         iStickerModule.addMaskModel(
-                new File(context.getFilesDir().getAbsolutePath() + "/facemasksource/", "rainbow_engine"),
+                new File(context.getFilesDir().getAbsolutePath() + "/facemasksource/facemask/", "rainbow_engine"),
                 new MaskLoadCallback() {
 
                     @Override
