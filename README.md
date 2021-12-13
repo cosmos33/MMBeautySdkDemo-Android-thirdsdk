@@ -20,3 +20,4 @@
 ### 9.MMTencentLVBSDK为接入腾讯LVB sdk demo
 ### 10.MMNetease为接入云信互动直播 sdk demo
 
+## MM美颜sdk 3.0.0之后的版本[点我](https://github.com/cosmos33/MMBeautySdkDemo-Android-thirdsdk/tree/3.0.0)
