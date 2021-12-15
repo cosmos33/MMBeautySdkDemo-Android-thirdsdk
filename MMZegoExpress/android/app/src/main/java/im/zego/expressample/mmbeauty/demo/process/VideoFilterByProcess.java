@@ -70,8 +70,9 @@ public class VideoFilterByProcess extends IZegoCustomVideoProcessHandler impleme
     /**
      * 释放资源
      *
+     * @param mRoomID
      */
-    public void stopAndDeAllocate() {
+    public void stopAndDeAllocate(String mRoomID) {
         stopFlag =true;
         final CountDownLatch barrier = new CountDownLatch(1);
         mHandler.post(new Runnable() {

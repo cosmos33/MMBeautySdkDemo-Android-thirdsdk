@@ -99,25 +99,23 @@ public class FUBeautyActivity extends Activity{
             videoCaptureFromCamera.onStop(ZegoPublishChannel.MAIN);
         }
         if(videoFilterByProcess!=null&&videoBufferType==ZegoVideoBufferType.SURFACE_TEXTURE){
-            ((VideoFilterByProcess)videoFilterByProcess).stopAndDeAllocate();
+            ((VideoFilterByProcess)videoFilterByProcess).stopAndDeAllocate(mRoomID);
+            ZegoExpressEngine.getEngine().setCustomVideoCaptureHandler(null);
+            // 停止预览
+            ZegoExpressEngine.getEngine().stopPreview();
+
+            // 在退出页面时停止推流
+            ZegoExpressEngine.getEngine().stopPublishingStream();
+
+            // 登出房间
+            ZegoExpressEngine.getEngine().logoutRoom(mRoomID);
+
+            ZegoExpressEngine.getEngine().setEventHandler(null);
+            ZegoExpressEngine.destroyEngine(null);
         }
         if(videoFilterByProcess!=null&&videoBufferType==ZegoVideoBufferType.GL_TEXTURE_2D){
-            ((VideoFilterByProcess2)videoFilterByProcess).stopAndDeAllocate();
+            ((VideoFilterByProcess2)videoFilterByProcess).stopAndDeAllocate(mRoomID);
         }
-
-        ZegoExpressEngine.getEngine().setCustomVideoCaptureHandler(null);
-        // 停止预览
-        ZegoExpressEngine.getEngine().stopPreview();
-
-        // 在退出页面时停止推流
-        ZegoExpressEngine.getEngine().stopPublishingStream();
-
-        // 登出房间
-        ZegoExpressEngine.getEngine().logoutRoom(mRoomID);
-
-        ZegoExpressEngine.getEngine().setEventHandler(null);
-        ZegoExpressEngine.destroyEngine(null);
-
     }
 
     IZegoCustomVideoCaptureHandler videoCaptureFromCamera;

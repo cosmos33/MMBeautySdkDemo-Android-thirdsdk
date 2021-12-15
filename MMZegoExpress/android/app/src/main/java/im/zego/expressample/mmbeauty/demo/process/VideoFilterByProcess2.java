@@ -23,6 +23,8 @@ public class VideoFilterByProcess2 extends IZegoCustomVideoProcessHandler {
     // mm 美颜处理类
     private ZegoBeautyManager beautyManager;
     private boolean isFrontCamera = true;
+    private boolean destoryMMBeauty = false;
+    private String mRoomID;
 
     public void setFrontCamera(boolean frontCamera) {
         isFrontCamera = frontCamera;
@@ -35,9 +37,6 @@ public class VideoFilterByProcess2 extends IZegoCustomVideoProcessHandler {
 
     @Override
     public void onStart(ZegoPublishChannel channel) {//切换摄像头会回调
-        if (beautyManager == null) {
-            beautyManager = new ZegoBeautyManager(ZegoApplication.zegoApplication);
-        }
     }
 
     /**
@@ -45,17 +44,14 @@ public class VideoFilterByProcess2 extends IZegoCustomVideoProcessHandler {
      *
      */
 
-    public void stopAndDeAllocate() {
+    public void stopAndDeAllocate(String mRoomID) {
+        this.mRoomID = mRoomID;
+        destoryMMBeauty = true;
     }
 
     @Override
     public void onStop(ZegoPublishChannel channel) {//切换摄像头会回调
         super.onStop(channel);
-        if (beautyManager != null) {
-            beautyManager.stopOrientationCallback();
-            beautyManager.textureDestoryed();
-            beautyManager = null;
-        }
     }
 
     @Override
@@ -63,6 +59,21 @@ public class VideoFilterByProcess2 extends IZegoCustomVideoProcessHandler {
         int fuTextureId = beautyManager.renderWithTexture(textureID,width,height,isFrontCamera);
 
         ZegoExpressEngine.getEngine().sendCustomVideoProcessedTextureData(fuTextureId,width,height,referenceTimeMillisecond);
+        if (destoryMMBeauty) {
+            beautyManager.textureDestoryed();
+            ZegoExpressEngine.getEngine().setCustomVideoCaptureHandler(null);
+            // 停止预览
+            ZegoExpressEngine.getEngine().stopPreview();
+
+            // 在退出页面时停止推流
+            ZegoExpressEngine.getEngine().stopPublishingStream();
+
+            // 登出房间
+            ZegoExpressEngine.getEngine().logoutRoom(mRoomID);
+
+            ZegoExpressEngine.getEngine().setEventHandler(null);
+            ZegoExpressEngine.destroyEngine(null);
+        }
     }
 
 
