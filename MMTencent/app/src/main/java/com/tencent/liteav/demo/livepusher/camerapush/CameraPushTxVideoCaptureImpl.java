@@ -1,10 +1,8 @@
 package com.tencent.liteav.demo.livepusher.camerapush;
 
 import android.content.Context;
-import android.os.Looper;
 
 import com.cosmos.thirdlive.TencentBeautyManager;
-import com.immomo.resdownloader.utils.MainThreadExecutor;
 import com.tencent.liteav.demo.livepusher.camerapush.model.CameraPushImpl;
 import com.tencent.rtmp.TXLivePusher;
 import com.tencent.rtmp.ui.TXCloudVideoView;
@@ -12,6 +10,7 @@ import com.tencent.rtmp.ui.TXCloudVideoView;
 public class CameraPushTxVideoCaptureImpl extends CameraPushImpl implements TXLivePusher.VideoCustomProcessListener {
     private TXCloudVideoView mPusherView;
     private TencentBeautyManager tencentBeautyManager;
+
     public CameraPushTxVideoCaptureImpl(Context context, TXCloudVideoView pusherView, int screenRotation) {
         super(context, pusherView);
     }
@@ -35,11 +34,13 @@ public class CameraPushTxVideoCaptureImpl extends CameraPushImpl implements TXLi
         mLivePusher.setVideoProcessListener(this);
         mLivePusher.startCameraPreview(mPusherView);
     }
+
     @Override
     public void switchCamera() {
         super.switchCamera();
         mLivePusher.setMirror(mFrontCamera);
     }
+
     @Override
     protected void setVisibility(int visibility) {
         if (mPusherView != null) {
@@ -49,17 +50,10 @@ public class CameraPushTxVideoCaptureImpl extends CameraPushImpl implements TXLi
 
     @Override
     public int onTextureCustomProcess(int texture, int texWidth, int texHeight) {
-        if (Looper.myLooper() == null) {
-            MainThreadExecutor.post(() -> {
-                if (tencentBeautyManager == null) {
-                    tencentBeautyManager = new TencentBeautyManager(mContext);
-                }
-            });
+        if (tencentBeautyManager == null) {
+            tencentBeautyManager = new TencentBeautyManager(mContext);
         }
-        if (tencentBeautyManager != null) {
-            return tencentBeautyManager.renderWithTexture(texture, texWidth, texHeight, true);
-        }
-        return texture;
+        return tencentBeautyManager.renderWithTexture(texture, texWidth, texHeight, true);
     }
 
     @Override
@@ -72,6 +66,5 @@ public class CameraPushTxVideoCaptureImpl extends CameraPushImpl implements TXLi
         if (tencentBeautyManager != null) {
             tencentBeautyManager.textureDestoryed();
         }
-
     }
 }

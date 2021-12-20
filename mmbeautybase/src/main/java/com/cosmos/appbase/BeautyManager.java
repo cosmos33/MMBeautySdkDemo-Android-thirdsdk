@@ -19,8 +19,7 @@ import com.cosmos.beauty.module.sticker.DetectRect;
 import com.cosmos.beauty.module.sticker.IStickerModule;
 import com.cosmos.beauty.module.sticker.MaskLoadCallback;
 import com.cosmos.beautyutils.BuildConfig;
-import com.cosmos.beautyutils.Empty2Filter;
-import com.cosmos.beautyutils.FaceInfoCreatorPBOFilter;
+import com.cosmos.beautyutils.SyncReadByteFromGPUFilter;
 import com.immomo.resdownloader.utils.MainThreadExecutor;
 import com.mm.mmutil.toast.Toaster;
 import com.momo.mcamera.mask.MaskModel;
@@ -32,6 +31,8 @@ import java.io.File;
 
 abstract public class BeautyManager implements IMMRenderModuleManager.CVModelStatusListener, IMMRenderModuleManager.IDetectFaceCallback, IMMRenderModuleManager.IDetectGestureCallback {
     protected static String cosmosAppid = "";// TODO mmbeauty 这里配置appid
+    protected final float SCALE_FACTOR = 1f;
+    protected final float DOWN_SAMPLE_RATIO = 1 / SCALE_FACTOR;
     protected IMMRenderModuleManager renderModuleManager;
     protected boolean authSuccess = false;
     protected boolean filterResouceSuccess = false;
@@ -43,14 +44,21 @@ abstract public class BeautyManager implements IMMRenderModuleManager.CVModelSta
     protected boolean resourceReady = false;
     protected Context context;
     protected String appId;
-    protected FaceInfoCreatorPBOFilter faceInfoCreatorPBOFilter;
-    protected Empty2Filter emptyFilter;
+    protected SyncReadByteFromGPUFilter syncReadByteFromGPUFilter;
     protected TransOesTextureFilter transOesTextureFilter;
 
     public BeautyManager(Context context, String appId) {
         this.context = context.getApplicationContext();
         this.appId = appId;
         initSDK();
+    }
+
+    protected int getDownSampleSize(int originSize) {
+        return (int) (originSize * DOWN_SAMPLE_RATIO);
+    }
+
+    protected float getScaleFactor() {
+        return SCALE_FACTOR;
     }
 
     public int renderWithOESTexture(int texture, int texWidth, int texHeight, boolean mFrontCamera, int cameraRotation) {
@@ -78,13 +86,9 @@ abstract public class BeautyManager implements IMMRenderModuleManager.CVModelSta
             transOesTextureFilter.destroy();
             transOesTextureFilter = null;
         }
-        if (faceInfoCreatorPBOFilter != null) {
-            faceInfoCreatorPBOFilter.destroy();
-            faceInfoCreatorPBOFilter = null;
-        }
-        if (emptyFilter != null) {
-            emptyFilter.destroy();
-            emptyFilter = null;
+        if (syncReadByteFromGPUFilter != null) {
+            syncReadByteFromGPUFilter.destroy();
+            syncReadByteFromGPUFilter = null;
         }
         if (renderModuleManager != null) {
             if (iBeautyModule != null) {
