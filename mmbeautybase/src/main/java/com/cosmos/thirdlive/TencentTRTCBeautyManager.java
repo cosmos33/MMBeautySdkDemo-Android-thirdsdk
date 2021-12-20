@@ -6,9 +6,8 @@ import com.core.glcore.util.ImageFrame;
 import com.cosmos.appbase.BeautyManager;
 import com.cosmos.beauty.model.MMRenderFrameParams;
 import com.cosmos.beauty.model.datamode.CommonDataMode;
-import com.cosmos.beautyutils.Empty2Filter;
-import com.cosmos.beautyutils.FaceInfoCreatorPBOFilter;
 import com.cosmos.beautyutils.RotateFilter;
+import com.cosmos.beautyutils.SyncReadByteFromGPUFilter;
 
 /**
  * 腾讯TRTC接入美颜sdk管理类
@@ -27,29 +26,25 @@ public class TencentTRTCBeautyManager extends BeautyManager {
             if (rotateFilter == null) {
                 rotateFilter = new RotateFilter(RotateFilter.ROTATE_VERTICAL);
                 revertRotateFilter = new RotateFilter(RotateFilter.ROTATE_VERTICAL);
-                faceInfoCreatorPBOFilter = new FaceInfoCreatorPBOFilter(texWidth, texHeight);
-                emptyFilter = new Empty2Filter();
-                emptyFilter.setWidth(texWidth);
-                emptyFilter.setHeight(texHeight);
+                syncReadByteFromGPUFilter = new SyncReadByteFromGPUFilter();
             }
             int rotateTexture = rotateFilter.rotateTexture(texture, texWidth, texHeight);
-            faceInfoCreatorPBOFilter.newTextureReady(rotateTexture, emptyFilter, true);
-            if (faceInfoCreatorPBOFilter.byteBuffer != null) {
-                if (frameData == null || frameData.length != faceInfoCreatorPBOFilter.byteBuffer.remaining()) {
-                    frameData = new byte[faceInfoCreatorPBOFilter.byteBuffer.remaining()];
+            syncReadByteFromGPUFilter.newTextureReady(rotateTexture, getDownSampleSize(texWidth), getDownSampleSize(texHeight), true);
+            if (syncReadByteFromGPUFilter.byteBuffer != null) {
+                if (frameData == null || frameData.length != syncReadByteFromGPUFilter.byteBuffer.remaining()) {
+                    frameData = new byte[syncReadByteFromGPUFilter.byteBuffer.remaining()];
                 }
-                faceInfoCreatorPBOFilter.byteBuffer.get(frameData);
+                syncReadByteFromGPUFilter.byteBuffer.get(frameData);
                 //美颜sdk处理
                 CommonDataMode dataMode = new CommonDataMode();
                 dataMode.setNeedFlip(mFrontCamera);
                 int beautyTexture = renderModuleManager.renderFrame(rotateTexture, new MMRenderFrameParams(
                         dataMode,
                         frameData,
+                        getDownSampleSize(texWidth), getDownSampleSize(texHeight),
                         texWidth,
                         texHeight,
-                        texWidth,
-                        texHeight,
-                        ImageFrame.MMFormat.FMT_RGBA
+                        ImageFrame.MMFormat.FMT_RGBA, getScaleFactor()
                 ));
                 return revertRotateFilter.rotateTexture(beautyTexture, texWidth, texHeight);
             }

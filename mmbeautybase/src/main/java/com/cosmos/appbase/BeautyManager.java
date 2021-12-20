@@ -31,7 +31,7 @@ import java.io.File;
 
 abstract public class BeautyManager implements IMMRenderModuleManager.CVModelStatusListener, IMMRenderModuleManager.IDetectFaceCallback, IMMRenderModuleManager.IDetectGestureCallback {
     protected static String cosmosAppid = "";// TODO mmbeauty 这里配置appid
-    protected final float SCALE_FACTOR = 1f;
+    protected final float SCALE_FACTOR = 1f;//修改为1的整数倍（比如2），会适当减少整个渲染的耗时，但是会对美颜精度产生一定程度影响，请根据接入方的接受程度修改该值
     protected final float DOWN_SAMPLE_RATIO = 1 / SCALE_FACTOR;
     protected IMMRenderModuleManager renderModuleManager;
     protected boolean authSuccess = false;

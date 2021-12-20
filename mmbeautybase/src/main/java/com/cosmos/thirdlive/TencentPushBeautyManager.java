@@ -6,9 +6,6 @@ import com.core.glcore.util.ImageFrame;
 import com.cosmos.appbase.BeautyManager;
 import com.cosmos.beauty.model.MMRenderFrameParams;
 import com.cosmos.beauty.model.datamode.CameraDataMode;
-import com.cosmos.beauty.model.datamode.CommonDataMode;
-import com.cosmos.beautyutils.FaceInfoCreatorPBOFilter;
-import com.cosmos.beautyutils.RotateFilter;
 
 /**
  * 腾讯直播接入美颜sdk管理类

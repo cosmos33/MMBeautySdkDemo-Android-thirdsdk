@@ -8,14 +8,12 @@ import com.cosmos.appbase.BeautyManager;
 import com.cosmos.appbase.TransOesTextureFilter;
 import com.cosmos.appbase.orientation.BeautySdkOrientationSwitchListener;
 import com.cosmos.appbase.orientation.ScreenOrientationManager;
-import com.cosmos.appbase.utils.SaveByteToFile;
 import com.cosmos.beauty.Constants;
 import com.cosmos.beauty.model.MMRenderFrameParams;
 import com.cosmos.beauty.model.datamode.CameraDataMode;
 import com.cosmos.beauty.model.datamode.CommonDataMode;
-import com.cosmos.beautyutils.Empty2Filter;
-import com.cosmos.beautyutils.FaceInfoCreatorPBOFilter;
 import com.cosmos.beautyutils.RotateFilter;
+import com.cosmos.beautyutils.SyncReadByteFromGPUFilter;
 import com.mm.mmutil.app.AppContext;
 
 /**
@@ -57,10 +55,7 @@ public class QiniuBeautyManager extends BeautyManager {
             rotateRevertFilter = new RotateFilter(RotateFilter.ROTATE_180);
             backRotateFilter = new RotateFilter(RotateFilter.ROTATE_270);
             backHorizontalRotateFilter = new RotateFilter(RotateFilter.ROTATE_HORIZONTAL);
-            faceInfoCreatorPBOFilter = new FaceInfoCreatorPBOFilter(texWidth, texHeight);
-            emptyFilter = new Empty2Filter();
-            emptyFilter.setWidth(texWidth);
-            emptyFilter.setHeight(texHeight);
+            syncReadByteFromGPUFilter = new SyncReadByteFromGPUFilter();
         }
         if (renderModuleManager != null) {
             int rotateTexture;
@@ -74,13 +69,13 @@ public class QiniuBeautyManager extends BeautyManager {
             } else {
                 rotateTexture = backRotateFilter.rotateTexture(transTexture, texWidth, texHeight);
             }
-            faceInfoCreatorPBOFilter.newTextureReady(rotateTexture, emptyFilter, true);
+            syncReadByteFromGPUFilter.newTextureReady(rotateTexture, getDownSampleSize(texWidth), getDownSampleSize(texHeight), true);
 
-            if (faceInfoCreatorPBOFilter.byteBuffer != null) {
-                if (frameData == null || frameData.length != faceInfoCreatorPBOFilter.byteBuffer.remaining()) {
-                    frameData = new byte[faceInfoCreatorPBOFilter.byteBuffer.remaining()];
+            if (syncReadByteFromGPUFilter.byteBuffer != null) {
+                if (frameData == null || frameData.length != syncReadByteFromGPUFilter.byteBuffer.remaining()) {
+                    frameData = new byte[syncReadByteFromGPUFilter.byteBuffer.remaining()];
                 }
-                faceInfoCreatorPBOFilter.byteBuffer.get(frameData);
+                syncReadByteFromGPUFilter.byteBuffer.get(frameData);
                 //美颜sdk处理
                 CommonDataMode dataMode = new CommonDataMode();
                 dataMode.setNeedFlip(false);
@@ -88,11 +83,10 @@ public class QiniuBeautyManager extends BeautyManager {
                 MMRenderFrameParams renderFrameParams =
                         new MMRenderFrameParams(
                                 dataMode, frameData,
+                                getDownSampleSize(texWidth), getDownSampleSize(texHeight),
                                 texWidth,
                                 texHeight,
-                                texWidth,
-                                texHeight,
-                                ImageFrame.MMFormat.FMT_RGBA
+                                ImageFrame.MMFormat.FMT_RGBA, getScaleFactor()
                         );
                 rotateTexture =renderModuleManager.renderFrame(rotateTexture, renderFrameParams);
                 if (!mFrontCamera) {
