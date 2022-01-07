@@ -3,14 +3,14 @@ package com.cosmos.thirdlive;
 import android.content.Context;
 import android.opengl.GLES20;
 
-import com.core.glcore.util.ImageFrame;
 import com.cosmos.appbase.BeautyManager;
 import com.cosmos.appbase.TransOesTextureFilter;
 import com.cosmos.appbase.TransYUVTextureFilter;
 import com.cosmos.beauty.model.MMRenderFrameParams;
 import com.cosmos.beauty.model.datamode.CommonDataMode;
 import com.cosmos.beautyutils.RotateFilter;
-import com.cosmos.thirdlive.utils.PBOFilter;
+import com.cosmos.beautyutils.SyncReadByteFromGPUFilter;
+import com.momo.mcamera.util.ImageFrame;
 
 /**
  * 即构接入美颜sdk管理类
@@ -25,7 +25,7 @@ public class ZegoBeautyManager extends BeautyManager {
     private byte[] frameData;
 
     public ZegoBeautyManager(Context context) {
-        super(context, cosmosAppid);
+        super(context);
     }
 
     @Override
@@ -41,12 +41,12 @@ public class ZegoBeautyManager extends BeautyManager {
     @Override
     public int renderWithTexture(int texture, int texWidth, int texHeight, boolean mFrontCamera) {
         if (resourceReady) {
-            if (pboFilter == null) {
+            if (syncReadByteFromGPUFilter == null) {
                 rotateFilter = new RotateFilter(RotateFilter.ROTATE_180);
                 backRotateFilter = new RotateFilter(RotateFilter.ROTATE_VERTICAL);
                 revertRotateFilter = new RotateFilter(RotateFilter.ROTATE_180);
                 backRevertRotateFilter = new RotateFilter(RotateFilter.ROTATE_VERTICAL);
-                pboFilter = new PBOFilter(texWidth, texHeight);
+                syncReadByteFromGPUFilter = new SyncReadByteFromGPUFilter();
             }
             int rotateTexture = texture;
             RotateFilter temp;
@@ -59,13 +59,13 @@ public class ZegoBeautyManager extends BeautyManager {
                 tempRevert = backRevertRotateFilter;
             }
             rotateTexture = temp.rotateTexture(texture, texWidth, texHeight);
-            pboFilter.newTextureReady(rotateTexture, texWidth, texHeight, true);
+            syncReadByteFromGPUFilter.newTextureReady(rotateTexture, texWidth, texHeight, true);
 
-            if (pboFilter.byteBuffer != null) {
-                if (frameData == null || frameData.length != pboFilter.byteBuffer.remaining()) {
-                    frameData = new byte[pboFilter.byteBuffer.remaining()];
+            if (syncReadByteFromGPUFilter.byteBuffer != null) {
+                if (frameData == null || frameData.length != syncReadByteFromGPUFilter.byteBuffer.remaining()) {
+                    frameData = new byte[syncReadByteFromGPUFilter.byteBuffer.remaining()];
                 }
-                pboFilter.byteBuffer.get(frameData);
+                syncReadByteFromGPUFilter.byteBuffer.get(frameData);
                 //美颜sdk处理
                 CommonDataMode dataMode = new CommonDataMode();
                 dataMode.setNeedFlip(false);

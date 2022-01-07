@@ -2,13 +2,10 @@ package com.cosmos.thirdlive;
 
 import android.content.Context;
 
-import com.core.glcore.util.ImageFrame;
 import com.cosmos.appbase.BeautyManager;
 import com.cosmos.beauty.model.MMRenderFrameParams;
 import com.cosmos.beauty.model.datamode.CameraDataMode;
-import com.cosmos.beauty.model.datamode.CommonDataMode;
-import com.cosmos.beautyutils.FaceInfoCreatorPBOFilter;
-import com.cosmos.beautyutils.RotateFilter;
+import com.momo.mcamera.util.ImageFrame;
 
 /**
  * 腾讯直播接入美颜sdk管理类
@@ -16,7 +13,7 @@ import com.cosmos.beautyutils.RotateFilter;
 public class TencentPushBeautyManager extends BeautyManager {
 
     public TencentPushBeautyManager(Context context) {
-        super(context, cosmosAppid);
+        super(context);
     }
 
     @Override

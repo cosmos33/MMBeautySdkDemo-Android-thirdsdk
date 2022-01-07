@@ -2,14 +2,10 @@ package com.cosmos.appbase;
 
 import android.content.Context;
 
-import com.cosmos.appbase.listener.OnFilterResourcePrepareListener;
-import com.cosmos.appbase.listener.OnStickerResourcePrepareListener;
+import com.cosmos.appbase.listener.OnResPrepareListener;
 import com.cosmos.appbase.utils.FilterUtils;
 import com.cosmos.beauty.CosmosBeautySDK;
-import com.cosmos.beauty.inter.OnAuthenticationStateListener;
-import com.cosmos.beauty.inter.OnBeautyResourcePreparedListener;
 import com.cosmos.beauty.model.AuthResult;
-import com.cosmos.beauty.model.BeautySDKInitConfig;
 import com.cosmos.beauty.module.IMMRenderModuleManager;
 import com.cosmos.beauty.module.beauty.IBeautyModule;
 import com.cosmos.beauty.module.beauty.SimpleBeautyType;
@@ -17,9 +13,8 @@ import com.cosmos.beauty.module.lookup.ILookupModule;
 import com.cosmos.beauty.module.sticker.DetectRect;
 import com.cosmos.beauty.module.sticker.IStickerModule;
 import com.cosmos.beauty.module.sticker.MaskLoadCallback;
-import com.cosmos.beautyutils.BuildConfig;
-import com.cosmos.thirdlive.utils.PBOFilter;
-import com.immomo.resdownloader.utils.MainThreadExecutor;
+import com.cosmos.beautyutils.SyncReadByteFromGPUFilter;
+import com.immomo.medialog.thread.MainThreadExecutor;
 import com.mm.mmutil.toast.Toaster;
 import com.momo.mcamera.mask.MaskModel;
 
@@ -28,7 +23,7 @@ import org.jetbrains.annotations.NotNull;
 import java.io.File;
 
 abstract public class BeautyManager implements IMMRenderModuleManager.CVModelStatusListener, IMMRenderModuleManager.IDetectFaceCallback, IMMRenderModuleManager.IDetectGestureCallback {
-    protected static String cosmosAppid = "";// TODO mmbeauty 这里配置appid
+    protected static String license = "";// TODO mmbeauty 这里配置license
     protected IMMRenderModuleManager renderModuleManager;
     protected boolean authSuccess = false;
     protected boolean cvModelSuccess = false;
@@ -38,13 +33,11 @@ abstract public class BeautyManager implements IMMRenderModuleManager.CVModelSta
     protected IStickerModule iStickerModule;
     protected boolean resourceReady = false;
     protected Context context;
-    protected String appId;
-    protected PBOFilter pboFilter;
+    protected SyncReadByteFromGPUFilter syncReadByteFromGPUFilter;
     protected TransOesTextureFilter transOesTextureFilter;
 
-    public BeautyManager(Context context, String appId) {
+    public BeautyManager(Context context) {
         this.context = context.getApplicationContext();
-        this.appId = appId;
         initSDK();
     }
 
@@ -60,7 +53,7 @@ abstract public class BeautyManager implements IMMRenderModuleManager.CVModelSta
         return texture;
     }
 
-    public int renderWithBytesTexture(byte[] datas, int texture, int dataWidth, int dataHeight, int texWidth, int texHeight, boolean mFrontCamera, int cameraRotaion){
+    public int renderWithBytesTexture(byte[] datas, int texture, int dataWidth, int dataHeight, int texWidth, int texHeight, boolean mFrontCamera, int cameraRotaion) {
         return texture;
     }
 
@@ -73,9 +66,9 @@ abstract public class BeautyManager implements IMMRenderModuleManager.CVModelSta
             transOesTextureFilter.destroy();
             transOesTextureFilter = null;
         }
-        if (pboFilter != null) {
-            pboFilter.destroy();
-            pboFilter = null;
+        if (syncReadByteFromGPUFilter != null) {
+            syncReadByteFromGPUFilter.destroy();
+            syncReadByteFromGPUFilter = null;
         }
         if (renderModuleManager != null) {
             if (iBeautyModule != null) {
@@ -94,46 +87,31 @@ abstract public class BeautyManager implements IMMRenderModuleManager.CVModelSta
     }
 
     private void initSDK() {
-        BeautySDKInitConfig beautySDKInitConfig = new BeautySDKInitConfig.Builder(appId)
-                .setUserVersionCode(BuildConfig.VERSION_CODE)
-                .setUserVersionName(BuildConfig.VERSION_NAME)
-                .build();
-        CosmosBeautySDK.INSTANCE.init(context, beautySDKInitConfig, new OnAuthenticationStateListener() {
-            public void onResult(AuthResult result) {
+        FilterUtils.INSTANCE.prepareModelsResource(context, new OnResPrepareListener() {
+            public void onResReady(String rootPath) {
+                AuthResult result = CosmosBeautySDK.INSTANCE.init(context, license, rootPath);
                 if (!result.isSucceed()) {
                     Toaster.show(String.format("授权失败:%s", result.getMsg()));
                 } else {
-                    MainThreadExecutor.post(new Runnable() {
-                        @Override
-                        public void run() {
-                            authSuccess = true;
-                            checkResouceReady();
-                        }
-                    });
+                    authSuccess = true;
+                    checkResouceReady();
                 }
-            }
-        }, new OnBeautyResourcePreparedListener() {
-            public void onResult(boolean isSucceed) {
-                if (!isSucceed) {
-                    Toaster.show("resource false");
-                }
+                renderModuleManager = CosmosBeautySDK.INSTANCE.createRenderModuleManager();
+                renderModuleManager.prepare(true, BeautyManager.this, BeautyManager.this, BeautyManager.this);
             }
         });
 
-        FilterUtils.INSTANCE.prepareStikcerResource(context, new OnStickerResourcePrepareListener() {
-            public void onStickerReady(String rootPath) {
+        FilterUtils.INSTANCE.prepareStikcerResource(context, new OnResPrepareListener() {
+            public void onResReady(String rootPath) {
                 stickerSuccess = true;
                 checkResouceReady();
             }
         });
-        renderModuleManager = CosmosBeautySDK.INSTANCE.createRenderModuleManager();
-        renderModuleManager.prepare(true, this, this, this);
     }
 
     private void checkResouceReady() {
         if (cvModelSuccess && authSuccess && stickerSuccess) {
-//            Toaster.show("美颜sdk资源准备就绪！！");
-            MainThreadExecutor.post(new Runnable() {
+            MainThreadExecutor.execute(new Runnable() {
                 @Override
                 public void run() {
                     initRender();
@@ -174,6 +152,8 @@ abstract public class BeautyManager implements IMMRenderModuleManager.CVModelSta
         if (success) {
             cvModelSuccess = true;
             checkResouceReady();
+        } else {
+            Toaster.show("模型加载失败");
         }
     }
 

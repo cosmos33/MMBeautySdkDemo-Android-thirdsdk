@@ -2,15 +2,13 @@ package com.cosmos.thirdlive;
 
 import android.content.Context;
 
-import com.core.glcore.util.ImageFrame;
 import com.cosmos.appbase.BeautyManager;
 import com.cosmos.appbase.TransOesTextureFilter;
 import com.cosmos.beauty.model.MMRenderFrameParams;
 import com.cosmos.beauty.model.datamode.CommonDataMode;
-import com.cosmos.beautyutils.Empty2Filter;
-import com.cosmos.beautyutils.FaceInfoCreatorPBOFilter;
 import com.cosmos.beautyutils.RotateFilter;
-import com.cosmos.thirdlive.utils.PBOFilter;
+import com.cosmos.beautyutils.SyncReadByteFromGPUFilter;
+import com.momo.mcamera.util.ImageFrame;
 
 public class AgoraLiveBeautyManager extends BeautyManager {
     private TransOesTextureFilter transOesTextureFilter;
@@ -19,7 +17,7 @@ public class AgoraLiveBeautyManager extends BeautyManager {
     private byte[] frameData;
 
     public AgoraLiveBeautyManager(Context context) {
-        super(context, cosmosAppid);
+        super(context);
     }
 
     @Override
@@ -39,18 +37,18 @@ public class AgoraLiveBeautyManager extends BeautyManager {
     @Override
     public int renderWithTexture(int texture, int texWidth, int texHeight, boolean mFrontCamera) {
         if (resourceReady) {
-            if (pboFilter == null) {
+            if (syncReadByteFromGPUFilter == null) {
                 rotateFilter = new RotateFilter(RotateFilter.ROTATE_90);
                 revertRotateFilter = new RotateFilter(RotateFilter.ROTATE_270);
-                pboFilter = new PBOFilter(texWidth, texHeight);
+                syncReadByteFromGPUFilter = new SyncReadByteFromGPUFilter();
             }
             int rotateTexture = rotateFilter.rotateTexture(texture, texWidth, texHeight);
-            pboFilter.newTextureReady(rotateTexture, texWidth, texHeight, true);
-            if (pboFilter.byteBuffer != null) {
-                if (frameData == null || frameData.length != pboFilter.byteBuffer.remaining()) {
-                    frameData = new byte[pboFilter.byteBuffer.remaining()];
+            syncReadByteFromGPUFilter.newTextureReady(rotateTexture, texWidth, texHeight, true);
+            if (syncReadByteFromGPUFilter.byteBuffer != null) {
+                if (frameData == null || frameData.length != syncReadByteFromGPUFilter.byteBuffer.remaining()) {
+                    frameData = new byte[syncReadByteFromGPUFilter.byteBuffer.remaining()];
                 }
-                pboFilter.byteBuffer.get(frameData);
+                syncReadByteFromGPUFilter.byteBuffer.get(frameData);
                 //美颜sdk处理
                 CommonDataMode dataMode = new CommonDataMode();
                 dataMode.setNeedFlip(mFrontCamera);

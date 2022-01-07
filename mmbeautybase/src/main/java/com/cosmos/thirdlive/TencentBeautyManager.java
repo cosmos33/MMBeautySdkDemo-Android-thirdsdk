@@ -2,14 +2,12 @@ package com.cosmos.thirdlive;
 
 import android.content.Context;
 
-import com.core.glcore.util.ImageFrame;
 import com.cosmos.appbase.BeautyManager;
 import com.cosmos.beauty.model.MMRenderFrameParams;
 import com.cosmos.beauty.model.datamode.CommonDataMode;
-import com.cosmos.beautyutils.Empty2Filter;
-import com.cosmos.beautyutils.FaceInfoCreatorPBOFilter;
 import com.cosmos.beautyutils.RotateFilter;
-import com.cosmos.thirdlive.utils.PBOFilter;
+import com.cosmos.beautyutils.SyncReadByteFromGPUFilter;
+import com.momo.mcamera.util.ImageFrame;
 
 /**
  * 腾讯直播接入美颜sdk管理类
@@ -20,7 +18,7 @@ public class TencentBeautyManager extends BeautyManager {
     private byte[] frameData;
 
     public TencentBeautyManager(Context context) {
-        super(context, cosmosAppid);
+        super(context);
     }
 
     @Override
@@ -29,15 +27,15 @@ public class TencentBeautyManager extends BeautyManager {
             if (rotateFilter == null) {
                 rotateFilter = new RotateFilter(RotateFilter.ROTATE_VERTICAL);
                 revertRotateFilter = new RotateFilter(RotateFilter.ROTATE_VERTICAL);
-                pboFilter = new PBOFilter(texWidth, texHeight);
+                syncReadByteFromGPUFilter = new SyncReadByteFromGPUFilter();
             }
             int rotateTexture = rotateFilter.rotateTexture(texture, texWidth, texHeight);
-            pboFilter.newTextureReady(rotateTexture, texWidth, texHeight, true);
-            if (pboFilter.byteBuffer != null) {
-                if (frameData == null || frameData.length != pboFilter.byteBuffer.remaining()) {
-                    frameData = new byte[pboFilter.byteBuffer.remaining()];
+            syncReadByteFromGPUFilter.newTextureReady(rotateTexture, texWidth, texHeight, true);
+            if (syncReadByteFromGPUFilter.byteBuffer != null) {
+                if (frameData == null || frameData.length != syncReadByteFromGPUFilter.byteBuffer.remaining()) {
+                    frameData = new byte[syncReadByteFromGPUFilter.byteBuffer.remaining()];
                 }
-                pboFilter.byteBuffer.get(frameData);
+                syncReadByteFromGPUFilter.byteBuffer.get(frameData);
                 //美颜sdk处理
                 CommonDataMode dataMode = new CommonDataMode();
                 dataMode.setNeedFlip(mFrontCamera);

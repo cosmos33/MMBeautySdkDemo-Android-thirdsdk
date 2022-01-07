@@ -2,7 +2,6 @@ package com.cosmos.thirdlive;
 
 import android.content.Context;
 
-import com.core.glcore.util.ImageFrame;
 import com.cosmos.appbase.BeautyManager;
 import com.cosmos.appbase.orientation.BeautySdkOrientationSwitchListener;
 import com.cosmos.appbase.orientation.ScreenOrientationManager;
@@ -13,6 +12,7 @@ import com.cosmos.beauty.model.datamode.CameraDataMode;
 import com.cosmos.beauty.module.beauty.SimpleBeautyType;
 import com.cosmos.beautyutils.RotateFilter;
 import com.mm.mmutil.app.AppContext;
+import com.momo.mcamera.util.ImageFrame;
 
 /**
  * 七牛接入美颜sdk管理类
@@ -27,7 +27,7 @@ public class QiniuShortVideoBeautyManager extends BeautyManager {
     private BeautySdkOrientationSwitchListener orientationListener;
 
     public QiniuShortVideoBeautyManager(Context context) {
-        super(context, cosmosAppid);
+        super(context);
         orientationListener = new BeautySdkOrientationSwitchListener();
         ScreenOrientationManager screenOrientationManager =
                 ScreenOrientationManager.getInstance(AppContext.getContext());

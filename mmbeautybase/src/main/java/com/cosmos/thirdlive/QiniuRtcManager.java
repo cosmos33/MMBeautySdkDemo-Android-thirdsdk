@@ -3,11 +3,11 @@ package com.cosmos.thirdlive;
 import android.content.Context;
 import android.opengl.GLES20;
 
-import com.core.glcore.util.ImageFrame;
 import com.cosmos.appbase.BeautyManager;
 import com.cosmos.beauty.model.MMRenderFrameParams;
 import com.cosmos.beauty.model.datamode.CameraDataMode;
 import com.cosmos.beautyutils.RotateFilter;
+import com.momo.mcamera.util.ImageFrame;
 
 /**
  * 七牛RTC接入美颜sdk管理类
@@ -21,7 +21,7 @@ public class QiniuRtcManager extends BeautyManager {
     private RotateFilter backRotateFilter;
 
     public QiniuRtcManager(Context context) {
-        super(context, cosmosAppid);
+        super(context);
     }
 
     public int renderWithBytesTexture(byte[] data, int texture, int dataWidth, int dataHeight, boolean mFrontCamera, int cameraRotaion) {

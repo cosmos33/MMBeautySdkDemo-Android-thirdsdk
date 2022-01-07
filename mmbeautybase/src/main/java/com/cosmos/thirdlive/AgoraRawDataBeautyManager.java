@@ -3,14 +3,13 @@ package com.cosmos.thirdlive;
 import android.content.Context;
 import android.opengl.EGLSurface;
 
-import com.core.glcore.util.ImageFrame;
 import com.cosmos.appbase.BeautyManager;
 import com.cosmos.appbase.gl.EGLHelper;
 import com.cosmos.beauty.model.MMRenderFrameParams;
 import com.cosmos.beauty.model.datamode.CameraDataMode;
 import com.cosmos.beautyutils.RotateFilter;
-import com.cosmos.thirdlive.utils.PBOFilter;
 import com.cosmos.thirdlive.utils.PBOSubFilter;
+import com.momo.mcamera.util.ImageFrame;
 
 import java.nio.ByteBuffer;
 
@@ -27,7 +26,7 @@ public class AgoraRawDataBeautyManager extends BeautyManager {
     private RotateFilter rotateFilter2;
 
     public AgoraRawDataBeautyManager(Context context) {
-        super(context, cosmosAppid);
+        super(context);
     }
 
     public ByteBuffer renderWithRawData(byte[] data, int width, int height, int rotation, boolean mFrontCamera) {
@@ -42,7 +41,7 @@ public class AgoraRawDataBeautyManager extends BeautyManager {
         if (yuvToTexture == null) {
             yuvToTexture = new NewNV21PreviewInput();
             yuvToTexture.setRenderSize(width, height);
-            pboFilter = new PBOSubFilter(width, height);
+            syncReadByteFromGPUFilter = new PBOSubFilter();
             rotateFilter = new RotateFilter(RotateFilter.ROTATE_HORIZONTAL);
             rotateFilter1 = new RotateFilter(RotateFilter.ROTATE_270);
             rotateFilter2 = new RotateFilter(RotateFilter.ROTATE_90);
@@ -69,8 +68,8 @@ public class AgoraRawDataBeautyManager extends BeautyManager {
         ));
         int rotateTexId = rotateFilter.rotateTexture(beautyTexture, width, height);
         int rotateTexId1 = rotateFilter1.rotateTexture(rotateTexId, width, height);
-        pboFilter.newTextureReady(rotateTexId1, width, height, true);
-        return pboFilter.byteBuffer;
+        syncReadByteFromGPUFilter.newTextureReady(rotateTexId1, width, height, true);
+        return syncReadByteFromGPUFilter.byteBuffer;
     }
 
     @Override

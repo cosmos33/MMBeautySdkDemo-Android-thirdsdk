@@ -3,7 +3,6 @@ package com.cosmos.thirdlive;
 import android.content.Context;
 import android.opengl.GLES20;
 
-import com.core.glcore.util.ImageFrame;
 import com.cosmos.appbase.BeautyManager;
 import com.cosmos.appbase.TransOesTextureFilter;
 import com.cosmos.appbase.orientation.BeautySdkOrientationSwitchListener;
@@ -12,11 +11,10 @@ import com.cosmos.beauty.Constants;
 import com.cosmos.beauty.model.MMRenderFrameParams;
 import com.cosmos.beauty.model.datamode.CameraDataMode;
 import com.cosmos.beauty.model.datamode.CommonDataMode;
-import com.cosmos.beautyutils.Empty2Filter;
-import com.cosmos.beautyutils.FaceInfoCreatorPBOFilter;
 import com.cosmos.beautyutils.RotateFilter;
-import com.cosmos.thirdlive.utils.PBOFilter;
+import com.cosmos.beautyutils.SyncReadByteFromGPUFilter;
 import com.mm.mmutil.app.AppContext;
+import com.momo.mcamera.util.ImageFrame;
 
 /**
  * 七牛接入美颜sdk管理类
@@ -31,7 +29,7 @@ public class QiniuBeautyManager extends BeautyManager {
     private byte[] frameData;
 
     public QiniuBeautyManager(Context context) {
-        super(context, cosmosAppid);
+        super(context);
         orientationListener = new BeautySdkOrientationSwitchListener();
         ScreenOrientationManager screenOrientationManager =
                 ScreenOrientationManager.getInstance(AppContext.getContext());
@@ -57,7 +55,7 @@ public class QiniuBeautyManager extends BeautyManager {
             rotateRevertFilter = new RotateFilter(RotateFilter.ROTATE_180);
             backRotateFilter = new RotateFilter(RotateFilter.ROTATE_270);
             backHorizontalRotateFilter = new RotateFilter(RotateFilter.ROTATE_HORIZONTAL);
-            pboFilter = new PBOFilter(texWidth, texHeight);
+            syncReadByteFromGPUFilter = new SyncReadByteFromGPUFilter();
         }
         if (renderModuleManager != null) {
             int rotateTexture;
@@ -71,13 +69,13 @@ public class QiniuBeautyManager extends BeautyManager {
             } else {
                 rotateTexture = backRotateFilter.rotateTexture(transTexture, texWidth, texHeight);
             }
-            pboFilter.newTextureReady(rotateTexture, texWidth, texHeight, true);
+            syncReadByteFromGPUFilter.newTextureReady(rotateTexture, texWidth, texHeight, true);
 
-            if (pboFilter.byteBuffer != null) {
-                if (frameData == null || frameData.length != pboFilter.byteBuffer.remaining()) {
-                    frameData = new byte[pboFilter.byteBuffer.remaining()];
+            if (syncReadByteFromGPUFilter.byteBuffer != null) {
+                if (frameData == null || frameData.length != syncReadByteFromGPUFilter.byteBuffer.remaining()) {
+                    frameData = new byte[syncReadByteFromGPUFilter.byteBuffer.remaining()];
                 }
-                pboFilter.byteBuffer.get(frameData);
+                syncReadByteFromGPUFilter.byteBuffer.get(frameData);
                 //美颜sdk处理
                 CommonDataMode dataMode = new CommonDataMode();
                 dataMode.setNeedFlip(false);
