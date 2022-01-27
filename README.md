@@ -1,4 +1,8 @@
-## 本工程为MM美颜SDK接入第三方直播、视频sdk demo
+## 本工程为MM美颜本地授权SDK接入第三方直播、视频sdk demo
+>  接入MM美颜本地授权sdk需要额外修改的部分：
+>  - mmbeautybase module下 assets添加模型文件(model-all.zip)（咨询接入同学）
+>  - mmbeautybase module下libs文件夹添加sdk aar所有文件(咨询接入同学)
+
 > ### 接入MM美颜sdk需要修改的部分（可以通过全局搜索**TODO mmbeauty**来快速定位）：
 > - applicationId ""      // 配置applicationid
 > - signingConfigs.config //配置keystore
