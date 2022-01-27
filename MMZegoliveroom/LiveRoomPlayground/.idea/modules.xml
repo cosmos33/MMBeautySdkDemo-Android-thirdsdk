@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/LiveRoomPlayground.iml" filepath="$PROJECT_DIR$/.idea/modules/LiveRoomPlayground.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/audioPlayer/LiveRoomPlayground.audioPlayer.iml" filepath="$PROJECT_DIR$/.idea/modules/audioPlayer/LiveRoomPlayground.audioPlayer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/common/LiveRoomPlayground.common.iml" filepath="$PROJECT_DIR$/.idea/modules/common/LiveRoomPlayground.common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/frequencySpectrum/LiveRoomPlayground.frequencySpectrum.iml" filepath="$PROJECT_DIR$/.idea/modules/frequencySpectrum/LiveRoomPlayground.frequencySpectrum.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/joinLive/LiveRoomPlayground.joinLive.iml" filepath="$PROJECT_DIR$/.idea/modules/joinLive/LiveRoomPlayground.joinLive.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/l3play/LiveRoomPlayground.l3play.iml" filepath="$PROJECT_DIR$/.idea/modules/l3play/LiveRoomPlayground.l3play.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/layeredcoding/LiveRoomPlayground.layeredCoding.iml" filepath="$PROJECT_DIR$/.idea/modules/layeredcoding/LiveRoomPlayground.layeredCoding.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/main/LiveRoomPlayground.main.iml" filepath="$PROJECT_DIR$/.idea/modules/main/LiveRoomPlayground.main.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mediaplayer/LiveRoomPlayground.mediaPlayer.iml" filepath="$PROJECT_DIR$/.idea/modules/mediaplayer/LiveRoomPlayground.mediaPlayer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mediasideinfo/LiveRoomPlayground.mediaSideInfo.iml" filepath="$PROJECT_DIR$/.idea/modules/mediasideinfo/LiveRoomPlayground.mediaSideInfo.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mediarecorder/LiveRoomPlayground.mediarecorder.iml" filepath="$PROJECT_DIR$/.idea/modules/mediarecorder/LiveRoomPlayground.mediarecorder.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mixstream/LiveRoomPlayground.mixStream.iml" filepath="$PROJECT_DIR$/.idea/modules/mixstream/LiveRoomPlayground.mixStream.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/mixing/LiveRoomPlayground.mixing.iml" filepath="$PROJECT_DIR$/.idea/modules/mixing/LiveRoomPlayground.mixing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/play/LiveRoomPlayground.play.iml" filepath="$PROJECT_DIR$/.idea/modules/play/LiveRoomPlayground.play.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/publish/LiveRoomPlayground.publish.iml" filepath="$PROJECT_DIR$/.idea/modules/publish/LiveRoomPlayground.publish.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/soundProcessing/LiveRoomPlayground.soundProcessing.iml" filepath="$PROJECT_DIR$/.idea/modules/soundProcessing/LiveRoomPlayground.soundProcessing.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/videocapture/LiveRoomPlayground.videoCapture.iml" filepath="$PROJECT_DIR$/.idea/modules/videocapture/LiveRoomPlayground.videoCapture.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/videoCommunicaton/LiveRoomPlayground.videoCommunicaton.iml" filepath="$PROJECT_DIR$/.idea/modules/videoCommunicaton/LiveRoomPlayground.videoCommunicaton.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/videoexternalrender/LiveRoomPlayground.videoExternalRender.iml" filepath="$PROJECT_DIR$/.idea/modules/videoexternalrender/LiveRoomPlayground.videoExternalRender.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/videofilter/LiveRoomPlayground.videoFilter.iml" filepath="$PROJECT_DIR$/.idea/modules/videofilter/LiveRoomPlayground.videoFilter.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/893790977/cosmosbeauty-live.LiveRoomPlayground.mmbeautybase.iml" filepath="$PROJECT_DIR$/.idea/modules/893790977/cosmosbeauty-live.LiveRoomPlayground.mmbeautybase.iml" />
+    </modules>
+  </component>
+</project>

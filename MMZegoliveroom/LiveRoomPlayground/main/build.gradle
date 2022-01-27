@@ -1,0 +1,57 @@
+apply from: "../../../mmbeautybase/app_build.gradle"
+
+android {
+    defaultConfig {
+        multiDexEnabled true
+    }
+    compileOptions {
+        targetCompatibility 1.8
+        sourceCompatibility 1.8
+    }
+
+    dataBinding {
+        enabled = true
+    }
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+
+    repositories {
+        flatDir {
+            dirs '../common/libs'   // aar目录
+        }
+    }
+}
+
+dependencies {
+    implementation fileTree(include: ['*.jar'], dir: 'libs')
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+    implementation files('libs/zegoliveroom.jar')
+    implementation project(path: ':common')
+    implementation project(path: ':soundProcessing')
+    implementation project(path: ':play')
+    implementation project(path: ':publish')
+    implementation project(path: ':mediaPlayer')
+    implementation project(path: ':audioPlayer')
+    implementation project(path: ':mediaSideInfo')
+    implementation project(path: ':layeredCoding')
+    implementation project(path: ':frequencySpectrum')
+    implementation project(path: ':mediarecorder')
+    implementation project(path: ':mixing')
+    implementation project(path: ':mixStream')
+    implementation project(path: ':videoExternalRender')
+    implementation project(path: ':videoCapture')
+    implementation project(path: ':videoCommunicaton')
+    implementation project(path: ':joinLive')
+    implementation project(path: ':videoFilter')
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'com.android.volley:volley:1.1.1'
+    implementation 'com.google.code.gson:gson:2.8.0'
+
+    implementation 'androidx.multidex:multidex:2.0.1'
+    implementation project(path: ':l3play')
+
+}

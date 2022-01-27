@@ -1,0 +1,44 @@
+apply plugin: 'com.android.library'
+
+android {
+    compileSdkVersion 28
+
+
+
+    defaultConfig {
+        minSdkVersion 16
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+    }
+
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    dataBinding {
+        enabled = true
+    }
+
+    repositories {
+        flatDir {
+            dirs '../common/libs'   // aar目录
+        }
+    }
+
+}
+
+dependencies {
+    implementation(name: 'zego-app-support', ext: 'aar')
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation fileTree(include: ['*.jar'], dir: '../main/libs')
+
+    implementation 'androidx.recyclerview:recyclerview:1.1.0'
+    implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.0.0'
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation project(path: ':common')
+    implementation 'androidx.constraintlayout:constraintlayout:2.1.0'
+}

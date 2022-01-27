@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="GradleMigrationSettings" migrationVersion="1" />
+  <component name="GradleSettings">
+    <option name="linkedExternalProjectsSettings">
+      <GradleProjectSettings>
+        <option name="testRunner" value="PLATFORM" />
+        <option name="distributionType" value="DEFAULT_WRAPPED" />
+        <option name="externalProjectPath" value="$PROJECT_DIR$" />
+        <option name="gradleJvm" value="1.8" />
+        <option name="modules">
+          <set>
+            <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/audioPlayer" />
+            <option value="$PROJECT_DIR$/common" />
+            <option value="$PROJECT_DIR$/frequencySpectrum" />
+            <option value="$PROJECT_DIR$/joinLive" />
+            <option value="$PROJECT_DIR$/l3play" />
+            <option value="$PROJECT_DIR$/layeredcoding" />
+            <option value="$PROJECT_DIR$/main" />
+            <option value="$PROJECT_DIR$/mediaplayer" />
+            <option value="$PROJECT_DIR$/mediarecorder" />
+            <option value="$PROJECT_DIR$/mediasideinfo" />
+            <option value="$PROJECT_DIR$/mixing" />
+            <option value="$PROJECT_DIR$/mixstream" />
+            <option value="$PROJECT_DIR$/play" />
+            <option value="$PROJECT_DIR$/publish" />
+            <option value="$PROJECT_DIR$/soundProcessing" />
+            <option value="$PROJECT_DIR$/videoCommunicaton" />
+            <option value="$PROJECT_DIR$/videocapture" />
+            <option value="$PROJECT_DIR$/videoexternalrender" />
+            <option value="$PROJECT_DIR$/videofilter" />
+            <option value="$PROJECT_DIR$/../../mmbeautybase" />
+          </set>
+        </option>
+        <option name="resolveModulePerSourceSet" value="false" />
+        <option name="useQualifiedModuleNames" value="true" />
+      </GradleProjectSettings>
+    </option>
+  </component>
+</project>

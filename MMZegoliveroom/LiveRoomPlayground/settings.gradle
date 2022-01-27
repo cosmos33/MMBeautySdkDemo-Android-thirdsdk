@@ -1,0 +1,25 @@
+include ':l3play'
+include ':main', ':audioPlayer',
+        ':joinLive',
+        ':videoFilter',
+        ':videoCommunicaton',
+        ':frequencySpectrum',
+        ':soundProcessing',
+        ':mediaPlayer',
+        ':common',
+        ':mediaSideInfo',
+        ':layeredCoding',
+        ':mediarecorder',
+        ':mixing',
+        ':mixStream',
+        ':videoExternalRender',
+        ':videoCapture',
+        ':play',
+        ':publish'
+
+gradle.ext.usemmbeauty = true
+gradle.ext.uselocalbeauty = false
+if (gradle.usemmbeauty) {
+    include "mmbeautybase"
+    project(':mmbeautybase').projectDir = new File(settingsDir,'../../mmbeautybase/')
+}
