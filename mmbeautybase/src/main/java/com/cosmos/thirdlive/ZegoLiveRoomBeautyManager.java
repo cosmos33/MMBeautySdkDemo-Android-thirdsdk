@@ -17,6 +17,7 @@ import com.cosmos.beautyutils.RotateFilter;
 import com.cosmos.beautyutils.SyncReadByteFromGPUFilter;
 import com.cosmos.thirdlive.utils.PBOSubFilter;
 import com.mm.mmutil.app.AppContext;
+import com.momo.mcamera.mask.beauty.DrawFaceFilter;
 import com.momo.mcamera.util.ImageFrame;
 
 import java.nio.ByteBuffer;
@@ -27,25 +28,90 @@ import project.android.imageprocessing.input.NewNV21PreviewInput;
  * 即构接入美颜sdk管理类
  */
 public class ZegoLiveRoomBeautyManager extends BeautyManager {
+    private TransOesTextureFilter transOesTexture;
+    private RotateFilter rotateFilter;
+    private RotateFilter revertRotateFilter;
+    private BeautySdkOrientationSwitchListener orientationListener;
 
     public ZegoLiveRoomBeautyManager(Context context) {
         super(context);
+        orientationListener = new BeautySdkOrientationSwitchListener();
+        ScreenOrientationManager screenOrientationManager =
+                ScreenOrientationManager.getInstance(AppContext.getContext());
+        screenOrientationManager.setAngleChangedListener(orientationListener);
+        if (!screenOrientationManager.isListening()) {
+            screenOrientationManager.start();
+        }
     }
 
     @Override
-    public int renderWithBytesTexture(byte[] datas, int texture, int dataWidth, int dataHeight, int texWidth, int texHeight, boolean mFrontCamera) {
-        if (!resourceReady) {
-            return texture;
+    public int renderWithOESTexture(int texture, int texWidth, int texHeight, boolean mFrontCamera, int cameraRotation) {
+        if (transOesTexture == null) {
+            transOesTexture = new TransOesTextureFilter();
         }
-        CameraDataMode dataMode = new CameraDataMode(mFrontCamera, 90);
-        return renderModuleManager.renderFrame(texture, new MMRenderFrameParams(
-                dataMode,
-                datas,
-                dataWidth,
-                dataHeight,
-                texWidth,
-                texHeight,
-                ImageFrame.MMFormat.FMT_NV21
-        ));
+        int tempWidth = texWidth;
+        int tempHeight = texHeight;
+        return renderWithTexture(transOesTexture.newTextureReady(texture, texWidth, texHeight), tempWidth, tempHeight, mFrontCamera);
+    }
+
+    @Override
+    public int renderWithTexture(int texture, int texWidth, int texHeight, boolean mFrontCamera) {
+        if (resourceReady) {
+            if (syncReadByteFromGPUFilter == null) {
+                rotateFilter = new RotateFilter(RotateFilter.ROTATE_VERTICAL);
+                revertRotateFilter = new RotateFilter(RotateFilter.ROTATE_VERTICAL);
+                syncReadByteFromGPUFilter = new SyncReadByteFromGPUFilter();
+            }
+            float currentAngle = orientationListener.getCurrentAngle();
+            int rotateTexture = texture;
+            if (currentAngle == 0) {
+                rotateTexture = rotateFilter.rotateTexture(texture, texWidth, texHeight);
+            }
+            syncReadByteFromGPUFilter.newTextureReady(rotateTexture, texWidth,texHeight, true);
+
+            if (syncReadByteFromGPUFilter.byteBuffer != null) {
+                byte[] frameData = new byte[syncReadByteFromGPUFilter.byteBuffer.remaining()];
+                syncReadByteFromGPUFilter.byteBuffer.get(frameData);
+                //美颜sdk处理
+                CommonDataMode dataMode = new CommonDataMode();
+                dataMode.setNeedFlip(false);
+                int beautyTexture = renderModuleManager.renderFrame(rotateTexture, new MMRenderFrameParams(
+                        dataMode,
+                        frameData,
+                        texWidth,
+                        texHeight,
+                        texWidth,
+                        texHeight,
+                        ImageFrame.MMFormat.FMT_RGBA
+                ));
+                if (currentAngle != 0) {
+                    return beautyTexture;
+                }
+                return revertRotateFilter.rotateTexture(beautyTexture, texWidth, texHeight);
+            }
+        }
+        return texture;
+    }
+
+    public void stopOrientationCallback() {
+        ScreenOrientationManager screenOrientationManager =
+                ScreenOrientationManager.getInstance(AppContext.getContext());
+        if (screenOrientationManager.isListening()) {
+            screenOrientationManager.stop();
+        }
+        ScreenOrientationManager.release();
+    }
+    @Override
+    public void textureDestoryed() {
+        super.textureDestoryed();
+        if (rotateFilter != null) {
+            rotateFilter.destory();
+            rotateFilter = null;
+        }
+        if (revertRotateFilter != null) {
+            revertRotateFilter.destory();
+            revertRotateFilter = null;
+        }
+
     }
 }
