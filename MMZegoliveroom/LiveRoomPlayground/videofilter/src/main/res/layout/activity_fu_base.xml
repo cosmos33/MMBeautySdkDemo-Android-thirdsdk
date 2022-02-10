@@ -32,6 +32,14 @@
                     android:layout_marginLeft="10dp"
                     android:background="@mipmap/ic_round_left" />
 
+                <Button
+                    android:layout_width="wrap_content"
+                    android:layout_height="40dp"
+                    android:id="@+id/swithCamera"
+                    android:text="切换摄像头"
+                    android:layout_gravity="right|center_vertical"
+                    android:layout_marginRight="10dp"/>
+
             </com.zego.common.widgets.TitleLayout>
 
             <RelativeLayout

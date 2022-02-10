@@ -45,7 +45,9 @@ public class VideoFilterSurfaceTextureDemo extends ZegoVideoFilter implements Su
 
     private GlRectDrawer mDrawer = null;
     private Surface mOutputSurface = null;
-
+    private boolean frontCamera = true;
+    private boolean switchCamera = false;
+    private Context context;
     private final float[] transformationMatrix = new float[]{
             1.0f, 0.0f, 0.0f, 0.0f,
             0.0f, 1.0f, 0.0f, 0.0f,
@@ -53,8 +55,8 @@ public class VideoFilterSurfaceTextureDemo extends ZegoVideoFilter implements Su
             0.0f, 0.0f, 0.0f, 1.0f
     };
 
-    public VideoFilterSurfaceTextureDemo(Context content) {
-        beautyManager = new ZegoLiveRoomBeautyManager(content);
+    public VideoFilterSurfaceTextureDemo(Context context) {
+        this.context = context;
     }
 
     /**
@@ -86,6 +88,8 @@ public class VideoFilterSurfaceTextureDemo extends ZegoVideoFilter implements Su
                 mIsEgl14 = EglBase14.isEGL14Supported();
 
                 barrier.countDown();
+                beautyManager = new ZegoLiveRoomBeautyManager(context);
+                switchCamera = false;
             }
         });
         try {
@@ -199,6 +203,9 @@ public class VideoFilterSurfaceTextureDemo extends ZegoVideoFilter implements Su
 
     @Override
     public void onFrameAvailable(SurfaceTexture surfaceTexture) {
+        if (beautyManager == null || switchCamera) {
+            return;
+        }
         if (mInputTextureId == 0) {
             mInputTextureId = GlUtil.generateTexture(GLES11Ext.GL_TEXTURE_EXTERNAL_OES);
             surfaceTexture.attachToGLContext(mInputTextureId);
@@ -213,7 +220,7 @@ public class VideoFilterSurfaceTextureDemo extends ZegoVideoFilter implements Su
 
         // 调用 faceunity 进行美颜，美颜后返回纹理 ID
 //        int textureID = mFuRender.onDrawOesFrame(mInputTextureId, mOutputWidth, mOutputHeight);
-        int textureID = beautyManager.renderWithOESTexture(mInputTextureId, mOutputWidth, mOutputHeight,true,270);
+        int textureID = beautyManager.renderWithOESTexture(mInputTextureId, mOutputWidth, mOutputHeight,frontCamera);
 
         GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
 
@@ -277,6 +284,7 @@ public class VideoFilterSurfaceTextureDemo extends ZegoVideoFilter implements Su
         if (mEglContext.hasSurface()) {
             beautyManager.stopOrientationCallback();
             beautyManager.textureDestoryed();
+            beautyManager = null;
             mEglContext.makeCurrent();
 
             if (mDrawer != null) {
@@ -311,5 +319,10 @@ public class VideoFilterSurfaceTextureDemo extends ZegoVideoFilter implements Su
             mInputSurfaceTexture.release();
             mInputSurfaceTexture = null;
         }
+    }
+
+    public void switchCamera(boolean frontCamera){
+        this.frontCamera = frontCamera;
+        this.switchCamera = true;
     }
 }

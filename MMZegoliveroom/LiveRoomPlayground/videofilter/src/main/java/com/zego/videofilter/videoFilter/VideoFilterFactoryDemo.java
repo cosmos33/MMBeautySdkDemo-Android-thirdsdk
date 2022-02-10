@@ -12,7 +12,11 @@ import com.zego.zegoavkit2.videofilter.ZegoVideoFilterFactory;
 public class VideoFilterFactoryDemo extends ZegoVideoFilterFactory {
     private FilterType type = FilterType.FilterType_SurfaceTexture;
     private Context context ;
-    private ZegoVideoFilter mFilter = null;
+    private VideoFilterSurfaceTextureDemo mFilter = null;
+
+    public void switchCamera(boolean frontCamra) {
+        mFilter.switchCamera(frontCamra);
+    }
 
     // 前处理传递数据的类型枚举
     public enum FilterType {

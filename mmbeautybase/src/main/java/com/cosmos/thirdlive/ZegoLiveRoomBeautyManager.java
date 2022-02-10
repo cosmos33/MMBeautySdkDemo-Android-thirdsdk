@@ -37,15 +37,14 @@ public class ZegoLiveRoomBeautyManager extends BeautyManager {
         super(context);
         orientationListener = new BeautySdkOrientationSwitchListener();
         ScreenOrientationManager screenOrientationManager =
-                ScreenOrientationManager.getInstance(AppContext.getContext());
+                ScreenOrientationManager.getInstance(context);
         screenOrientationManager.setAngleChangedListener(orientationListener);
         if (!screenOrientationManager.isListening()) {
             screenOrientationManager.start();
         }
     }
 
-    @Override
-    public int renderWithOESTexture(int texture, int texWidth, int texHeight, boolean mFrontCamera, int cameraRotation) {
+    public int renderWithOESTexture(int texture, int texWidth, int texHeight, boolean mFrontCamera ) {
         if (transOesTexture == null) {
             transOesTexture = new TransOesTextureFilter();
         }

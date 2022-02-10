@@ -52,6 +52,8 @@ public class FUBeautyActivity extends AppCompatActivity {
 
     // 主播流名
     private String anchorStreamID = ZegoUtil.getPublishStreamID();
+    private boolean frontCamra = true;
+    private VideoFilterFactoryDemo filterFactory;
 
 //    private VideoFilterFactoryDemo.FilterType chooseFilterType;
 
@@ -68,6 +70,13 @@ public class FUBeautyActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 finish();
+            }
+        });
+        binding.swithCamera.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                ZGFilterHelper.sharedInstance().getZegoLiveRoom().setFrontCam(frontCamra = !frontCamra);
+                filterFactory.switchCamera(frontCamra);
             }
         });
 
@@ -158,7 +167,7 @@ public class FUBeautyActivity extends AppCompatActivity {
         ZegoLiveRoom.setTestEnv(ZegoUtil.getIsTestEnv());
 
         // 设置外部滤镜---必须在初始化 ZEGO SDK 之前设置，否则不会回调   SyncTexture
-        VideoFilterFactoryDemo filterFactory = new VideoFilterFactoryDemo(this);
+        filterFactory = new VideoFilterFactoryDemo(this);
         ZegoExternalVideoFilter.setVideoFilterFactory(filterFactory, ZegoConstants.PublishChannelIndex.MAIN);
 
         // 初始化SDK
