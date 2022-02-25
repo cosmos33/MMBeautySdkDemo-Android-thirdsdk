@@ -11,7 +11,7 @@ public class TransYUVTextureFilter extends BasicFilter {
     private int vTexLocation;
 
     @Override
-    protected String getFragmentShader() {
+    public String getFragmentShader() {
         return "precision mediump float;"
                 + "uniform sampler2D SamplerY;"
                 + "uniform sampler2D SamplerU;"
@@ -41,7 +41,7 @@ public class TransYUVTextureFilter extends BasicFilter {
     }
 
     @Override
-    protected void initShaderHandles() {
+    public void initShaderHandles() {
         super.initShaderHandles();
         yTexLocation = GLES20.glGetUniformLocation(this.programHandle, "SamplerY");
         uTexLocation = GLES20.glGetUniformLocation(this.programHandle, "SamplerU");
@@ -49,7 +49,7 @@ public class TransYUVTextureFilter extends BasicFilter {
     }
 
     @Override
-    protected void passShaderValues() {
+    public void passShaderValues() {
         renderVertices.position(0);
         GLES20.glVertexAttribPointer(positionHandle, 2, GLES20.GL_FLOAT, false, 8, renderVertices);
         GLES20.glEnableVertexAttribArray(positionHandle);

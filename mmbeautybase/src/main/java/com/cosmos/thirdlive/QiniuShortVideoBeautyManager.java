@@ -5,13 +5,13 @@ import android.content.Context;
 import com.cosmos.appbase.BeautyManager;
 import com.cosmos.appbase.orientation.BeautySdkOrientationSwitchListener;
 import com.cosmos.appbase.orientation.ScreenOrientationManager;
+import com.cosmos.baseutil.app.AppContext;
 import com.cosmos.beauty.Constants;
 import com.cosmos.beauty.CosmosBeautySDK;
 import com.cosmos.beauty.model.MMRenderFrameParams;
 import com.cosmos.beauty.model.datamode.CameraDataMode;
 import com.cosmos.beauty.module.beauty.SimpleBeautyType;
 import com.cosmos.beautyutils.RotateFilter;
-import com.mm.mmutil.app.AppContext;
 import com.momo.mcamera.util.ImageFrame;
 
 /**

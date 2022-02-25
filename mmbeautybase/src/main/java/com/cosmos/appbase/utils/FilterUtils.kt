@@ -2,9 +2,9 @@ package com.cosmos.appbase.utils
 
 import android.content.Context
 import com.cosmos.appbase.listener.OnResPrepareListener
-import com.mm.mmutil.FileUtil
-import com.mm.mmutil.app.AppContext
-import com.mm.mmutil.task.ThreadUtils
+import com.cosmos.baseutil.app.AppContext
+import com.cosmos.baseutil.file.FileUtil
+import com.cosmos.baseutil.thread.ThreadUtils
 import java.io.File
 
 object FilterUtils {

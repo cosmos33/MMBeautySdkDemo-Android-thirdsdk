@@ -6,9 +6,10 @@ import android.opengl.GLES20;
 import project.android.imageprocessing.GLRenderer;
 import project.android.imageprocessing.filter.BasicFilter;
 
+
 public class TransOesTextureFilter extends BasicFilter {
     @Override
-    protected String getFragmentShader() {
+    public String getFragmentShader() {
         return "#extension GL_OES_EGL_image_external : require\n" +
                 "precision mediump float;\n" +
                 "varying vec2 " + GLRenderer.VARYING_TEXCOORD + ";\n" +
@@ -28,7 +29,7 @@ public class TransOesTextureFilter extends BasicFilter {
     }
 
     @Override
-    protected void passShaderValues() {
+    public void passShaderValues() {
         renderVertices.position(0);
         GLES20.glVertexAttribPointer(positionHandle, 2, GLES20.GL_FLOAT, false, 8, renderVertices);
         GLES20.glEnableVertexAttribArray(positionHandle);
