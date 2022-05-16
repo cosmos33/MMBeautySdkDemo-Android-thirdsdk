@@ -69,7 +69,7 @@ public class QiniuBeautyManager extends BeautyManager {
             } else {
                 rotateTexture = backRotateFilter.rotateTexture(transTexture, texWidth, texHeight);
             }
-            syncReadByteFromGPUFilter.newTextureReady(rotateTexture, texWidth, texHeight, true);
+            syncReadByteFromGPUFilter.newTextureReady(rotateTexture, getDownSampleSize(texWidth), getDownSampleSize(texHeight), true);
 
             if (syncReadByteFromGPUFilter.byteBuffer != null) {
                 if (frameData == null || frameData.length != syncReadByteFromGPUFilter.byteBuffer.remaining()) {
@@ -83,11 +83,10 @@ public class QiniuBeautyManager extends BeautyManager {
                 MMRenderFrameParams renderFrameParams =
                         new MMRenderFrameParams(
                                 dataMode, frameData,
+                                getDownSampleSize(texWidth), getDownSampleSize(texHeight),
                                 texWidth,
                                 texHeight,
-                                texWidth,
-                                texHeight,
-                                ImageFrame.MMFormat.FMT_RGBA
+                                ImageFrame.MMFormat.FMT_RGBA, getScaleFactor()
                         );
                 rotateTexture =renderModuleManager.renderFrame(rotateTexture, renderFrameParams);
                 if (!mFrontCamera) {

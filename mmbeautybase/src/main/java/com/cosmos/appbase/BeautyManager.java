@@ -24,6 +24,8 @@ import java.io.File;
 
 abstract public class BeautyManager implements IMMRenderModuleManager.IDetectFaceCallback, IMMRenderModuleManager.IDetectGestureCallback {
     protected static String license = "";// TODO mmbeauty 这里配置license
+    protected final float SCALE_FACTOR = 1f;//修改为1的整数倍（比如2），会适当减少整个渲染的耗时，但是会对美颜精度产生一定程度影响，请根据接入方的接受程度修改该值
+    protected final float DOWN_SAMPLE_RATIO = 1 / SCALE_FACTOR;
     protected IMMRenderModuleManager renderModuleManager;
     protected boolean authSuccess = false;
     protected boolean stickerSuccess;
@@ -38,6 +40,14 @@ abstract public class BeautyManager implements IMMRenderModuleManager.IDetectFac
     public BeautyManager(Context context) {
         this.context = context.getApplicationContext();
         initSDK();
+    }
+
+    protected int getDownSampleSize(int originSize) {
+        return (int) (originSize * DOWN_SAMPLE_RATIO);
+    }
+
+    protected float getScaleFactor() {
+        return SCALE_FACTOR;
     }
 
     public int renderWithOESTexture(int texture, int texWidth, int texHeight, boolean mFrontCamera, int cameraRotation) {

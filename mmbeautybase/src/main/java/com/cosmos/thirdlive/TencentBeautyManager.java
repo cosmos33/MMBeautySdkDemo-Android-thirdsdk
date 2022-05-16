@@ -30,7 +30,7 @@ public class TencentBeautyManager extends BeautyManager {
                 syncReadByteFromGPUFilter = new SyncReadByteFromGPUFilter();
             }
             int rotateTexture = rotateFilter.rotateTexture(texture, texWidth, texHeight);
-            syncReadByteFromGPUFilter.newTextureReady(rotateTexture, texWidth, texHeight, true);
+            syncReadByteFromGPUFilter.newTextureReady(rotateTexture, getDownSampleSize(texWidth), getDownSampleSize(texHeight), true);
             if (syncReadByteFromGPUFilter.byteBuffer != null) {
                 if (frameData == null || frameData.length != syncReadByteFromGPUFilter.byteBuffer.remaining()) {
                     frameData = new byte[syncReadByteFromGPUFilter.byteBuffer.remaining()];
@@ -42,11 +42,11 @@ public class TencentBeautyManager extends BeautyManager {
                 int beautyTexture = renderModuleManager.renderFrame(rotateTexture, new MMRenderFrameParams(
                         dataMode,
                         frameData,
+                        getDownSampleSize(texWidth),
+                        getDownSampleSize(texHeight),
                         texWidth,
                         texHeight,
-                        texWidth,
-                        texHeight,
-                        ImageFrame.MMFormat.FMT_RGBA
+                        ImageFrame.MMFormat.FMT_RGBA, getScaleFactor()
                 ));
                 return revertRotateFilter.rotateTexture(beautyTexture, texWidth, texHeight);
             }
