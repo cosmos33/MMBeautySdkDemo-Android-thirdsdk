@@ -1,12 +1,16 @@
 package io.agora.api.example.examples.advanced;
 
+import static io.agora.api.example.common.model.Examples.ADVANCED;
+import static io.agora.rtc.video.VideoCanvas.RENDER_MODE_HIDDEN;
+import static io.agora.rtc.video.VideoEncoderConfiguration.FRAME_RATE.FRAME_RATE_FPS_15;
+import static io.agora.rtc.video.VideoEncoderConfiguration.ORIENTATION_MODE.ORIENTATION_MODE_FIXED_PORTRAIT;
+import static io.agora.rtc.video.VideoEncoderConfiguration.STANDARD_BITRATE;
+
 import android.content.Context;
+import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.opengl.EGLSurface;
-import android.opengl.GLES11Ext;
-import android.opengl.GLES20;
-import android.opengl.Matrix;
 import android.os.Bundle;
 import android.text.TextUtils;
 import android.util.Log;
@@ -23,14 +27,14 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 
 import com.cosmos.thirdlive.AgoraLiveBeautyManager;
+import com.cosmos.thirdlive.utils.FBOHelper;
+import com.cosmos.thirdlive.utils.ScreenDrawer;
 import com.yanzhenjie.permission.AndPermission;
 import com.yanzhenjie.permission.runtime.Permission;
 
 import java.io.IOException;
 
-import io.agora.api.component.gles.ProgramTexture2d;
 import io.agora.api.component.gles.core.EglCore;
-import io.agora.api.component.gles.core.GlUtil;
 import io.agora.api.example.R;
 import io.agora.api.example.R2;
 import io.agora.api.example.annotation.Example;
@@ -43,12 +47,6 @@ import io.agora.rtc.video.AgoraVideoFrame;
 import io.agora.rtc.video.VideoCanvas;
 import io.agora.rtc.video.VideoEncoderConfiguration;
 
-import static io.agora.api.example.common.model.Examples.ADVANCED;
-import static io.agora.rtc.video.VideoCanvas.RENDER_MODE_HIDDEN;
-import static io.agora.rtc.video.VideoEncoderConfiguration.FRAME_RATE.FRAME_RATE_FPS_15;
-import static io.agora.rtc.video.VideoEncoderConfiguration.ORIENTATION_MODE.ORIENTATION_MODE_FIXED_PORTRAIT;
-import static io.agora.rtc.video.VideoEncoderConfiguration.STANDARD_BITRATE;
-
 @Example(
         index = 5,
         group = ADVANCED,
@@ -57,7 +55,7 @@ import static io.agora.rtc.video.VideoEncoderConfiguration.STANDARD_BITRATE;
         tipsId = "此示例演示了在音视频通话过程中如何以主动Push的方式进行视频自采集的功能。"
 )
 public class PushExternalVideo extends BaseFragment implements View.OnClickListener, TextureView.SurfaceTextureListener,
-        SurfaceTexture.OnFrameAvailableListener {
+        SurfaceTexture.OnFrameAvailableListener, Camera.PreviewCallback {
     private static final String TAG = PushExternalVideo.class.getSimpleName();
     private final int DEFAULT_CAPTURE_WIDTH = 640;
     private final int DEFAULT_CAPTURE_HEIGHT = 480;
@@ -69,12 +67,12 @@ public class PushExternalVideo extends BaseFragment implements View.OnClickListe
     private int myUid;
     private volatile boolean joined = false;
 
-    private int mPreviewTexture;
+    //    private int mPreviewTexture;
     private SurfaceTexture mPreviewSurfaceTexture;
     private EglCore mEglCore;
     private EGLSurface mDummySurface;
     private EGLSurface mDrawSurface;
-    private ProgramTexture2d mProgram;
+    //    private ProgramTexture2d mProgram;
     private float[] mTransform = new float[16];
     private float[] mMVPMatrix = new float[16];
     private boolean mMVPMatrixInit = false;
@@ -85,6 +83,8 @@ public class PushExternalVideo extends BaseFragment implements View.OnClickListe
     private int mSurfaceHeight;
     private boolean mTextureDestroyed;
     private AgoraLiveBeautyManager agoraLiveBeautyManager;
+    private FBOHelper fboHelper;
+    private ScreenDrawer screenDrawer;
 
     @Nullable
     @Override
@@ -263,50 +263,53 @@ public class PushExternalVideo extends BaseFragment implements View.OnClickListe
 
     @Override
     public void onFrameAvailable(SurfaceTexture surfaceTexture) {
-        if (mTextureDestroyed) {
-            return;
-        }
+//        if (mTextureDestroyed) {
+//            return;
+//        }
+//
+//        if (!mEglCore.isCurrent(mDrawSurface)) {
+//            mEglCore.makeCurrent(mDrawSurface);
+//        }
+//        try {
+//            mPreviewSurfaceTexture.updateTexImage();
+//            mPreviewSurfaceTexture.getTransformMatrix(mTransform);
+//        } catch (Exception e) {
+//            e.printStackTrace();
+//        }
+//
+//        /**The rectangle ratio of frames and the screen surface may be different, so cropping may
+//         *  happen when display frames to the screen.
+//         * The display transformation matrix does not change for the same camera when the screen
+//         *  orientation remains the same.*/
+//        if (!mMVPMatrixInit) {
+//            /***/
+//            /**For simplicity, we only consider the activity as portrait mode. In this case, the captured
+//             * images should be rotated 90 degrees (left or right).Thus the frame width and height
+//             * should be swapped.*/
+//            float frameRatio = DEFAULT_CAPTURE_HEIGHT / (float) DEFAULT_CAPTURE_WIDTH;
+//            float surfaceRatio = mSurfaceWidth / (float) mSurfaceHeight;
+//            Matrix.setIdentityM(mMVPMatrix, 0);
+//
+//            if (frameRatio >= surfaceRatio) {
+//                float w = DEFAULT_CAPTURE_WIDTH * surfaceRatio;
+//                float scaleW = DEFAULT_CAPTURE_HEIGHT / w;
+//                Matrix.scaleM(mMVPMatrix, 0, scaleW, 1, 1);
+//            } else {
+//                float h = DEFAULT_CAPTURE_HEIGHT / surfaceRatio;
+//                float scaleH = DEFAULT_CAPTURE_WIDTH / h;
+//                Matrix.scaleM(mMVPMatrix, 0, 1, scaleH, 1);
+//            }
+//            mMVPMatrixInit = true;
+//        }
+//        int outTexture = agoraLiveBeautyManager.renderWithBytesTexture(cameraData, mPreviewTexture, DEFAULT_CAPTURE_WIDTH,
+//                DEFAULT_CAPTURE_HEIGHT, DEFAULT_CAPTURE_WIDTH, DEFAULT_CAPTURE_HEIGHT, mFacing == Camera.CameraInfo.CAMERA_FACING_FRONT, 90);
+//        GLES20.glViewport(0, 0, mSurfaceWidth, mSurfaceHeight);
+//        mProgram.drawFrame(outTexture, mTransform, mMVPMatrix);
+//        mEglCore.swapBuffers(mDrawSurface);
+//        pushFrame(outTexture);
+    }
 
-        if (!mEglCore.isCurrent(mDrawSurface)) {
-            mEglCore.makeCurrent(mDrawSurface);
-        }
-        try {
-            mPreviewSurfaceTexture.updateTexImage();
-            mPreviewSurfaceTexture.getTransformMatrix(mTransform);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-
-        /**The rectangle ratio of frames and the screen surface may be different, so cropping may
-         *  happen when display frames to the screen.
-         * The display transformation matrix does not change for the same camera when the screen
-         *  orientation remains the same.*/
-        if (!mMVPMatrixInit) {
-            /***/
-            /**For simplicity, we only consider the activity as portrait mode. In this case, the captured
-             * images should be rotated 90 degrees (left or right).Thus the frame width and height
-             * should be swapped.*/
-            float frameRatio = DEFAULT_CAPTURE_HEIGHT / (float) DEFAULT_CAPTURE_WIDTH;
-            float surfaceRatio = mSurfaceWidth / (float) mSurfaceHeight;
-            Matrix.setIdentityM(mMVPMatrix, 0);
-
-            if (frameRatio >= surfaceRatio) {
-                float w = DEFAULT_CAPTURE_WIDTH * surfaceRatio;
-                float scaleW = DEFAULT_CAPTURE_HEIGHT / w;
-                Matrix.scaleM(mMVPMatrix, 0, scaleW, 1, 1);
-            } else {
-                float h = DEFAULT_CAPTURE_HEIGHT / surfaceRatio;
-                float scaleH = DEFAULT_CAPTURE_WIDTH / h;
-                Matrix.scaleM(mMVPMatrix, 0, 1, scaleH, 1);
-            }
-            mMVPMatrixInit = true;
-        }
-        int outTexture = agoraLiveBeautyManager.renderWithOESTexture(mPreviewTexture, DEFAULT_CAPTURE_WIDTH,
-                DEFAULT_CAPTURE_HEIGHT, mFacing == Camera.CameraInfo.CAMERA_FACING_FRONT, 90);
-        GLES20.glViewport(0, 0, mSurfaceWidth, mSurfaceHeight);
-        mProgram.drawFrame(outTexture, mTransform, mMVPMatrix);
-        mEglCore.swapBuffers(mDrawSurface);
-
+    private void pushFrame(int outTexture) {
         if (joined) {
             /**about AgoraVideoFrame, see https://docs.agora.io/en/Video/API%20Reference/java/classio_1_1agora_1_1rtc_1_1video_1_1_agora_video_frame.html*/
             AgoraVideoFrame frame = new AgoraVideoFrame();
@@ -338,13 +341,9 @@ public class PushExternalVideo extends BaseFragment implements View.OnClickListe
         mSurfaceWidth = width;
         mSurfaceHeight = height;
         mEglCore = new EglCore();
-        mDummySurface = mEglCore.createOffscreenSurface(1, 1);
-        mEglCore.makeCurrent(mDummySurface);
-        mPreviewTexture = GlUtil.createTextureObject(GLES11Ext.GL_TEXTURE_EXTERNAL_OES);
-        mPreviewSurfaceTexture = new SurfaceTexture(mPreviewTexture);
-        mPreviewSurfaceTexture.setOnFrameAvailableListener(this);
+        mPreviewSurfaceTexture = new SurfaceTexture(0);
         mDrawSurface = mEglCore.createWindowSurface(surface);
-        mProgram = new ProgramTexture2d();
+//        mProgram = new ProgramTexture2d();
         if (mCamera != null || mPreviewing) {
             Log.e(TAG, "Camera preview has been started");
             return;
@@ -357,6 +356,14 @@ public class PushExternalVideo extends BaseFragment implements View.OnClickListe
             parameters.setPreviewSize(DEFAULT_CAPTURE_WIDTH, DEFAULT_CAPTURE_HEIGHT);
             mCamera.setParameters(parameters);
             mCamera.setPreviewTexture(mPreviewSurfaceTexture);
+            for (int i = 0; i < 3; i++) {
+                byte[] byteArray = new byte[DEFAULT_CAPTURE_WIDTH
+                        * DEFAULT_CAPTURE_HEIGHT
+                        * ImageFormat.getBitsPerPixel(mCamera.getParameters().getPreviewFormat())
+                        / 8];
+                mCamera.addCallbackBuffer(byteArray);
+            }
+            mCamera.setPreviewCallbackWithBuffer(this);
             /**The display orientation is 90 for both front and back facing cameras using a surface
              * texture for the preview when the screen is in portrait mode.*/
             mCamera.setDisplayOrientation(90);
@@ -365,6 +372,45 @@ public class PushExternalVideo extends BaseFragment implements View.OnClickListe
         } catch (IOException e) {
             e.printStackTrace();
         }
+    }
+
+    @Override
+    public void onPreviewFrame(byte[] data, Camera camera) {
+        if (!mEglCore.isCurrent(mDrawSurface)) {
+            mEglCore.makeCurrent(mDrawSurface);
+        }
+        int orientation = getOrientation(mFacing);
+        if (fboHelper == null) {
+            fboHelper = new FBOHelper(DEFAULT_CAPTURE_HEIGHT, DEFAULT_CAPTURE_WIDTH);
+            fboHelper.setNeedFlip(
+                    mFacing == Camera.CameraInfo.CAMERA_FACING_FRONT,
+                    orientation
+            );
+            screenDrawer = new ScreenDrawer(DEFAULT_CAPTURE_HEIGHT, DEFAULT_CAPTURE_WIDTH, mSurfaceWidth, mSurfaceHeight);
+        }
+        //纹理
+        int resultTexture =
+                fboHelper.update(data, orientation, DEFAULT_CAPTURE_WIDTH, DEFAULT_CAPTURE_HEIGHT);
+        if (agoraLiveBeautyManager != null) {
+            resultTexture = agoraLiveBeautyManager.renderWithBytesTexture(data, resultTexture, DEFAULT_CAPTURE_WIDTH,
+                    DEFAULT_CAPTURE_HEIGHT, DEFAULT_CAPTURE_HEIGHT, DEFAULT_CAPTURE_WIDTH,
+                    mFacing == Camera.CameraInfo.CAMERA_FACING_FRONT);
+        }
+        screenDrawer.draw(resultTexture);
+        mEglCore.swapBuffers(mDrawSurface);
+
+        mCamera.addCallbackBuffer(data);
+    }
+
+    private int getOrientation(int cameraId) {
+        Camera.CameraInfo cameraInfo = new Camera.CameraInfo();
+        try {
+            Camera.getCameraInfo(cameraId, cameraInfo);
+        } catch (RuntimeException e) {
+            e.printStackTrace();
+            return -1;
+        }
+        return cameraInfo.orientation;
     }
 
     @Override
@@ -385,7 +431,7 @@ public class PushExternalVideo extends BaseFragment implements View.OnClickListe
         if (agoraLiveBeautyManager != null) {
             agoraLiveBeautyManager.textureDestoryed();
         }
-        mProgram.release();
+//        mProgram.release();
         mEglCore.releaseSurface(mDummySurface);
         mEglCore.releaseSurface(mDrawSurface);
         mEglCore.release();
