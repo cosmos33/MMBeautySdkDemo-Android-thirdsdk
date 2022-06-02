@@ -1,17 +1,13 @@
 package io.agora.api.example.examples.advanced;
 
-import static io.agora.api.example.common.model.Examples.ADVANCED;
-import static io.agora.rtc.video.VideoCanvas.RENDER_MODE_HIDDEN;
-import static io.agora.rtc.video.VideoEncoderConfiguration.FRAME_RATE.FRAME_RATE_FPS_15;
-import static io.agora.rtc.video.VideoEncoderConfiguration.ORIENTATION_MODE.ORIENTATION_MODE_FIXED_PORTRAIT;
-import static io.agora.rtc.video.VideoEncoderConfiguration.STANDARD_BITRATE;
-
 import android.content.Context;
 import android.graphics.ImageFormat;
 import android.graphics.SurfaceTexture;
 import android.hardware.Camera;
 import android.opengl.EGLSurface;
 import android.os.Bundle;
+import android.os.Handler;
+import android.os.HandlerThread;
 import android.text.TextUtils;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -47,6 +43,12 @@ import io.agora.rtc.video.AgoraVideoFrame;
 import io.agora.rtc.video.VideoCanvas;
 import io.agora.rtc.video.VideoEncoderConfiguration;
 
+import static io.agora.api.example.common.model.Examples.ADVANCED;
+import static io.agora.rtc.video.VideoCanvas.RENDER_MODE_HIDDEN;
+import static io.agora.rtc.video.VideoEncoderConfiguration.FRAME_RATE.FRAME_RATE_FPS_15;
+import static io.agora.rtc.video.VideoEncoderConfiguration.ORIENTATION_MODE.ORIENTATION_MODE_FIXED_PORTRAIT;
+import static io.agora.rtc.video.VideoEncoderConfiguration.STANDARD_BITRATE;
+
 @Example(
         index = 5,
         group = ADVANCED,
@@ -70,7 +72,6 @@ public class PushExternalVideo extends BaseFragment implements View.OnClickListe
     //    private int mPreviewTexture;
     private SurfaceTexture mPreviewSurfaceTexture;
     private EglCore mEglCore;
-    private EGLSurface mDummySurface;
     private EGLSurface mDrawSurface;
     //    private ProgramTexture2d mProgram;
     private float[] mTransform = new float[16];
@@ -85,6 +86,7 @@ public class PushExternalVideo extends BaseFragment implements View.OnClickListe
     private AgoraLiveBeautyManager agoraLiveBeautyManager;
     private FBOHelper fboHelper;
     private ScreenDrawer screenDrawer;
+    private Handler cameraHandler;
 
     @Nullable
     @Override
@@ -340,38 +342,49 @@ public class PushExternalVideo extends BaseFragment implements View.OnClickListe
         mTextureDestroyed = false;
         mSurfaceWidth = width;
         mSurfaceHeight = height;
-        mEglCore = new EglCore();
-        mPreviewSurfaceTexture = new SurfaceTexture(0);
-        mDrawSurface = mEglCore.createWindowSurface(surface);
+        if (cameraHandler == null) {
+            HandlerThread handlerThread = new HandlerThread("camera data thread");
+            handlerThread.start();
+            cameraHandler = new Handler(handlerThread.getLooper());
+        }
+        cameraHandler.post(new Runnable() {
+            @Override
+            public void run() {
+                mEglCore = new EglCore();
+                mPreviewSurfaceTexture = new SurfaceTexture(0);
+                mDrawSurface = mEglCore.createWindowSurface(surface);
 //        mProgram = new ProgramTexture2d();
-        if (mCamera != null || mPreviewing) {
-            Log.e(TAG, "Camera preview has been started");
-            return;
-        }
-        try {
-            mCamera = Camera.open(mFacing);
-            /**It is assumed to capture images of resolution 640x480. During development, it should
-             * be the most suitable supported resolution that best fits the scenario.*/
-            Camera.Parameters parameters = mCamera.getParameters();
-            parameters.setPreviewSize(DEFAULT_CAPTURE_WIDTH, DEFAULT_CAPTURE_HEIGHT);
-            mCamera.setParameters(parameters);
-            mCamera.setPreviewTexture(mPreviewSurfaceTexture);
-            for (int i = 0; i < 3; i++) {
-                byte[] byteArray = new byte[DEFAULT_CAPTURE_WIDTH
-                        * DEFAULT_CAPTURE_HEIGHT
-                        * ImageFormat.getBitsPerPixel(mCamera.getParameters().getPreviewFormat())
-                        / 8];
-                mCamera.addCallbackBuffer(byteArray);
+                if (mCamera != null || mPreviewing) {
+                    Log.e(TAG, "Camera preview has been started");
+                    return;
+                }
+                try {
+                    mCamera = Camera.open(mFacing);
+                    /**It is assumed to capture images of resolution 640x480. During development, it should
+                     * be the most suitable supported resolution that best fits the scenario.*/
+                    Camera.Parameters parameters = mCamera.getParameters();
+                    parameters.setPreviewSize(DEFAULT_CAPTURE_WIDTH, DEFAULT_CAPTURE_HEIGHT);
+                    mCamera.setParameters(parameters);
+                    mCamera.setPreviewTexture(mPreviewSurfaceTexture);
+                    for (int i = 0; i < 3; i++) {
+                        byte[] byteArray = new byte[DEFAULT_CAPTURE_WIDTH
+                                * DEFAULT_CAPTURE_HEIGHT
+                                * ImageFormat.getBitsPerPixel(mCamera.getParameters().getPreviewFormat())
+                                / 8];
+                        mCamera.addCallbackBuffer(byteArray);
+                    }
+                    mCamera.setPreviewCallbackWithBuffer(PushExternalVideo.this::onPreviewFrame);
+                    /**The display orientation is 90 for both front and back facing cameras using a surface
+                     * texture for the preview when the screen is in portrait mode.*/
+                    mCamera.setDisplayOrientation(90);
+                    mCamera.startPreview();
+                    mPreviewing = true;
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
             }
-            mCamera.setPreviewCallbackWithBuffer(this);
-            /**The display orientation is 90 for both front and back facing cameras using a surface
-             * texture for the preview when the screen is in portrait mode.*/
-            mCamera.setDisplayOrientation(90);
-            mCamera.startPreview();
-            mPreviewing = true;
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
+        });
+
     }
 
     @Override
@@ -400,6 +413,8 @@ public class PushExternalVideo extends BaseFragment implements View.OnClickListe
         mEglCore.swapBuffers(mDrawSurface);
 
         mCamera.addCallbackBuffer(data);
+
+        pushFrame(resultTexture);
     }
 
     private int getOrientation(int cameraId) {
@@ -422,19 +437,27 @@ public class PushExternalVideo extends BaseFragment implements View.OnClickListe
     public boolean onSurfaceTextureDestroyed(SurfaceTexture surface) {
         Log.i(TAG, "onSurfaceTextureDestroyed");
         mTextureDestroyed = true;
-        if (mCamera != null && mPreviewing) {
-            mCamera.stopPreview();
-            mPreviewing = false;
-            mCamera.release();
-            mCamera = null;
-        }
-        if (agoraLiveBeautyManager != null) {
-            agoraLiveBeautyManager.textureDestoryed();
-        }
+        if (cameraHandler != null) {
+            cameraHandler.post(new Runnable() {
+                @Override
+                public void run() {
+                    if (mCamera != null && mPreviewing) {
+                        mCamera.stopPreview();
+                        mPreviewing = false;
+                        mCamera.release();
+                        mCamera = null;
+                    }
+                    if (agoraLiveBeautyManager != null) {
+                        agoraLiveBeautyManager.textureDestoryed();
+                    }
 //        mProgram.release();
-        mEglCore.releaseSurface(mDummySurface);
-        mEglCore.releaseSurface(mDrawSurface);
-        mEglCore.release();
+                    mEglCore.releaseSurface(mDrawSurface);
+                    mEglCore.release();
+                }
+            });
+            cameraHandler.getLooper().quitSafely();
+            cameraHandler = null;
+        }
         return true;
     }
 
