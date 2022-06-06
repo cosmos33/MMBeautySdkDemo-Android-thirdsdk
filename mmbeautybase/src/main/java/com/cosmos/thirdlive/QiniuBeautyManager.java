@@ -32,7 +32,7 @@ public class QiniuBeautyManager extends BeautyManager {
         super(context);
         orientationListener = new BeautySdkOrientationSwitchListener();
         ScreenOrientationManager screenOrientationManager =
-                ScreenOrientationManager.getInstance(AppContext.getContext());
+                ScreenOrientationManager.getInstance(context);
         screenOrientationManager.setAngleChangedListener(orientationListener);
         if (!screenOrientationManager.isListening()) {
             screenOrientationManager.start();
@@ -96,13 +96,11 @@ public class QiniuBeautyManager extends BeautyManager {
                         rotateTexture = rotateRevertFilter.rotateTexture(rotateTexture,texWidth,texHeight);
                     }
                 }
+                GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT);
                 return rotateTexture;
             }
         }
-        //重置当前渲染环境状态
-        GLES20.glBindFramebuffer(GLES20.GL_FRAMEBUFFER, 0);
-        GLES20.glClearColor(0, 0, 0, 0);
-        GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT | GLES20.GL_COLOR_BUFFER_BIT);
+        GLES20.glClear(GLES20.GL_DEPTH_BUFFER_BIT);
         return originTexture;
     }
 
