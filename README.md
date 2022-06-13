@@ -18,10 +18,11 @@
 ### 5.MMQiniu 为接入七牛直播sdk demo
 ### 6.MMQinniuShortVideoUIDemo 为接入七牛短视频sdk demo
 ### 7.MMQiniuRTC_v3.x 为接入七牛RTC sdk demo
-### 8.MMTencent 为接入腾讯直播sdk demo
+### 8.MMQiniuRTC_v4.x 为接入七牛RTC sdk 4.x以上版本 demo
+### 9.MMTencent 为接入腾讯直播sdk demo
 > MMTencent除需要配置以上三个部分之外，还需要在TxApplication中配置在腾讯直播后台申请的licenceUrl以及licenseKey
-### 9.MMTencentTRTCSDK为接入腾讯TRTC sdk demo
+### 10.MMTencentTRTCSDK为接入腾讯TRTC sdk demo
 > MMTencentTRTCSDK除需要配置以上三部分之外，还需要在GenerateTestUserSig中配置在腾讯后台申请的SDKAPPID以及SECRETKEY
-### 10.MMTencentLVBSDK为接入腾讯LVB sdk demo
-### 11.MMNetease为接入云信互动直播 sdk demo
+### 11.MMTencentLVBSDK为接入腾讯LVB sdk demo
+### 12.MMNetease为接入云信互动直播 sdk demo
 
