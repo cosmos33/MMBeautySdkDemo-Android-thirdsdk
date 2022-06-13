@@ -1,0 +1,4 @@
+include ':app'
+gradle.ext.uselocalbeauty = false
+include "mmbeautybase"
+project(':mmbeautybase').projectDir = new File(settingsDir,'../mmbeautybase/')
